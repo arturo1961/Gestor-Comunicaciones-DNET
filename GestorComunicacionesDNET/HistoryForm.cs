@@ -35,7 +35,7 @@ internal sealed class HistoryForm : Form
 		layout.RowStyles.Add(new RowStyle(SizeType.Percent, 100f));
 		layout.RowStyles.Add(new RowStyle(SizeType.Absolute, 52f));
 		Controls.Add(layout);
-		layout.Controls.Add(new Label { Text = rows.Count == 0 ? "Todavía no hay comunicaciones registradas." : $"Comunicaciones registradas: {rows.Count}", Dock = DockStyle.Fill, TextAlign = ContentAlignment.MiddleLeft }, 0, 0);
+		layout.Controls.Add(new Label { Text = rows.Count == 0 ? UiText.Get("Todavía no hay comunicaciones registradas.") : UiText.Format("Comunicaciones registradas: {0}", rows.Count), Dock = DockStyle.Fill, TextAlign = ContentAlignment.MiddleLeft }, 0, 0);
 
 		DataGridView grid = new DataGridView { Dock = DockStyle.Fill, AutoGenerateColumns = false, ReadOnly = true, AllowUserToAddRows = false, AllowUserToDeleteRows = false, RowHeadersVisible = false, SelectionMode = DataGridViewSelectionMode.FullRowSelect };
 		AddColumn(grid, "Fecha", "Fecha", 165);
@@ -53,6 +53,7 @@ internal sealed class HistoryForm : Form
 		close.Click += (_, _) => Close();
 		footer.Controls.Add(close);
 		layout.Controls.Add(footer, 0, 2);
+		UiText.Apply(this);
 	}
 
 	private static HistoryRow CreateRow(JsonObject entry, IReadOnlyDictionary<string, JsonObject> contacts)
@@ -60,7 +61,7 @@ internal sealed class HistoryForm : Form
 		contacts.TryGetValue(ContactStore.Get(entry, "contacto_id"), out JsonObject? contact);
 		return new HistoryRow(
 			ContactStore.Get(entry, "fecha"),
-			contact == null ? "Contacto no disponible" : ContactStore.Get(contact, "nombre"),
+			contact == null ? UiText.Get("Contacto no disponible") : ContactStore.Get(contact, "nombre"),
 			contact == null ? "" : ContactStore.Get(contact, "correo"),
 			ContactStore.Get(entry, "version"),
 			ContactStore.Get(entry, "estado"),

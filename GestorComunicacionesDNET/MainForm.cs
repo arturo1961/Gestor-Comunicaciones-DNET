@@ -97,7 +97,7 @@ internal sealed class MainForm : Form
 		}
 		catch (Exception ex)
 		{
-			MessageBox.Show("No se pudieron leer los archivos JSON.\n" + ex.Message, "Error de inicio", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+			MessageBox.Show(UiText.Get("No se pudieron leer los archivos JSON.\n") + ex.Message, UiText.Get("Error de inicio"), MessageBoxButtons.OK, MessageBoxIcon.Hand);
 			throw;
 		}
 		TableLayoutPanel tableLayoutPanel = new TableLayoutPanel
@@ -124,6 +124,14 @@ internal sealed class MainForm : Form
 		toolsMenu.DropDownItems.Add("Historial de comunicaciones...", null, ShowHistory);
 		toolsMenu.DropDownItems.Add("Revisar duplicados y correos...", null, ShowIssues);
 		menuStrip.Items.Add(toolsMenu);
+		ToolStripMenuItem languageMenu = new ToolStripMenuItem("Idioma");
+		foreach (LanguageOption option in UiText.Languages)
+		{
+			ToolStripMenuItem languageItem = new ToolStripMenuItem(option.DisplayName) { Checked = option.Code == UiText.CurrentLanguage, Tag = option.Code };
+			languageItem.Click += ChangeLanguage;
+			languageMenu.DropDownItems.Add(languageItem);
+		}
+		menuStrip.Items.Add(languageMenu);
 		base.MainMenuStrip = menuStrip;
 		base.Controls.Add(tableLayoutPanel);
 		base.Controls.Add(menuStrip);
@@ -197,7 +205,7 @@ internal sealed class MainForm : Form
 		_classifyAs.Width = 165;
 		flowLayoutPanel2.Controls.Add(new Label
 		{
-			Text = "  Clasificar seleccionados:",
+			Text = "Clasificar seleccionados:",
 			AutoSize = true,
 			Margin = new Padding(6, 9, 4, 0)
 		});
@@ -285,6 +293,17 @@ internal sealed class MainForm : Form
 			int max = Math.Max(split.Panel1MinSize, split.Height - split.SplitterWidth - split.Panel2MinSize);
 			split.SplitterDistance = Math.Clamp((int)((double)split.Height * 0.58), split.Panel1MinSize, max);
 		};
+		UiText.Apply(this);
+	}
+
+	private void ChangeLanguage(object? sender, EventArgs e)
+	{
+		if (sender is not ToolStripMenuItem item || item.Tag is not string code) return;
+		UiText.SetLanguage(code);
+		foreach (ToolStripMenuItem sibling in item.Owner!.Items.OfType<ToolStripMenuItem>()) sibling.Checked = ReferenceEquals(sibling, item);
+		PopulateFilters();
+		UiText.ApplyAllOpenForms();
+		UpdateStatus();
 	}
 
 	private static void AddLabeled(FlowLayoutPanel parent, string name, Control input)
@@ -375,14 +394,14 @@ internal sealed class MainForm : Form
 		{
 			string text = combo.SelectedItem?.ToString();
 			combo.Items.Clear();
-			combo.Items.Add("Todos");
+			combo.Items.Add(UiText.Get("Todos"));
 			foreach (string item in from v in values.Where((string v) => !string.IsNullOrWhiteSpace(v)).Distinct<string>(StringComparer.OrdinalIgnoreCase)
 				orderby v
 				select v)
 			{
 				combo.Items.Add(item);
 			}
-			combo.SelectedItem = ((text != null && combo.Items.Contains(text)) ? text : "Todos");
+			combo.SelectedItem = ((text != null && combo.Items.Contains(text)) ? text : UiText.Get("Todos"));
 		}
 	}
 
@@ -402,7 +421,7 @@ internal sealed class MainForm : Form
 		static bool Keep(JsonObject c, ComboBox f, string name)
 		{
 			string text = f.SelectedItem?.ToString();
-			if (text != null && !(text == "Todos"))
+			if (text != null && !(text == UiText.Get("Todos")))
 			{
 				return string.Equals(ContactStore.Get(c, name), text, StringComparison.OrdinalIgnoreCase);
 			}
@@ -472,7 +491,7 @@ internal sealed class MainForm : Form
 	private void UpdateStatus()
 	{
 		List<ContactRow> list = SelectedRows();
-		_status.Text = $"Contactos en base: {_store.Contacts.Count}    ·    Visibles: {_visibleRows.Count}    ·    Marcados: {list.Count}    ·    Dirección CCO oculta para otros destinatarios.";
+		_status.Text = UiText.Format("Contactos en base: {0}    ·    Visibles: {1}    ·    Marcados: {2}    ·    Dirección CCO oculta para otros destinatarios.", _store.Contacts.Count, _visibleRows.Count, list.Count);
 	}
 
 	private void ApplyClassification(object? sender, EventArgs e)
@@ -480,7 +499,7 @@ internal sealed class MainForm : Form
 		List<ContactRow> list = SelectedRows();
 		if (list.Count == 0)
 		{
-			Warn("Primero marca una o varias filas.");
+			Warn(UiText.Get("Primero marca una o varias filas."));
 			return;
 		}
 		string text = _classifyAs.SelectedItem?.ToString() ?? "sin_clasificar";
@@ -491,14 +510,14 @@ internal sealed class MainForm : Form
 		_store.SaveContacts();
 		PopulateFilters();
 		RefreshList();
-		MessageBox.Show($"Clasificación '{text}' aplicada a {list.Count} contactos y guardada. Vuelve a marcarlos antes de preparar correo.", "Guardado");
+		MessageBox.Show(UiText.Format("Clasificación '{0}' aplicada a {1} contactos y guardada. Vuelve a marcarlos antes de preparar correo.", text, list.Count), UiText.Get("Guardado"));
 	}
 
 	private void ImportJson(object? sender, EventArgs e)
 	{
 		using OpenFileDialog openFileDialog = new OpenFileDialog
 		{
-			Title = "Importar contactos JSON",
+			Title = UiText.Get("Importar contactos JSON"),
 			Filter = "JSON (*.json)|*.json"
 		};
 		if (openFileDialog.ShowDialog(this) != DialogResult.OK)
@@ -510,11 +529,11 @@ internal sealed class MainForm : Form
 			var (value, value2) = _store.ImportContacts(openFileDialog.FileName);
 			PopulateFilters();
 			RefreshList();
-			MessageBox.Show($"Importados: {value}\nOmitidos por ID/correo repetido o sin nombre: {value2}\nLos contactos existentes NO se han sobrescrito.", "Importación");
+			MessageBox.Show(UiText.Format("Importados: {0}\nOmitidos por ID/correo repetido o sin nombre: {1}\nLos contactos existentes NO se han sobrescrito.", value, value2), UiText.Get("Importación"));
 		}
 		catch (Exception ex)
 		{
-			Warn("No se pudo importar el archivo:\n" + ex.Message);
+			Warn(UiText.Get("No se pudo importar el archivo:\n") + ex.Message);
 		}
 	}
 
@@ -531,11 +550,11 @@ internal sealed class MainForm : Form
 			_lastPrepared.Clear();
 			PopulateFilters();
 			RefreshList();
-			MessageBox.Show(this, "Contacto añadido y guardado en contactos.json.", "Guardado");
+			MessageBox.Show(this, UiText.Get("Contacto añadido y guardado en contactos.json."), UiText.Get("Guardado"));
 		}
 		catch (Exception ex)
 		{
-			Warn("No se pudo añadir el contacto:\n" + ex.Message);
+			Warn(UiText.Get("No se pudo añadir el contacto:\n") + ex.Message);
 		}
 	}
 
@@ -549,7 +568,7 @@ internal sealed class MainForm : Form
 		ContactRow contactRow = CurrentContact();
 		if (contactRow == null)
 		{
-			Warn("Selecciona una fila para modificarla (no hace falta marcar su casilla). ");
+			Warn(UiText.Get("Selecciona una fila para modificarla (no hace falta marcar su casilla)."));
 			return;
 		}
 		using ContactEditorForm contactEditorForm = new ContactEditorForm(contactRow.Data);
@@ -563,11 +582,11 @@ internal sealed class MainForm : Form
 			_lastPrepared.Clear();
 			PopulateFilters();
 			RefreshList();
-			MessageBox.Show(this, "Contacto modificado y guardado. Se conserva el historial anterior.", "Guardado");
+			MessageBox.Show(this, UiText.Get("Contacto modificado y guardado. Se conserva el historial anterior."), UiText.Get("Guardado"));
 		}
 		catch (Exception ex)
 		{
-			Warn("No se pudo modificar el contacto:\n" + ex.Message);
+			Warn(UiText.Get("No se pudo modificar el contacto:\n") + ex.Message);
 		}
 	}
 
@@ -579,13 +598,13 @@ internal sealed class MainForm : Form
 			ContactRow contactRow = CurrentContact();
 			if (contactRow == null)
 			{
-				Warn("Marca uno o varios contactos, o selecciona una fila, para borrarlos.");
+				Warn(UiText.Get("Marca uno o varios contactos, o selecciona una fila, para borrarlos."));
 				return;
 			}
 			list.Add(contactRow);
 		}
 		string text = ((list.Count == 1) ? ("'" + ContactStore.Get(list[0].Data, "nombre") + "'") : $"los {list.Count} contactos marcados");
-		if (MessageBox.Show(this, "¿Eliminar de la lista activa a " + text + "?\n\nNo aparecerán en futuras campañas. Se guardará una copia de cada registro en contactos_eliminados y el historial de envíos seguirá intacto.", (list.Count == 1) ? "Confirmar eliminación" : "Confirmar eliminación múltiple", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2) != DialogResult.Yes)
+		if (MessageBox.Show(this, UiText.Format("¿Eliminar de la lista activa a {0}?\n\nNo aparecerán en futuras campañas. Se guardará una copia de cada registro en contactos_eliminados y el historial de envíos seguirá intacto.", text), UiText.Get((list.Count == 1) ? "Confirmar eliminación" : "Confirmar eliminación múltiple"), MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2) != DialogResult.Yes)
 		{
 			return;
 		}
@@ -595,11 +614,11 @@ internal sealed class MainForm : Form
 			_lastPrepared.Clear();
 			PopulateFilters();
 			RefreshList();
-			MessageBox.Show(this, $"Eliminados {list.Count} contactos de la lista activa y conservados en el archivo histórico.", "Eliminación completada");
+			MessageBox.Show(this, UiText.Format("Eliminados {0} contactos de la lista activa y conservados en el archivo histórico.", list.Count), UiText.Get("Eliminación completada"));
 		}
 		catch (Exception ex)
 		{
-			Warn("No se pudieron eliminar los contactos:\n" + ex.Message);
+			Warn(UiText.Get("No se pudieron eliminar los contactos:\n") + ex.Message);
 		}
 	}
 
@@ -607,7 +626,7 @@ internal sealed class MainForm : Form
 	{
 		using SaveFileDialog saveFileDialog = new SaveFileDialog
 		{
-			Title = "Exportar todos los contactos (para conservar o compartir con ChatGPT)",
+			Title = UiText.Get("Exportar todos los contactos"),
 			Filter = "JSON (*.json)|*.json",
 			FileName = "contactos_DNET_exportados.json",
 			OverwritePrompt = true
@@ -619,11 +638,11 @@ internal sealed class MainForm : Form
 		try
 		{
 			_store.ExportContacts(saveFileDialog.FileName);
-			MessageBox.Show(this, "Contactos exportados. Puedes compartir este JSON aquí para que preparemos nuevos registros.", "Exportación");
+			MessageBox.Show(this, UiText.Get("Contactos exportados correctamente."), UiText.Get("Exportación"));
 		}
 		catch (Exception ex)
 		{
-			Warn("No se pudo exportar el JSON:\n" + ex.Message);
+			Warn(UiText.Get("No se pudo exportar el JSON:\n") + ex.Message);
 		}
 	}
 
@@ -631,8 +650,8 @@ internal sealed class MainForm : Form
 	{
 		using SaveFileDialog saveFileDialog = new SaveFileDialog
 		{
-			Title = "Hacer copia de seguridad completa",
-			Filter = "Copia de seguridad ZIP (*.zip)|*.zip",
+			Title = UiText.Get("Hacer copia de seguridad completa"),
+			Filter = UiText.Get("Copia de seguridad ZIP (*.zip)|*.zip"),
 			FileName = "Gestor_Comunicaciones_DNET_copia_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".zip",
 			InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
 			OverwritePrompt = true
@@ -644,11 +663,11 @@ internal sealed class MainForm : Form
 		try
 		{
 			_store.CreateBackup(saveFileDialog.FileName);
-			MessageBox.Show(this, "La copia de seguridad se ha creado correctamente.\n\nIncluye todos los contactos, los contactos eliminados y el historial de envíos.\n\n" + saveFileDialog.FileName, "Copia completada", MessageBoxButtons.OK, MessageBoxIcon.Information);
+			MessageBox.Show(this, UiText.Format("La copia de seguridad se ha creado correctamente.\n\nIncluye todos los contactos, los contactos eliminados y el historial de envíos.\n\n{0}", saveFileDialog.FileName), UiText.Get("Copia completada"), MessageBoxButtons.OK, MessageBoxIcon.Information);
 		}
 		catch (Exception ex)
 		{
-			Warn("No se pudo crear la copia de seguridad:\n" + ex.Message);
+			Warn(UiText.Get("No se pudo crear la copia de seguridad:\n") + ex.Message);
 		}
 	}
 
@@ -656,14 +675,14 @@ internal sealed class MainForm : Form
 	{
 		using OpenFileDialog openFileDialog = new OpenFileDialog
 		{
-			Title = "Recuperar copia de seguridad completa",
-			Filter = "Copia de seguridad ZIP (*.zip)|*.zip"
+			Title = UiText.Get("Recuperar copia de seguridad completa"),
+			Filter = UiText.Get("Copia de seguridad ZIP (*.zip)|*.zip")
 		};
 		if (openFileDialog.ShowDialog(this) != DialogResult.OK)
 		{
 			return;
 		}
-		if (MessageBox.Show(this, "La copia seleccionada sustituirá los contactos y el historial actuales.\n\nAntes de recuperar, el programa guardará automáticamente una copia de seguridad del estado actual.\n\n¿Deseas continuar?", "Confirmar recuperación", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) != DialogResult.Yes)
+		if (MessageBox.Show(this, UiText.Get("La copia seleccionada sustituirá los contactos y el historial actuales.\n\nAntes de recuperar, el programa guardará automáticamente una copia de seguridad del estado actual.\n\n¿Deseas continuar?"), UiText.Get("Confirmar recuperación"), MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) != DialogResult.Yes)
 		{
 			return;
 		}
@@ -673,11 +692,11 @@ internal sealed class MainForm : Form
 			_lastPrepared.Clear();
 			PopulateFilters();
 			RefreshList();
-			MessageBox.Show(this, $"Copia recuperada correctamente.\n\nContactos activos: {result.contacts}\nEnvíos en el historial: {result.shipments}\n\nCopia automática del estado anterior:\n{result.safetyBackupPath}", "Recuperación completada", MessageBoxButtons.OK, MessageBoxIcon.Information);
+			MessageBox.Show(this, UiText.Format("Copia recuperada correctamente.\n\nContactos activos: {0}\nEnvíos en el historial: {1}\n\nCopia automática del estado anterior:\n{2}", result.contacts, result.shipments, result.safetyBackupPath), UiText.Get("Recuperación completada"), MessageBoxButtons.OK, MessageBoxIcon.Information);
 		}
 		catch (Exception ex)
 		{
-			Warn("No se pudo recuperar la copia. Los datos actuales se han conservado.\n\n" + ex.Message);
+			Warn(UiText.Get("No se pudo recuperar la copia. Los datos actuales se han conservado.\n\n") + ex.Message);
 		}
 	}
 
@@ -687,7 +706,7 @@ internal sealed class MainForm : Form
 		List<ContactRow> list2 = list.Where((ContactRow c) => !Eligible(c.Data)).ToList();
 		if (list2.Count > 0)
 		{
-			message = $"Hay {list2.Count} contactos sin correo autorizado o marcados como no contactar. Desmárcalos.";
+			message = UiText.Format("Hay {0} contactos sin correo autorizado o marcados como no contactar. Desmárcalos.", list2.Count);
 			return new List<ContactRow>();
 		}
 		if (_skipInformed.Checked)
@@ -698,10 +717,10 @@ internal sealed class MainForm : Form
 			where g.Count() > 1
 			select g).ToList().Count > 0)
 		{
-			message = "Hay direcciones repetidas entre las seleccionadas. Corrige la lista antes de continuar.";
+			message = UiText.Get("Hay direcciones repetidas entre las seleccionadas. Corrige la lista antes de continuar.");
 			return new List<ContactRow>();
 		}
-		message = ((list.Count == 0) ? "No hay destinatarios válidos para la selección y versión actual." : "");
+		message = ((list.Count == 0) ? UiText.Get("No hay destinatarios válidos para la selección y versión actual.") : "");
 		return list;
 	}
 
@@ -715,7 +734,7 @@ internal sealed class MainForm : Form
 			return;
 		}
 		Clipboard.SetText(string.Join(", ", list.Select((ContactRow c) => c.Correo)));
-		MessageBox.Show($"{list.Count} correos copiados. Pégalos en CCO, NO en CC.", "CCO copiado");
+		MessageBox.Show(UiText.Format("{0} correos copiados. Pégalos en CCO, NO en CC.", list.Count), UiText.Get("CCO copiado"));
 	}
 
 	private void PrepareMail(object? sender, EventArgs e)
@@ -729,7 +748,7 @@ internal sealed class MainForm : Form
 		}
 		string stringToEscape = string.Join(",", list.Select((ContactRow c) => c.Correo.Trim()));
 		string fileName = "mailto:?bcc=" + Uri.EscapeDataString(stringToEscape);
-		if (MessageBox.Show($"Preparar correo para {list.Count} destinatarios en CCO.\n\n" + "Se abrirá la aplicación de correo predeterminada, NO se enviará nada automáticamente.\nEl asunto, el mensaje y los adjuntos quedarán en blanco para que los completes personalmente.\nRevisa especialmente el campo CCO antes de enviar.\n\n¿Continuar?", "Revisar destinatarios", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk) != DialogResult.Yes)
+		if (MessageBox.Show(UiText.Format("Preparar correo para {0} destinatarios en CCO.\n\nSe abrirá la aplicación de correo predeterminada, NO se enviará nada automáticamente.\nEl asunto, el mensaje y los adjuntos quedarán en blanco para que los completes personalmente.\nRevisa especialmente el campo CCO antes de enviar.\n\n¿Continuar?", list.Count), UiText.Get("Revisar destinatarios"), MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk) != DialogResult.Yes)
 		{
 			return;
 		}
@@ -745,7 +764,7 @@ internal sealed class MainForm : Form
 		catch (Exception ex)
 		{
 			_lastPrepared.Clear();
-			Warn("No se pudo abrir el cliente de correo. Puede que mailto no esté configurado. Usa 'Copiar CCO' y pega las direcciones en Gmail manualmente.\n\n" + ex.Message);
+			Warn(UiText.Get("No se pudo abrir el cliente de correo. Puede que mailto no esté configurado. Usa 'Copiar CCO' y pega las direcciones manualmente.\n\n") + ex.Message);
 		}
 	}
 
@@ -753,24 +772,24 @@ internal sealed class MainForm : Form
 	{
 		if (_lastPrepared.Count == 0)
 		{
-			Warn("Primero prepara el correo con 'Preparar con mailto'. Esto NO confirma un envío.");
+			Warn(UiText.Get("Primero prepara el correo con 'Preparar con mailto'. Esto NO confirma un envío."));
 			return;
 		}
-		string value = ((_lastPreparedVersion.Length == 0) ? "sin indicar versión" : ("de la versión " + _lastPreparedVersion));
-		if (MessageBox.Show($"¿CONFIRMAS que tú has pulsado ENVIAR en tu cliente de correo para los {_lastPrepared.Count} destinatarios ({value})?\n\nSólo entonces anotaremos 'enviado confirmado por usuario'.", "Confirmar envío real", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) != DialogResult.Yes)
+		string value = ((_lastPreparedVersion.Length == 0) ? UiText.Get("sin indicar versión") : UiText.Format("de la versión {0}", _lastPreparedVersion));
+		if (MessageBox.Show(UiText.Format("¿CONFIRMAS que tú has pulsado ENVIAR en tu cliente de correo para los {0} destinatarios ({1})?\n\nSólo entonces anotaremos 'enviado confirmado por usuario'.", _lastPrepared.Count, value), UiText.Get("Confirmar envío REAL"), MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) != DialogResult.Yes)
 		{
 			return;
 		}
 		try
 		{
 			_store.ConfirmSend(_lastPrepared, _lastPreparedVersion);
-			MessageBox.Show($"Registrados {_lastPrepared.Count} envíos declarados por ti. No equivale a confirmar entrega.", "Registro actualizado");
+			MessageBox.Show(UiText.Format("Registrados {0} envíos declarados por ti. No equivale a confirmar entrega.", _lastPrepared.Count), UiText.Get("Registro actualizado"));
 			_lastPrepared.Clear();
 			RefreshList();
 		}
 		catch (Exception ex)
 		{
-			Warn("No se pudo guardar el historial:\n" + ex.Message);
+			Warn(UiText.Get("No se pudo guardar el historial:\n") + ex.Message);
 		}
 	}
 
@@ -791,11 +810,11 @@ internal sealed class MainForm : Form
 
 	private void Help(object? sender, EventArgs e)
 	{
-		MessageBox.Show("1) Busca por cualquier dato o utiliza los filtros para localizar contactos.\n2) Añade, modifica o borra contactos; también puedes importar y exportar JSON.\n3) Filtra y marca los destinatarios que quieras incluir.\n4) La versión es opcional y sólo sirve para el historial interno.\n5) 'Preparar con mailto' abre un único correo con los seleccionados en CCO.\n6) Después de enviarlo, vuelve aquí y confirma el envío real para registrarlo.\n7) En 'Herramientas' puedes recuperar contactos de la papelera, consultar el historial y revisar posibles duplicados.\n8) En 'Copias de seguridad' puedes guardar o recuperar juntos los contactos y el historial.\n\nIMPORTANTE: el gestor NO envía correos, no guarda contraseñas y no incluye asunto ni mensaje en el enlace mailto. Los JSON privados se guardan en AppData local.", "Cómo utilizar el gestor");
+		MessageBox.Show(UiText.Get("1) Busca por cualquier dato o utiliza los filtros para localizar contactos.\n2) Añade, modifica o borra contactos; también puedes importar y exportar JSON.\n3) Filtra y marca los destinatarios que quieras incluir.\n4) La versión es opcional y sólo sirve para el historial interno.\n5) 'Preparar con mailto' abre un único correo con los seleccionados en CCO.\n6) Después de enviarlo, vuelve aquí y confirma el envío real para registrarlo.\n7) En 'Herramientas' puedes recuperar contactos de la papelera, consultar el historial y revisar posibles duplicados.\n8) En 'Copias de seguridad' puedes guardar o recuperar juntos los contactos y el historial.\n\nIMPORTANTE: el gestor NO envía correos, no guarda contraseñas y no incluye asunto ni mensaje en el enlace mailto. Los JSON privados se guardan en AppData local."), UiText.Get("Cómo utilizar el gestor"));
 	}
 
 	private void Warn(string message)
 	{
-		MessageBox.Show(message, "Gestor DNET", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+		MessageBox.Show(message, UiText.Get("Gestor DNET"), MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 	}
 }

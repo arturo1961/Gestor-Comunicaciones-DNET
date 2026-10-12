@@ -18,5 +18,7 @@
     <None Remove="GestorComunicacionesDNET.Datos.envios.json" />
     <EmbeddedResource Include="GestorComunicacionesDNET.Datos.contactos.json" LogicalName="GestorComunicacionesDNET.Datos.contactos.json" />
     <EmbeddedResource Include="GestorComunicacionesDNET.Datos.envios.json" LogicalName="GestorComunicacionesDNET.Datos.envios.json" />
+    <EmbeddedResource Include="GestorComunicacionesDNET\SpanishTexts.json" LogicalName="GestorComunicacionesDNET.SpanishTexts.json" />
+    <EmbeddedResource Include="GestorComunicacionesDNET\LanguagePacks\*.json" />
   </ItemGroup>
 </Project>

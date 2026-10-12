@@ -2,6 +2,8 @@
 
 Aplicación personal para Windows que permite organizar contactos, filtrarlos y preparar un correo nuevo con los destinatarios seleccionados en el campo CCO.
 
+La versión 1.6.0 incluye **62 idiomas** en un único ejecutable. El idioma se cambia desde el menú superior y queda guardado para el siguiente inicio.
+
 El programa no envía mensajes automáticamente, no almacena contraseñas y no incorpora asuntos ni textos privados. El usuario revisa y completa personalmente cada correo en su aplicación de correo predeterminada.
 
 ## Funciones
@@ -14,6 +16,8 @@ El programa no envía mensajes automáticamente, no almacena contraseñas y no i
 - Registro manual y consulta visual del historial de comunicaciones.
 - Papelera para recuperar contactos eliminados o borrarlos definitivamente.
 - Revisión de posibles contactos repetidos y correos incorrectos.
+- Interfaz, editor, avisos, ayuda y operaciones principales traducidos a 62 idiomas.
+- Detección inicial del idioma de Windows y cambio sin reiniciar.
 - Importación y exportación de contactos en JSON.
 - Copia de seguridad completa de contactos e historial en ZIP.
 - Recuperación validada con copia automática previa del estado actual.
@@ -29,14 +33,17 @@ Los contactos y el historial reales permanecen fuera del repositorio. No publiqu
 ## Pequeño manual de uso
 
 1. Abre el programa y añade tus contactos con **Nuevo contacto**. También puedes importar contactos desde un archivo JSON.
-2. Utiliza el buscador o los filtros para mostrar únicamente los contactos que necesites.
-3. Marca las casillas de los destinatarios. **Marcar visibles** selecciona todos los contactos mostrados que pueden recibir correo.
-4. Pulsa **Copiar CCO** para copiar las direcciones o **Preparar con mailto** para abrir un correo nuevo con los destinatarios colocados en CCO.
-5. Escribe personalmente el asunto y el mensaje, añade los archivos necesarios y revisa el campo CCO antes de enviar.
-6. Después de realizar el envío, vuelve al gestor y pulsa **Confirmar envío REAL** para anotarlo en el historial.
-7. En **Herramientas** puedes abrir la papelera, consultar el historial y revisar posibles duplicados o correos incorrectos.
-8. Utiliza **Copias de seguridad > Hacer copia de seguridad** para guardar juntos los contactos y el historial en un ZIP.
-9. Para volver a un estado anterior, utiliza **Recuperar copia de seguridad**. Antes de sustituir los datos, el programa conserva automáticamente otra copia del estado actual.
+2. Si lo necesitas, cambia la interfaz desde el menú **Idioma**. La elección se conservará.
+3. Utiliza el buscador o los filtros para mostrar únicamente los contactos que necesites.
+4. Marca las casillas de los destinatarios. **Marcar visibles** selecciona todos los contactos mostrados que pueden recibir correo.
+5. Pulsa **Copiar CCO** para copiar las direcciones o **Preparar con mailto** para abrir un correo nuevo con los destinatarios colocados en CCO.
+6. Escribe personalmente el asunto y el mensaje, añade los archivos necesarios y revisa el campo CCO antes de enviar.
+7. Después de realizar el envío, vuelve al gestor y pulsa **Confirmar envío REAL** para anotarlo en el historial.
+8. En **Herramientas** puedes abrir la papelera, consultar el historial y revisar posibles duplicados o correos incorrectos.
+9. Utiliza **Copias de seguridad > Hacer copia de seguridad** para guardar juntos los contactos y el historial en un ZIP.
+10. Para volver a un estado anterior, utiliza **Recuperar copia de seguridad**. Antes de sustituir los datos, el programa conserva automáticamente otra copia del estado actual.
+
+La lista completa está en [IDIOMAS.md](IDIOMAS.md). Las traducciones iniciales se han generado con ayuda automática y se aceptan correcciones de hablantes nativos.
 
 ## Requisitos para compilar
 

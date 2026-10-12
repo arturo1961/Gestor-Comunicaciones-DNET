@@ -65,6 +65,7 @@ internal sealed class RecycleBinForm : Form
 		buttons.Controls.Add(restore);
 		layout.Controls.Add(buttons, 0, 2);
 		Reload();
+		UiText.Apply(this);
 	}
 
 	private static Button NewButton(string text, EventHandler click, int width)
@@ -92,8 +93,8 @@ internal sealed class RecycleBinForm : Form
 			.ToList();
 		_grid.DataSource = new BindingList<DeletedRow>(rows);
 		_status.Text = rows.Count == 0
-			? "La papelera está vacía."
-			: $"Hay {rows.Count} contactos eliminados. Puedes seleccionar varios manteniendo pulsada la tecla Ctrl.";
+			? UiText.Get("La papelera está vacía.")
+			: UiText.Format("Hay {0} contactos eliminados. Puedes seleccionar varios manteniendo pulsada la tecla Ctrl.", rows.Count);
 	}
 
 	private void RestoreSelected(object? sender, EventArgs e)
@@ -101,13 +102,13 @@ internal sealed class RecycleBinForm : Form
 		List<JsonObject> selected = SelectedContacts();
 		if (selected.Count == 0)
 		{
-			MessageBox.Show(this, "Selecciona uno o varios contactos para recuperarlos.", "Papelera", MessageBoxButtons.OK, MessageBoxIcon.Information);
+			MessageBox.Show(this, UiText.Get("Selecciona uno o varios contactos para recuperarlos."), UiText.Get("Papelera"), MessageBoxButtons.OK, MessageBoxIcon.Information);
 			return;
 		}
 		var result = _store.RestoreDeletedContacts(selected);
 		DataChanged |= result.restored > 0;
 		Reload();
-		MessageBox.Show(this, $"Recuperados: {result.restored}\nNo recuperados por coincidencia de ID o correo: {result.skipped}", "Resultado");
+		MessageBox.Show(this, UiText.Format("Recuperados: {0}\nNo recuperados por coincidencia de ID o correo: {1}", result.restored, result.skipped), UiText.Get("Resultado"));
 	}
 
 	private void DeletePermanently(object? sender, EventArgs e)
@@ -115,10 +116,10 @@ internal sealed class RecycleBinForm : Form
 		List<JsonObject> selected = SelectedContacts();
 		if (selected.Count == 0)
 		{
-			MessageBox.Show(this, "Selecciona uno o varios contactos.", "Papelera", MessageBoxButtons.OK, MessageBoxIcon.Information);
+			MessageBox.Show(this, UiText.Get("Selecciona uno o varios contactos."), UiText.Get("Papelera"), MessageBoxButtons.OK, MessageBoxIcon.Information);
 			return;
 		}
-		if (MessageBox.Show(this, $"¿Eliminar definitivamente {selected.Count} contactos de la papelera?\n\nEsta operación no se puede deshacer salvo que tengas una copia de seguridad.", "Confirmar eliminación definitiva", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) != DialogResult.Yes)
+		if (MessageBox.Show(this, UiText.Format("¿Eliminar definitivamente {0} contactos de la papelera?\n\nEsta operación no se puede deshacer salvo que tengas una copia de seguridad.", selected.Count), UiText.Get("Confirmar eliminación definitiva"), MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) != DialogResult.Yes)
 		{
 			return;
 		}

@@ -9,6 +9,7 @@ internal static class Program
 	private static void Main()
 	{
 		ApplicationConfiguration.Initialize();
+		UiText.Initialize();
 		Application.Run(new MainForm());
 	}
 }

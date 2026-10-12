@@ -1,5 +1,14 @@
 # Historial de cambios
 
+## 1.6.0
+
+- 62 idiomas integrados en el mismo ejecutable.
+- Detección inicial del idioma de Windows.
+- Selector de idioma que cambia la interfaz sin reiniciar y recuerda la elección.
+- Traducción de la ventana principal, editor, papelera, historial, revisión, ayuda, confirmaciones y avisos principales.
+- Validación automática de que todos los paquetes contienen los mismos textos y conservan sus marcadores.
+- Las escrituras de derecha a izquierda mantienen el texto natural sin invertir la distribución de la aplicación.
+
 ## 1.5.0
 
 - Buscador instantáneo compatible con los filtros existentes.

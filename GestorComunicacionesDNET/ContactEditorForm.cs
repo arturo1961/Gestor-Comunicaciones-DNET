@@ -130,6 +130,7 @@ internal sealed class ContactEditorForm : Form
 		flowLayoutPanel.Controls.Add(button2);
 		base.CancelButton = button;
 		base.AcceptButton = button2;
+		UiText.Apply(this);
 	}
 
 	private static (Panel Panel, TableLayoutPanel Table) NewColumn()
@@ -241,7 +242,7 @@ internal sealed class ContactEditorForm : Form
 				}
 				catch
 				{
-					Error("El campo '" + text2 + "' contiene JSON no válido. Corrígelo antes de guardar.");
+					Error(UiText.Format("El campo '{0}' contiene JSON no válido. Corrígelo antes de guardar.", text2));
 					return;
 				}
 			}
@@ -323,6 +324,6 @@ internal sealed class ContactEditorForm : Form
 
 	private void Error(string msg)
 	{
-		MessageBox.Show(this, msg, "Revisa los datos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+		MessageBox.Show(this, UiText.Get(msg), UiText.Get("Revisa los datos"), MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 	}
 }

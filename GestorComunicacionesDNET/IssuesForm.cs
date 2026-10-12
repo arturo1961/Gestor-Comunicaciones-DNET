@@ -22,7 +22,7 @@ internal sealed class IssuesForm : Form
 		Controls.Add(layout);
 		layout.Controls.Add(new Label
 		{
-			Text = issues.Count == 0 ? "No se han encontrado correos incorrectos ni posibles duplicados." : $"Se han encontrado {issues.Count} avisos. Revísalos y modifica el contacto correspondiente desde la ventana principal.",
+			Text = issues.Count == 0 ? UiText.Get("No se han encontrado correos incorrectos ni posibles duplicados.") : UiText.Format("Se han encontrado {0} avisos. Revísalos y modifica el contacto correspondiente desde la ventana principal.", issues.Count),
 			Dock = DockStyle.Fill,
 			TextAlign = ContentAlignment.MiddleLeft
 		}, 0, 0);
@@ -39,5 +39,6 @@ internal sealed class IssuesForm : Form
 		close.Click += (_, _) => Close();
 		footer.Controls.Add(close);
 		layout.Controls.Add(footer, 0, 2);
+		UiText.Apply(this);
 	}
 }

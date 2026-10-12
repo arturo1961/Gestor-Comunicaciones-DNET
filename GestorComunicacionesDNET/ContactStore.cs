@@ -249,21 +249,21 @@ internal sealed class ContactStore
 			.GroupBy(c => Get(c, "correo").Trim(), StringComparer.OrdinalIgnoreCase)
 			.Where(group => group.Count() > 1))
 		{
-			issues.Add(new ContactIssue("Correo repetido", string.Join(" · ", group.Select(c => Get(c, "nombre"))), group.Key));
+			issues.Add(new ContactIssue(UiText.Get("Correo repetido"), string.Join(" · ", group.Select(c => Get(c, "nombre"))), group.Key));
 		}
 		foreach (IGrouping<string, JsonObject> group in Contacts
 			.Where(c => Get(c, "nombre").Trim().Length > 0)
 			.GroupBy(c => NormalizeForComparison(Get(c, "nombre")), StringComparer.OrdinalIgnoreCase)
 			.Where(group => group.Key.Length > 0 && group.Count() > 1))
 		{
-			issues.Add(new ContactIssue("Nombre repetido", string.Join(" · ", group.Select(c => Get(c, "nombre"))), string.Join("; ", group.Select(c => Get(c, "correo")).Where(value => value.Length > 0))));
+			issues.Add(new ContactIssue(UiText.Get("Nombre repetido"), string.Join(" · ", group.Select(c => Get(c, "nombre"))), string.Join("; ", group.Select(c => Get(c, "correo")).Where(value => value.Length > 0))));
 		}
 		foreach (JsonObject contact in Contacts)
 		{
 			string email = Get(contact, "correo").Trim();
 			if (email.Length > 0 && !IsValidEmail(email))
 			{
-				issues.Add(new ContactIssue("Correo posiblemente incorrecto", Get(contact, "nombre"), email));
+				issues.Add(new ContactIssue(UiText.Get("Correo posiblemente incorrecto"), Get(contact, "nombre"), email));
 			}
 		}
 		return issues
