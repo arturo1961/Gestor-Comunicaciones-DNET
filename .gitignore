@@ -1,0 +1,15 @@
+bin/
+obj/
+publicar/
+.vs/
+*.user
+*.suo
+*.zip
+*.bak
+*.tmp
+
+# Nunca añadir copias ni datos reales de contactos al repositorio.
+contactos.json
+envios.json
+*copia*.zip
+DatosPrivados/
