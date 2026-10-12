@@ -1,5 +1,7 @@
 # Gestor de Comunicaciones DNET
 
+[Español](README.md) | [简体中文](README.zh-CN.md)
+
 Aplicación personal para Windows que permite organizar contactos, filtrarlos y preparar un correo nuevo con los destinatarios seleccionados en el campo CCO.
 
 La versión 1.6.1 incluye **62 idiomas** en un único ejecutable. El idioma se cambia desde el menú superior y queda guardado para el siguiente inicio.
