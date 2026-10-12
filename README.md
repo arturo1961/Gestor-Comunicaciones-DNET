@@ -2,7 +2,7 @@
 
 Aplicación personal para Windows que permite organizar contactos, filtrarlos y preparar un correo nuevo con los destinatarios seleccionados en el campo CCO.
 
-La versión 1.6.0 incluye **62 idiomas** en un único ejecutable. El idioma se cambia desde el menú superior y queda guardado para el siguiente inicio.
+La versión 1.6.1 incluye **62 idiomas** en un único ejecutable. El idioma se cambia desde el menú superior y queda guardado para el siguiente inicio.
 
 El programa no envía mensajes automáticamente, no almacena contraseñas y no incorpora asuntos ni textos privados. El usuario revisa y completa personalmente cada correo en su aplicación de correo predeterminada.
 
@@ -68,7 +68,15 @@ Utiliza siempre CCO para grupos de destinatarios, respeta las solicitudes de baj
 
 ## Aportación voluntaria
 
-El programa es gratuito y de código abierto. Si te resulta útil, puedes apoyar voluntariamente su mantenimiento y evolución mediante los canales de aportación que publique el autor. La aportación no es obligatoria, no desbloquea funciones y no modifica los derechos concedidos por la licencia MIT.
+**EL GESTOR DE COMUNICACIONES DNET ES GRATUITO Y LO SEGUIRÁ SIENDO. DONAR O NO DONAR ES DECISIÓN EXCLUSIVA DE CADA PERSONA.** ❤️
+
+Si el programa te resulta útil y quieres apoyar voluntariamente su mantenimiento y evolución, puedes hacerlo por cualquiera de estos medios:
+
+- [PayPal: paypal.me/acarballoflandes](https://paypal.me/acarballoflandes)
+- **Bizum:** `+34 662 024 169`
+- [GitHub Sponsors de arturo1961](https://github.com/sponsors/arturo1961), cuando el perfil esté disponible.
+
+Donar no desbloquea funciones, no ofrece ventajas especiales y no modifica la licencia MIT ni las condiciones del programa. Consulta los detalles en [DONACIONES.md](DONACIONES.md).
 
 También puedes colaborar comunicando errores, proponiendo mejoras o difundiendo el proyecto.
 
