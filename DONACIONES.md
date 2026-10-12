@@ -7,6 +7,7 @@ Gestor de Comunicaciones DNET es software libre con licencia MIT. Todas sus func
 ## Formas de colaborar económicamente
 
 - **PayPal:** [paypal.me/acarballoflandes](https://paypal.me/acarballoflandes)
+- **Ko-fi:** [ko-fi.com/arturocarballo](https://ko-fi.com/arturocarballo)
 - **Bizum:** `+34 662 024 169`
 - **GitHub Sponsors:** [github.com/sponsors/arturo1961](https://github.com/sponsors/arturo1961), cuando GitHub apruebe y active el perfil.
 
