@@ -57,41 +57,59 @@ internal sealed class ContactEditorForm : Form
 		Text = (_creating ? "Añadir contacto — todos los campos" : "Modificar contacto — todos los campos");
 		base.StartPosition = FormStartPosition.CenterParent;
 		Font = new Font("Segoe UI", 10f);
-		base.Size = new Size(1050, 765);
-		MinimumSize = new Size(850, 600);
+		Rectangle workingArea = Screen.PrimaryScreen?.WorkingArea ?? new Rectangle(0, 0, 1200, 850);
+		base.Size = new Size(Math.Min(1180, workingArea.Width - 50), Math.Min(850, workingArea.Height - 50));
+		MinimumSize = new Size(860, 620);
 		base.FormBorderStyle = FormBorderStyle.Sizable;
 		base.ShowInTaskbar = false;
+		BackColor = Color.FromArgb(242, 245, 250);
 		TableLayoutPanel tableLayoutPanel = new TableLayoutPanel
 		{
 			Dock = DockStyle.Fill,
 			RowCount = 3,
 			ColumnCount = 1,
-			Padding = new Padding(10)
+			Padding = new Padding(12)
 		};
-		tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 44f));
+		tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 78f));
 		tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 100f));
-		tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 62f));
+		tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 66f));
 		base.Controls.Add(tableLayoutPanel);
-		Label control = new Label
+		Panel header = new Panel
 		{
+			Dock = DockStyle.Fill,
+			BackColor = Color.FromArgb(31, 55, 88),
+			Padding = new Padding(18, 10, 18, 8),
+			Margin = new Padding(0, 0, 0, 10)
+		};
+		Label heading = new Label
+		{
+			Text = Text,
+			Dock = DockStyle.Top,
+			Height = 31,
+			Font = new Font("Segoe UI Semibold", 15f),
+			ForeColor = Color.White
+		};
+		Label subtitle = new Label
+		{
+			Text = "Modifica los datos y pulsa Guardar. El ID se mantiene fijo para proteger el historial de envíos.",
 			Dock = DockStyle.Fill,
 			TextAlign = ContentAlignment.MiddleLeft,
-			Text = "Modifica los datos y pulsa Guardar. El ID se mantiene fijo para proteger el historial de envíos."
+			ForeColor = Color.FromArgb(220, 230, 244)
 		};
-		tableLayoutPanel.Controls.Add(control, 0, 0);
-		TableLayoutPanel tableLayoutPanel2 = new TableLayoutPanel
-		{
-			Dock = DockStyle.Fill,
-			ColumnCount = 2,
-			RowCount = 1
-		};
-		tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50f));
-		tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50f));
-		tableLayoutPanel.Controls.Add(tableLayoutPanel2, 0, 1);
-		(Panel, TableLayoutPanel) tuple = NewColumn();
-		(Panel, TableLayoutPanel) tuple2 = NewColumn();
-		tableLayoutPanel2.Controls.Add(tuple.Item1, 0, 0);
-		tableLayoutPanel2.Controls.Add(tuple2.Item1, 1, 0);
+		header.Controls.Add(subtitle);
+		header.Controls.Add(heading);
+		tableLayoutPanel.Controls.Add(header, 0, 0);
+
+		Panel scrollHost = new Panel { Dock = DockStyle.Fill, AutoScroll = true, BackColor = Color.FromArgb(242, 245, 250), Padding = new Padding(0, 2, 0, 6) };
+		TableLayoutPanel sections = new TableLayoutPanel { Dock = DockStyle.Top, AutoSize = true, ColumnCount = 2, RowCount = 1, Padding = new Padding(0, 0, 6, 0) };
+		sections.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50f));
+		sections.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50f));
+		scrollHost.Controls.Add(sections);
+		tableLayoutPanel.Controls.Add(scrollHost, 0, 1);
+		(GroupBox, TableLayoutPanel) tuple = NewSection("Datos del contacto");
+		(GroupBox, TableLayoutPanel) tuple2 = NewSection("Seguimiento e información");
+		sections.Controls.Add(tuple.Item1, 0, 0);
+		sections.Controls.Add(tuple2.Item1, 1, 0);
 		List<FieldDef> list = CommonFields.ToList();
 		foreach (string key in _original.Select<KeyValuePair<string, JsonNode>, string>((KeyValuePair<string, JsonNode> pair) => pair.Key))
 		{
@@ -102,29 +120,42 @@ internal sealed class ContactEditorForm : Form
 		}
 		for (int num = 0; num < list.Count; num++)
 		{
-			AddField((num < (list.Count + 1) / 2) ? tuple.Item2 : tuple2.Item2, list[num]);
+			AddField((num < 12) ? tuple.Item2 : tuple2.Item2, list[num]);
 		}
 		FlowLayoutPanel flowLayoutPanel = new FlowLayoutPanel
 		{
 			FlowDirection = FlowDirection.RightToLeft,
 			Dock = DockStyle.Fill,
 			WrapContents = false,
-			Padding = new Padding(4)
+			Padding = new Padding(4, 12, 2, 4),
+			BackColor = Color.White
 		};
 		tableLayoutPanel.Controls.Add(flowLayoutPanel, 0, 2);
 		Button button = new Button
 		{
 			Text = "Cancelar",
-			Width = 120,
+			AutoSize = true,
+			MinimumSize = new Size(120, 40),
 			Height = 38,
-			DialogResult = DialogResult.Cancel
+			Padding = new Padding(14, 2, 14, 2),
+			DialogResult = DialogResult.Cancel,
+			FlatStyle = FlatStyle.Flat,
+			BackColor = Color.White,
+			ForeColor = Color.FromArgb(35, 48, 68)
 		};
+		button.FlatAppearance.BorderColor = Color.FromArgb(180, 190, 205);
 		Button button2 = new Button
 		{
 			Text = "Guardar contacto",
-			Width = 175,
-			Height = 38
+			AutoSize = true,
+			MinimumSize = new Size(175, 40),
+			Height = 40,
+			Padding = new Padding(16, 2, 16, 2),
+			FlatStyle = FlatStyle.Flat,
+			BackColor = Color.FromArgb(26, 115, 232),
+			ForeColor = Color.White
 		};
+		button2.FlatAppearance.BorderSize = 0;
 		button2.Click += SaveChanges;
 		flowLayoutPanel.Controls.Add(button);
 		flowLayoutPanel.Controls.Add(button2);
@@ -133,13 +164,18 @@ internal sealed class ContactEditorForm : Form
 		UiText.Apply(this);
 	}
 
-	private static (Panel Panel, TableLayoutPanel Table) NewColumn()
+	private static (GroupBox Group, TableLayoutPanel Table) NewSection(string title)
 	{
-		Panel obj = new Panel
+		GroupBox group = new GroupBox
 		{
+			Text = title,
 			Dock = DockStyle.Fill,
-			AutoScroll = true,
-			Padding = new Padding(4)
+			AutoSize = true,
+			Padding = new Padding(12, 14, 12, 12),
+			Margin = new Padding(0, 0, 10, 0),
+			BackColor = Color.White,
+			Font = new Font("Segoe UI Semibold", 10f),
+			ForeColor = Color.FromArgb(31, 55, 88)
 		};
 		TableLayoutPanel tableLayoutPanel = new TableLayoutPanel
 		{
@@ -147,12 +183,14 @@ internal sealed class ContactEditorForm : Form
 			AutoSize = true,
 			ColumnCount = 2,
 			RowCount = 0,
-			Padding = new Padding(2)
+			Padding = new Padding(2),
+			Font = new Font("Segoe UI", 10f),
+			ForeColor = Color.FromArgb(25, 35, 50)
 		};
-		tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 172f));
-		tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 282f));
-		obj.Controls.Add(tableLayoutPanel);
-		return (Panel: obj, Table: tableLayoutPanel);
+		tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 190f));
+		tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100f));
+		group.Controls.Add(tableLayoutPanel);
+		return (Group: group, Table: tableLayoutPanel);
 	}
 
 	private void AddField(TableLayoutPanel table, FieldDef field)
@@ -166,14 +204,15 @@ internal sealed class ContactEditorForm : Form
 			flag = flag2;
 		}
 		bool flag3 = flag;
-		int num = (flag3 ? 96 : 36);
+		int num = (flag3 ? 112 : 50);
 		table.RowStyles.Add(new RowStyle(SizeType.Absolute, num));
 		table.Controls.Add(new Label
 		{
 			Text = field.Caption + ":",
 			TextAlign = ContentAlignment.MiddleLeft,
 			Dock = DockStyle.Fill,
-			Margin = new Padding(2)
+			Margin = new Padding(4, 3, 8, 3),
+			ForeColor = Color.FromArgb(48, 62, 82)
 		}, 0, row);
 		Control control;
 		if (field.Key == "no_contactar")
@@ -182,7 +221,7 @@ internal sealed class ContactEditorForm : Form
 			{
 				Checked = ContactStore.Flag(_original, field.Key),
 				Dock = DockStyle.Left,
-				Margin = new Padding(4, 10, 2, 2),
+				Margin = new Padding(4, 14, 2, 2),
 				AutoSize = true,
 				Text = "Sí, excluir de los envíos"
 			};
@@ -192,7 +231,7 @@ internal sealed class ContactEditorForm : Form
 			ComboBox comboBox = new ComboBox();
 			comboBox.DropDownStyle = ComboBoxStyle.DropDown;
 			comboBox.Dock = DockStyle.Fill;
-			comboBox.Margin = new Padding(3, 5, 3, 5);
+			comboBox.Margin = new Padding(3, 9, 3, 7);
 			comboBox.Items.AddRange(field.Choices.Cast<object>().ToArray());
 			comboBox.Text = ContactStore.Get(_original, field.Key);
 			control = comboBox;
@@ -209,7 +248,8 @@ internal sealed class ContactEditorForm : Form
 				Dock = DockStyle.Fill,
 				Multiline = flag3,
 				ScrollBars = (flag3 ? ScrollBars.Vertical : ScrollBars.None),
-				Margin = new Padding(3, flag3 ? 3 : 5, 3, flag3 ? 5 : 7),
+				Margin = new Padding(3, flag3 ? 5 : 9, 3, flag3 ? 7 : 7),
+				BorderStyle = BorderStyle.FixedSingle,
 				BackColor = ((field.Key == "id") ? Color.FromArgb(240, 242, 246) : SystemColors.Window)
 			};
 		}
