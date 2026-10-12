@@ -4,6 +4,7 @@ using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Reflection;
+using System.Net.Mail;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Nodes;
@@ -28,6 +29,10 @@ internal sealed class ContactStore
 	private JsonObject _historyRoot = new JsonObject();
 
 	public List<JsonObject> Contacts { get; } = new List<JsonObject>();
+
+	public IReadOnlyList<JsonObject> DeletedContacts => (_contactsRoot["contactos_eliminados"] as JsonArray)?.OfType<JsonObject>().ToList() ?? new List<JsonObject>();
+
+	public IReadOnlyList<JsonObject> HistoryEntries => (_historyRoot["envios"] as JsonArray)?.OfType<JsonObject>().ToList() ?? new List<JsonObject>();
 
 	public string DataDirectory => _directory;
 
@@ -175,6 +180,114 @@ internal sealed class ContactStore
 			jsonArray.Add(jsonObject);
 		}
 		SaveContacts();
+	}
+
+	public (int restored, int skipped) RestoreDeletedContacts(IEnumerable<JsonObject> deletedContacts)
+	{
+		if (_contactsRoot["contactos_eliminados"] is not JsonArray archive)
+		{
+			return (0, 0);
+		}
+		List<JsonObject> selected = deletedContacts.Distinct().ToList();
+		int restored = 0;
+		int skipped = 0;
+		foreach (JsonObject archived in selected)
+		{
+			if (!archive.Contains(archived))
+			{
+				skipped++;
+				continue;
+			}
+			string id = Get(archived, "id").Trim();
+			string email = Get(archived, "correo").Trim();
+			bool duplicateId = id.Length > 0 && Contacts.Any(c => string.Equals(Get(c, "id").Trim(), id, StringComparison.OrdinalIgnoreCase));
+			bool duplicateEmail = email.Length > 0 && Contacts.Any(c => string.Equals(Get(c, "correo").Trim(), email, StringComparison.OrdinalIgnoreCase));
+			if (duplicateId || duplicateEmail)
+			{
+				skipped++;
+				continue;
+			}
+			JsonObject restoredContact = (JsonObject)archived.DeepClone();
+			restoredContact.Remove("fecha_eliminacion_del_gestor");
+			archive.Remove(archived);
+			Contacts.Add(restoredContact);
+			restored++;
+		}
+		if (restored > 0)
+		{
+			SaveContacts();
+		}
+		return (restored, skipped);
+	}
+
+	public int PermanentlyDeleteArchivedContacts(IEnumerable<JsonObject> deletedContacts)
+	{
+		if (_contactsRoot["contactos_eliminados"] is not JsonArray archive)
+		{
+			return 0;
+		}
+		int removed = 0;
+		foreach (JsonObject contact in deletedContacts.Distinct().ToList())
+		{
+			if (archive.Remove(contact))
+			{
+				removed++;
+			}
+		}
+		if (removed > 0)
+		{
+			SaveContacts();
+		}
+		return removed;
+	}
+
+	public IReadOnlyList<ContactIssue> FindContactIssues()
+	{
+		List<ContactIssue> issues = new List<ContactIssue>();
+		foreach (IGrouping<string, JsonObject> group in Contacts
+			.Where(c => Get(c, "correo").Trim().Length > 0)
+			.GroupBy(c => Get(c, "correo").Trim(), StringComparer.OrdinalIgnoreCase)
+			.Where(group => group.Count() > 1))
+		{
+			issues.Add(new ContactIssue("Correo repetido", string.Join(" · ", group.Select(c => Get(c, "nombre"))), group.Key));
+		}
+		foreach (IGrouping<string, JsonObject> group in Contacts
+			.Where(c => Get(c, "nombre").Trim().Length > 0)
+			.GroupBy(c => NormalizeForComparison(Get(c, "nombre")), StringComparer.OrdinalIgnoreCase)
+			.Where(group => group.Key.Length > 0 && group.Count() > 1))
+		{
+			issues.Add(new ContactIssue("Nombre repetido", string.Join(" · ", group.Select(c => Get(c, "nombre"))), string.Join("; ", group.Select(c => Get(c, "correo")).Where(value => value.Length > 0))));
+		}
+		foreach (JsonObject contact in Contacts)
+		{
+			string email = Get(contact, "correo").Trim();
+			if (email.Length > 0 && !IsValidEmail(email))
+			{
+				issues.Add(new ContactIssue("Correo posiblemente incorrecto", Get(contact, "nombre"), email));
+			}
+		}
+		return issues
+			.OrderBy(issue => issue.Type, StringComparer.CurrentCultureIgnoreCase)
+			.ThenBy(issue => issue.Contacts, StringComparer.CurrentCultureIgnoreCase)
+			.ToList();
+	}
+
+	private static string NormalizeForComparison(string value)
+	{
+		return new string(value.Trim().ToUpperInvariant().Where(char.IsLetterOrDigit).ToArray());
+	}
+
+	private static bool IsValidEmail(string value)
+	{
+		try
+		{
+			MailAddress address = new MailAddress(value);
+			return string.Equals(address.Address, value, StringComparison.OrdinalIgnoreCase);
+		}
+		catch
+		{
+			return false;
+		}
 	}
 
 	public void ExportContacts(string target)

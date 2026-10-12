@@ -8,9 +8,12 @@ El programa no envía mensajes automáticamente, no almacena contraseñas y no i
 
 - Alta, modificación y eliminación controlada de contactos.
 - Filtros por país, región, idioma, tipo, organización y estado.
+- Búsqueda instantánea por nombre, correo, ubicación, organización, estado o notas.
 - Selección de destinatarios y copia de direcciones en CCO.
 - Apertura de un borrador mediante `mailto`.
-- Registro manual del historial de comunicaciones.
+- Registro manual y consulta visual del historial de comunicaciones.
+- Papelera para recuperar contactos eliminados o borrarlos definitivamente.
+- Revisión de posibles contactos repetidos y correos incorrectos.
 - Importación y exportación de contactos en JSON.
 - Copia de seguridad completa de contactos e historial en ZIP.
 - Recuperación validada con copia automática previa del estado actual.
@@ -26,13 +29,14 @@ Los contactos y el historial reales permanecen fuera del repositorio. No publiqu
 ## Pequeño manual de uso
 
 1. Abre el programa y añade tus contactos con **Nuevo contacto**. También puedes importar contactos desde un archivo JSON.
-2. Utiliza los filtros para mostrar únicamente el país, región, idioma, tipo, organización o estado que necesites.
+2. Utiliza el buscador o los filtros para mostrar únicamente los contactos que necesites.
 3. Marca las casillas de los destinatarios. **Marcar visibles** selecciona todos los contactos mostrados que pueden recibir correo.
 4. Pulsa **Copiar CCO** para copiar las direcciones o **Preparar con mailto** para abrir un correo nuevo con los destinatarios colocados en CCO.
 5. Escribe personalmente el asunto y el mensaje, añade los archivos necesarios y revisa el campo CCO antes de enviar.
 6. Después de realizar el envío, vuelve al gestor y pulsa **Confirmar envío REAL** para anotarlo en el historial.
-7. Utiliza **Copias de seguridad > Hacer copia de seguridad** para guardar juntos los contactos y el historial en un ZIP.
-8. Para volver a un estado anterior, utiliza **Recuperar copia de seguridad**. Antes de sustituir los datos, el programa conserva automáticamente otra copia del estado actual.
+7. En **Herramientas** puedes abrir la papelera, consultar el historial y revisar posibles duplicados o correos incorrectos.
+8. Utiliza **Copias de seguridad > Hacer copia de seguridad** para guardar juntos los contactos y el historial en un ZIP.
+9. Para volver a un estado anterior, utiliza **Recuperar copia de seguridad**. Antes de sustituir los datos, el programa conserva automáticamente otra copia del estado actual.
 
 ## Requisitos para compilar
 

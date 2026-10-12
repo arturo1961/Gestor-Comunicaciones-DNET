@@ -31,6 +31,13 @@ internal sealed class MainForm : Form
 
 	private readonly ComboBox _classifyAs = Combo();
 
+	private readonly TextBox _search = new TextBox
+	{
+		Width = 245,
+		PlaceholderText = "Nombre, correo, país, notas...",
+		Margin = new Padding(5, 5, 12, 4)
+	};
+
 	private readonly TextBox _version = new TextBox();
 
 	private readonly Label _status = new Label();
@@ -71,6 +78,11 @@ internal sealed class MainForm : Form
 	}
 
 	public MainForm()
+		: this(null)
+	{
+	}
+
+	internal MainForm(ContactStore? store)
 	{
 		Text = "Gestor de Comunicaciones DNET — Uso personal";
 		base.StartPosition = FormStartPosition.CenterScreen;
@@ -81,7 +93,7 @@ internal sealed class MainForm : Form
 		BackColor = Color.FromArgb(245, 247, 251);
 		try
 		{
-			_store = new ContactStore();
+			_store = store ?? new ContactStore();
 		}
 		catch (Exception ex)
 		{
@@ -107,6 +119,11 @@ internal sealed class MainForm : Form
 		toolStripMenuItem.DropDownItems.Add("Hacer copia de seguridad...", null, CreateBackup);
 		toolStripMenuItem.DropDownItems.Add("Recuperar copia de seguridad...", null, RestoreBackup);
 		menuStrip.Items.Add(toolStripMenuItem);
+		ToolStripMenuItem toolsMenu = new ToolStripMenuItem("Herramientas");
+		toolsMenu.DropDownItems.Add("Papelera de contactos...", null, ShowRecycleBin);
+		toolsMenu.DropDownItems.Add("Historial de comunicaciones...", null, ShowHistory);
+		toolsMenu.DropDownItems.Add("Revisar duplicados y correos...", null, ShowIssues);
+		menuStrip.Items.Add(toolsMenu);
 		base.MainMenuStrip = menuStrip;
 		base.Controls.Add(tableLayoutPanel);
 		base.Controls.Add(menuStrip);
@@ -141,6 +158,11 @@ internal sealed class MainForm : Form
 		AddLabeled(flowLayoutPanel, "Tipo", _type);
 		AddLabeled(flowLayoutPanel, "Organización", _classFilter);
 		AddLabeled(flowLayoutPanel, "Estado", _statusFilter);
+		AddLabeled(flowLayoutPanel, "Buscar", _search);
+		_search.TextChanged += delegate
+		{
+			RefreshList();
+		};
 		ComboBox[] array = new ComboBox[6] { _country, _region, _lang, _type, _classFilter, _statusFilter };
 		for (int i = 0; i < array.Length; i++)
 		{
@@ -265,7 +287,7 @@ internal sealed class MainForm : Form
 		};
 	}
 
-	private static void AddLabeled(FlowLayoutPanel parent, string name, ComboBox combo)
+	private static void AddLabeled(FlowLayoutPanel parent, string name, Control input)
 	{
 		FlowLayoutPanel flowLayoutPanel = new FlowLayoutPanel
 		{
@@ -280,7 +302,7 @@ internal sealed class MainForm : Form
 			AutoSize = true,
 			Margin = new Padding(4, 11, 1, 0)
 		});
-		flowLayoutPanel.Controls.Add(combo);
+		flowLayoutPanel.Controls.Add(input);
 		parent.Controls.Add(flowLayoutPanel);
 	}
 
@@ -368,7 +390,7 @@ internal sealed class MainForm : Form
 	{
 		if (_country.SelectedItem != null)
 		{
-			IOrderedEnumerable<JsonObject> source = _store.Contacts.Where((JsonObject c) => Keep(c, _country, "pais") && Keep(c, _region, "region") && Keep(c, _lang, "idioma") && Keep(c, _type, "tipo") && Keep(c, _classFilter, "naturaleza") && Keep(c, _statusFilter, "estado")).OrderBy<JsonObject, string>((JsonObject c) => ContactStore.Get(c, "nombre"), StringComparer.CurrentCultureIgnoreCase);
+			IOrderedEnumerable<JsonObject> source = _store.Contacts.Where((JsonObject c) => Keep(c, _country, "pais") && Keep(c, _region, "region") && Keep(c, _lang, "idioma") && Keep(c, _type, "tipo") && Keep(c, _classFilter, "naturaleza") && Keep(c, _statusFilter, "estado") && MatchesSearch(c)).OrderBy<JsonObject, string>((JsonObject c) => ContactStore.Get(c, "nombre"), StringComparer.CurrentCultureIgnoreCase);
 			_visibleRows = new BindingList<ContactRow>(source.Select((JsonObject c) => new ContactRow
 			{
 				Data = c
@@ -386,6 +408,40 @@ internal sealed class MainForm : Form
 			}
 			return true;
 		}
+		bool MatchesSearch(JsonObject contact)
+		{
+			string term = _search.Text.Trim();
+			if (term.Length == 0)
+			{
+				return true;
+			}
+			string[] fields = new string[11] { "nombre", "correo", "pais", "region", "idioma", "tipo", "naturaleza", "estado", "persona_contacto", "web_contacto", "notas" };
+			return fields.Any(field => ContactStore.Get(contact, field).Contains(term, StringComparison.CurrentCultureIgnoreCase));
+		}
+	}
+
+	private void ShowRecycleBin(object? sender, EventArgs e)
+	{
+		using RecycleBinForm form = new RecycleBinForm(_store);
+		form.ShowDialog(this);
+		if (form.DataChanged)
+		{
+			_lastPrepared.Clear();
+			PopulateFilters();
+			RefreshList();
+		}
+	}
+
+	private void ShowHistory(object? sender, EventArgs e)
+	{
+		using HistoryForm form = new HistoryForm(_store);
+		form.ShowDialog(this);
+	}
+
+	private void ShowIssues(object? sender, EventArgs e)
+	{
+		using IssuesForm form = new IssuesForm(_store);
+		form.ShowDialog(this);
 	}
 
 	private void MarkVisible(bool chosen)
@@ -735,7 +791,7 @@ internal sealed class MainForm : Form
 
 	private void Help(object? sender, EventArgs e)
 	{
-		MessageBox.Show("1) Añade, modifica o borra contactos; también puedes importar y exportar JSON.\n2) Filtra y marca los destinatarios que quieras incluir.\n3) La versión es opcional y sólo sirve para el historial interno.\n4) 'Preparar con mailto' abre un único correo con los seleccionados en CCO.\n5) El asunto, el mensaje y los adjuntos los completas personalmente en tu aplicación de correo.\n6) Después de enviarlo, vuelve aquí y confirma el envío real para registrarlo.\n7) En el menú 'Copias de seguridad' puedes guardar o recuperar juntos los contactos y el historial.\n\nIMPORTANTE: el gestor NO envía correos, no guarda contraseñas y no incluye asunto ni mensaje en el enlace mailto. Los JSON privados se guardan en AppData local.", "Cómo utilizar el gestor");
+		MessageBox.Show("1) Busca por cualquier dato o utiliza los filtros para localizar contactos.\n2) Añade, modifica o borra contactos; también puedes importar y exportar JSON.\n3) Filtra y marca los destinatarios que quieras incluir.\n4) La versión es opcional y sólo sirve para el historial interno.\n5) 'Preparar con mailto' abre un único correo con los seleccionados en CCO.\n6) Después de enviarlo, vuelve aquí y confirma el envío real para registrarlo.\n7) En 'Herramientas' puedes recuperar contactos de la papelera, consultar el historial y revisar posibles duplicados.\n8) En 'Copias de seguridad' puedes guardar o recuperar juntos los contactos y el historial.\n\nIMPORTANTE: el gestor NO envía correos, no guarda contraseñas y no incluye asunto ni mensaje en el enlace mailto. Los JSON privados se guardan en AppData local.", "Cómo utilizar el gestor");
 	}
 
 	private void Warn(string message)

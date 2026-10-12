@@ -1,6 +1,6 @@
 bin/
 obj/
-publicar/
+publicar*/
 .vs/
 *.user
 *.suo
