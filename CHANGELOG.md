@@ -1,5 +1,16 @@
 # Historial de cambios
 
+## 1.7.0
+
+- Nueva base de datos SQLite preparada para listas de contactos e historiales grandes.
+- Migración automática y comprobada desde los JSON existentes, sin pedir pasos técnicos al usuario.
+- Copia ZIP automática de los JSON originales antes de crear la base de datos.
+- Verificación del número de registros y de la integridad de SQLite antes de aceptar la migración.
+- Operaciones transaccionales: un cambio se guarda completo o no se guarda, evitando estados incompletos.
+- JSON de compatibilidad actualizados después de cada cambio para poder regresar a una versión anterior.
+- Detección protegida de cambios hechos con una versión anterior, con copia automática antes de reincorporarlos.
+- Importación, exportación y copias ZIP conservan el mismo formato JSON de las versiones anteriores.
+
 ## 1.6.1
 
 - Editor de contactos rediseñado con una presentación más limpia y moderna.

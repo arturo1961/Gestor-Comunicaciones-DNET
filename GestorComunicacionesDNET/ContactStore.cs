@@ -24,6 +24,10 @@ internal sealed class ContactStore
 
 	private readonly string _historyPath;
 
+	private readonly string _compatibilitySyncMarker;
+
+	private readonly SqliteDataStore _database;
+
 	private JsonObject _contactsRoot = new JsonObject();
 
 	private JsonObject _historyRoot = new JsonObject();
@@ -47,9 +51,23 @@ internal sealed class ContactStore
 		Directory.CreateDirectory(_directory);
 		_contactsPath = Path.Combine(_directory, "contactos.json");
 		_historyPath = Path.Combine(_directory, "envios.json");
-		CopySeedIfMissing("contactos.json", _contactsPath);
-		CopySeedIfMissing("envios.json", _historyPath);
+		_compatibilitySyncMarker = Path.Combine(_directory, "sincronizacion_json_pendiente.txt");
+		string databasePath = Path.Combine(_directory, "gestor_comunicaciones.db");
+		if (!File.Exists(databasePath))
+		{
+			CopySeedIfMissing("contactos.json", _contactsPath);
+			CopySeedIfMissing("envios.json", _historyPath);
+		}
+		_database = new SqliteDataStore(_directory, _contactsPath, _historyPath);
 		Load();
+		if (File.Exists(_compatibilitySyncMarker) || !File.Exists(_contactsPath) || !File.Exists(_historyPath))
+		{
+			RefreshCompatibilityJson(includeHistory: true);
+		}
+		else if (_database.CompatibilityFilesChanged(_contactsPath, _historyPath))
+		{
+			ImportChangesFromPreviousVersion();
+		}
 	}
 
 	private static void CopySeedIfMissing(string fileName, string destination)
@@ -71,8 +89,7 @@ internal sealed class ContactStore
 
 	private void Load()
 	{
-		_contactsRoot = (JsonNode.Parse(File.ReadAllText(_contactsPath)) as JsonObject) ?? throw new InvalidDataException("contactos.json debe contener un objeto JSON.");
-		_historyRoot = (JsonNode.Parse(File.ReadAllText(_historyPath)) as JsonObject) ?? throw new InvalidDataException("envios.json debe contener un objeto JSON.");
+		(_contactsRoot, _historyRoot) = _database.Load();
 		if (!(_contactsRoot["contactos"] is JsonArray source) || !(_historyRoot["envios"] is JsonArray))
 		{
 			throw new InvalidDataException("Los archivos JSON no tienen el formato esperado (contactos / envios).");
@@ -111,7 +128,16 @@ internal sealed class ContactStore
 	public void SaveContacts()
 	{
 		_contactsRoot["contactos"] = new JsonArray(Contacts.Select((JsonObject c) => c.DeepClone()).ToArray());
-		AtomicSave(_contactsPath, _contactsRoot);
+		try
+		{
+			_database.SaveContacts(_contactsRoot);
+			RefreshCompatibilityJson(includeHistory: false);
+		}
+		catch
+		{
+			Load();
+			throw;
+		}
 	}
 
 	public void AddContact(JsonObject contact)
@@ -293,25 +319,34 @@ internal sealed class ContactStore
 	public void ExportContacts(string target)
 	{
 		string fullPath = Path.GetFullPath(target);
-		if (string.Equals(fullPath, Path.GetFullPath(_contactsPath), StringComparison.OrdinalIgnoreCase))
+		if (string.Equals(fullPath, Path.GetFullPath(_contactsPath), StringComparison.OrdinalIgnoreCase) || string.Equals(fullPath, Path.GetFullPath(_database.DatabasePath), StringComparison.OrdinalIgnoreCase))
 		{
 			throw new InvalidOperationException("Elige otra carpeta: ese ya es el archivo de datos activo.");
 		}
-		SaveContacts();
-		File.Copy(_contactsPath, fullPath, overwrite: true);
+		JsonObject contactsRoot = BuildContactsRoot();
+		_database.SaveContacts(contactsRoot);
+		AtomicWriteText(fullPath, contactsRoot.ToJsonString(Options));
 	}
 
 	public void CreateBackup(string target)
 	{
 		string fullPath = Path.GetFullPath(target);
+		if (IsActiveDataPath(fullPath))
+		{
+			throw new InvalidOperationException("Elige otra ubicación: no se puede sustituir un archivo de datos activo con una copia de seguridad.");
+		}
 		Directory.CreateDirectory(Path.GetDirectoryName(fullPath) ?? throw new InvalidOperationException("La ruta de destino no es válida."));
-		SaveContacts();
-		ValidateDataFile(File.ReadAllText(_contactsPath), "contactos", "contactos.json");
-		ValidateDataFile(File.ReadAllText(_historyPath), "envios", "envios.json");
+		JsonObject contactsRoot = BuildContactsRoot();
+		JsonObject historyRoot = BuildHistoryRoot();
+		string contactsText = contactsRoot.ToJsonString(Options);
+		string historyText = historyRoot.ToJsonString(Options);
+		ValidateDataFile(contactsText, "contactos", "contactos.json");
+		ValidateDataFile(historyText, "envios", "envios.json");
+		_database.SaveAll(contactsRoot, historyRoot);
 		using FileStream fileStream = new FileStream(fullPath, FileMode.Create, FileAccess.ReadWrite, FileShare.None);
 		using ZipArchive zipArchive = new ZipArchive(fileStream, ZipArchiveMode.Create);
-		AddTextEntry(zipArchive, "contactos.json", File.ReadAllText(_contactsPath));
-		AddTextEntry(zipArchive, "envios.json", File.ReadAllText(_historyPath));
+		AddTextEntry(zipArchive, "contactos.json", contactsText);
+		AddTextEntry(zipArchive, "envios.json", historyText);
 		JsonObject manifest = new JsonObject
 		{
 			["formato"] = "Gestor_Comunicaciones_DNET_copia",
@@ -343,18 +378,14 @@ internal sealed class ContactStore
 		int shipmentCount = (historyRoot["envios"] as JsonArray)?.Count ?? 0;
 		string safetyBackup = Path.Combine(_directory, "copia_automatica_antes_de_recuperar_" + DateTime.Now.ToString("yyyyMMdd_HHmmssfff") + ".zip");
 		CreateBackup(safetyBackup);
-		byte[] originalContacts = File.ReadAllBytes(_contactsPath);
-		byte[] originalHistory = File.ReadAllBytes(_historyPath);
 		try
 		{
-			AtomicWriteText(_contactsPath, contactsRoot.ToJsonString(Options));
-			AtomicWriteText(_historyPath, historyRoot.ToJsonString(Options));
+			_database.SaveAll(contactsRoot, historyRoot);
 			Load();
+			RefreshCompatibilityJson(includeHistory: true);
 		}
 		catch
 		{
-			AtomicWriteBytes(_contactsPath, originalContacts);
-			AtomicWriteBytes(_historyPath, originalHistory);
 			Load();
 			throw;
 		}
@@ -464,8 +495,17 @@ internal sealed class ContactStore
 				["observaciones"] = "Confirmado por el usuario tras abrir borrador mailto. No constituye prueba automática de entrega."
 			});
 		}
-		SaveContacts();
-		AtomicSave(_historyPath, _historyRoot);
+		_contactsRoot["contactos"] = new JsonArray(Contacts.Select((JsonObject c) => c.DeepClone()).ToArray());
+		try
+		{
+			_database.SaveAll(_contactsRoot, _historyRoot);
+			RefreshCompatibilityJson(includeHistory: true);
+		}
+		catch
+		{
+			Load();
+			throw;
+		}
 	}
 
 	public (int added, int skipped) ImportContacts(string path)
@@ -547,14 +587,65 @@ internal sealed class ContactStore
 		return (added: num, skipped: num2);
 	}
 
-	private static void AtomicSave(string path, JsonNode root)
+	private JsonObject BuildContactsRoot()
 	{
-		string text = path + ".tmp";
-		if (File.Exists(path))
+		JsonObject root = (JsonObject)_contactsRoot.DeepClone();
+		root["contactos"] = new JsonArray(Contacts.Select(contact => contact.DeepClone()).ToArray());
+		root["contactos_eliminados"] ??= new JsonArray();
+		return root;
+	}
+
+	private bool IsActiveDataPath(string path)
+	{
+		string fullPath = Path.GetFullPath(path);
+		return string.Equals(fullPath, Path.GetFullPath(_contactsPath), StringComparison.OrdinalIgnoreCase)
+			|| string.Equals(fullPath, Path.GetFullPath(_historyPath), StringComparison.OrdinalIgnoreCase)
+			|| string.Equals(fullPath, Path.GetFullPath(_database.DatabasePath), StringComparison.OrdinalIgnoreCase);
+	}
+
+	private JsonObject BuildHistoryRoot()
+	{
+		JsonObject root = (JsonObject)_historyRoot.DeepClone();
+		root["envios"] ??= new JsonArray();
+		return root;
+	}
+
+	private void RefreshCompatibilityJson(bool includeHistory)
+	{
+		try
 		{
-			File.Copy(path, path + ".bak", overwrite: true);
+			AtomicWriteText(_contactsPath, BuildContactsRoot().ToJsonString(Options));
+			if (includeHistory)
+			{
+				AtomicWriteText(_historyPath, BuildHistoryRoot().ToJsonString(Options));
+			}
+			_database.RecordCompatibilityFiles(_contactsPath, _historyPath);
+			if (File.Exists(_compatibilitySyncMarker))
+			{
+				File.Delete(_compatibilitySyncMarker);
+			}
 		}
-		File.WriteAllText(text, root.ToJsonString(Options));
-		File.Move(text, path, overwrite: true);
+		catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or Microsoft.Data.Sqlite.SqliteException)
+		{
+			try
+			{
+				File.WriteAllText(_compatibilitySyncMarker, "Los datos están seguros en gestor_comunicaciones.db, pero queda pendiente actualizar los JSON de compatibilidad.\n" + ex.Message);
+			}
+			catch
+			{
+				// La base SQLite ya contiene la operación confirmada.
+			}
+		}
+	}
+
+	private void ImportChangesFromPreviousVersion()
+	{
+		string safetyBackup = Path.Combine(_directory, "copia_automatica_antes_de_sincronizar_version_anterior_" + DateTime.Now.ToString("yyyyMMdd_HHmmssfff") + ".zip");
+		CreateBackup(safetyBackup);
+		JsonObject contactsRoot = ValidateDataFile(File.ReadAllText(_contactsPath), "contactos", "contactos.json");
+		JsonObject historyRoot = ValidateDataFile(File.ReadAllText(_historyPath), "envios", "envios.json");
+		_database.SaveAll(contactsRoot, historyRoot);
+		Load();
+		RefreshCompatibilityJson(includeHistory: true);
 	}
 }

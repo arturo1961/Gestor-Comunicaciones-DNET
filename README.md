@@ -4,7 +4,7 @@
 
 Aplicación personal para Windows que permite organizar contactos, filtrarlos y preparar un correo nuevo con los destinatarios seleccionados en el campo CCO.
 
-La versión 1.6.1 incluye **62 idiomas** en un único ejecutable. El idioma se cambia desde el menú superior y queda guardado para el siguiente inicio.
+La versión 1.7.0 incluye **62 idiomas** en un único ejecutable y utiliza una base de datos SQLite para trabajar con listas grandes con mayor seguridad. El idioma se cambia desde el menú superior y queda guardado para el siguiente inicio.
 
 El programa no envía mensajes automáticamente, no almacena contraseñas y no incorpora asuntos ni textos privados. El usuario revisa y completa personalmente cada correo en su aplicación de correo predeterminada.
 
@@ -23,14 +23,19 @@ El programa no envía mensajes automáticamente, no almacena contraseñas y no i
 - Importación y exportación de contactos en JSON.
 - Copia de seguridad completa de contactos e historial en ZIP.
 - Recuperación validada con copia automática previa del estado actual.
+- Migración automática de los datos existentes a SQLite, con comprobación de registros e integridad.
+- JSON de compatibilidad para poder volver a una versión anterior si fuera necesario.
+- Recuperación automática de los cambios realizados al volver temporalmente a una versión anterior.
 
 ## Privacidad de los datos
 
-Los archivos incluidos en este repositorio están vacíos. En el primer arranque se copian a:
+Los archivos incluidos en este repositorio están vacíos. Los datos privados se guardan en:
 
 `%LOCALAPPDATA%\Gestor_Comunicaciones_DNET\`
 
-Los contactos y el historial reales permanecen fuera del repositorio. No publiques los archivos de esa carpeta ni las copias ZIP que genere la aplicación.
+Desde la versión 1.7.0, `gestor_comunicaciones.db` es la base principal. En el primer arranque se crea automáticamente una copia ZIP de los JSON originales, se migran todos los registros y se comprueba que las cantidades coincidan antes de activar la base nueva. Los JSON siguen actualizándose como formato de compatibilidad y las copias de seguridad conservan el formato conocido. Si una versión anterior modifica esos JSON, la versión nueva lo detecta, protege primero su estado en otro ZIP y reincorpora los cambios.
+
+Los contactos y el historial reales permanecen fuera del repositorio. No publiques la base de datos, los JSON de esa carpeta ni las copias ZIP que genere la aplicación.
 
 ## Pequeño manual de uso
 
