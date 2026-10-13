@@ -465,20 +465,22 @@ internal sealed class MainForm : Form
 
 	private void MarkVisible(bool chosen)
 	{
+		_grid.EndEdit();
 		foreach (ContactRow visibleRow in _visibleRows)
 		{
 			visibleRow.Elegido = chosen && Eligible(visibleRow.Data);
 		}
-		_grid.Refresh();
+		_visibleRows.ResetBindings();
+		_grid.InvalidateColumn(0);
 		_lastPrepared.Clear();
 		UpdateStatus();
 	}
 
 	private static bool Eligible(JsonObject c)
 	{
-		if (ContactStore.Get(c, "canal") == "email" && !string.IsNullOrWhiteSpace(ContactStore.Get(c, "correo")) && !ContactStore.Flag(c, "no_contactar"))
+		if (string.Equals(ContactStore.Get(c, "canal"), "email", StringComparison.OrdinalIgnoreCase) && !string.IsNullOrWhiteSpace(ContactStore.Get(c, "correo")) && !ContactStore.Flag(c, "no_contactar"))
 		{
-			return ContactStore.Get(c, "estado") != "no_contactar_por_ahora";
+			return !string.Equals(ContactStore.Get(c, "estado"), "no_contactar_por_ahora", StringComparison.OrdinalIgnoreCase);
 		}
 		return false;
 	}

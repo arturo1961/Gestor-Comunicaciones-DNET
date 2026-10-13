@@ -1,12 +1,31 @@
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Text.Json.Nodes;
 
 namespace GestorComunicacionesDNET;
 
-internal sealed class ContactRow
+internal sealed class ContactRow : INotifyPropertyChanged
 {
+	private bool _elegido;
+
 	public required JsonObject Data { get; init; }
 
-	public bool Elegido { get; set; }
+	public bool Elegido
+	{
+		get => _elegido;
+		set
+		{
+			if (_elegido == value)
+			{
+				return;
+			}
+
+			_elegido = value;
+			OnPropertyChanged();
+		}
+	}
+
+	public event PropertyChangedEventHandler? PropertyChanged;
 
 	public string Nombre => ContactStore.Get(Data, "nombre");
 
@@ -25,4 +44,9 @@ internal sealed class ContactRow
 	public string UltimaVersion => ContactStore.Get(Data, "ultima_version_comunicada");
 
 	public string Estado => ContactStore.Get(Data, "estado");
+
+	private void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+	{
+		PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+	}
 }

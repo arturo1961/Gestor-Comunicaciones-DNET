@@ -4,7 +4,7 @@
 
 Aplicación personal para Windows que permite organizar contactos, filtrarlos y preparar un correo nuevo con los destinatarios seleccionados en el campo CCO.
 
-La versión 1.7.0 incluye **62 idiomas** en un único ejecutable y utiliza una base de datos SQLite para trabajar con listas grandes con mayor seguridad. El idioma se cambia desde el menú superior y queda guardado para el siguiente inicio.
+La versión 1.7.1 incluye **62 idiomas** en un único ejecutable, utiliza una base de datos SQLite para trabajar con listas grandes con mayor seguridad y corrige la actualización visual del botón «Marcar visibles». El idioma se cambia desde el menú superior y queda guardado para el siguiente inicio.
 
 El programa no envía mensajes automáticamente, no almacena contraseñas y no incorpora asuntos ni textos privados. El usuario revisa y completa personalmente cada correo en su aplicación de correo predeterminada.
 

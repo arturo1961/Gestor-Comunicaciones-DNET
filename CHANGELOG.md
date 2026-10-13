@@ -1,5 +1,11 @@
 # Historial de cambios
 
+## 1.7.1
+
+- Corregido el botón «Marcar visibles» para que las casillas se actualicen inmediatamente.
+- La tabla recibe ahora una notificación explícita por cada cambio de selección.
+- La detección de contactos aptos acepta `email` y estados equivalentes sin distinguir mayúsculas y minúsculas.
+
 ## 1.7.0
 
 - Nueva base de datos SQLite preparada para listas de contactos e historiales grandes.
