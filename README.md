@@ -4,7 +4,7 @@
 
 Aplicación personal para Windows que permite organizar contactos, filtrarlos y preparar un correo nuevo con los destinatarios seleccionados en el campo CCO.
 
-La versión 1.7.1 incluye **62 idiomas** en un único ejecutable, utiliza una base de datos SQLite para trabajar con listas grandes con mayor seguridad y corrige la actualización visual del botón «Marcar visibles». El idioma se cambia desde el menú superior y queda guardado para el siguiente inicio.
+La versión 1.8.0 incluye **62 idiomas** en un único ejecutable, utiliza una base de datos SQLite para trabajar con listas grandes y permite importar contactos de Google, Outlook y otras agendas mediante CSV o vCard, sin pedir contraseñas. El idioma se cambia desde el menú superior y queda guardado para el siguiente inicio.
 
 El programa no envía mensajes automáticamente, no almacena contraseñas y no incorpora asuntos ni textos privados. El usuario revisa y completa personalmente cada correo en su aplicación de correo predeterminada.
 
@@ -20,12 +20,15 @@ El programa no envía mensajes automáticamente, no almacena contraseñas y no i
 - Revisión de posibles contactos repetidos y correos incorrectos.
 - Interfaz, editor, avisos, ayuda y operaciones principales traducidos a 62 idiomas.
 - Detección inicial del idioma de Windows y cambio sin reiniciar.
-- Importación y exportación de contactos en JSON.
+- Importación de contactos desde Google/Outlook CSV, vCard (VCF) y JSON, con vista previa, detección de repetidos y copia automática previa.
+- Exportación de contactos en JSON.
 - Copia de seguridad completa de contactos e historial en ZIP.
 - Recuperación validada con copia automática previa del estado actual.
 - Migración automática de los datos existentes a SQLite, con comprobación de registros e integridad.
 - JSON de compatibilidad para poder volver a una versión anterior si fuera necesario.
 - Recuperación automática de los cambios realizados al volver temporalmente a una versión anterior.
+
+Consulta [IMPORTAR_CONTACTOS.md](IMPORTAR_CONTACTOS.md) para exportar e incorporar agendas de Google, Outlook u otros programas de forma local.
 
 ## Privacidad de los datos
 
@@ -39,7 +42,7 @@ Los contactos y el historial reales permanecen fuera del repositorio. No publiqu
 
 ## Pequeño manual de uso
 
-1. Abre el programa y añade tus contactos con **Nuevo contacto**. También puedes importar contactos desde un archivo JSON.
+1. Abre el programa y añade tus contactos con **Nuevo contacto**. También puedes importarlos desde Google/Outlook CSV, vCard (VCF) o JSON; revisa la vista previa antes de confirmar.
 2. Si lo necesitas, cambia la interfaz desde el menú **Idioma**. La elección se conservará.
 3. Utiliza el buscador o los filtros para mostrar únicamente los contactos que necesites.
 4. Marca las casillas de los destinatarios. **Marcar visibles** selecciona todos los contactos mostrados que pueden recibir correo.

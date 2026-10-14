@@ -1,5 +1,14 @@
 # Historial de cambios
 
+## 1.8.0
+
+- Importación local de contactos desde Google Contacts y Outlook en formato CSV.
+- Importación de libretas de direcciones vCard (`.vcf`) y mantenimiento de la importación JSON.
+- Vista previa con cantidades y una muestra de los contactos antes de confirmar.
+- Detección de correos e identificadores repetidos sin sobrescribir contactos existentes.
+- Copia de seguridad ZIP automática inmediatamente antes de cada importación confirmada.
+- No se solicitan contraseñas ni se conecta directamente con cuentas de correo.
+
 ## 1.7.1
 
 - Corregido el botón «Marcar visibles» para que las casillas se actualicen inmediatamente.

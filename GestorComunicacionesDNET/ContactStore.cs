@@ -510,19 +510,21 @@ internal sealed class ContactStore
 
 	public (int added, int skipped) ImportContacts(string path)
 	{
-		JsonNode jsonNode = JsonNode.Parse(File.ReadAllText(path));
-		JsonArray jsonArray = ((jsonNode is JsonArray jsonArray2) ? jsonArray2 : ((jsonNode as JsonObject)?["contactos"] as JsonArray));
-		if (jsonArray == null)
-		{
-			throw new InvalidDataException("El JSON debe contener un array 'contactos' o ser un array.");
-		}
+		ContactImportPlan plan = PrepareImport(path);
+		ContactImportResult result = CommitImport(plan);
+		return (result.Added, result.Skipped);
+	}
+
+	public ContactImportPlan PrepareImport(string path)
+	{
+		ContactImportReader.ReadResult importSource = ContactImportReader.Read(path);
 		HashSet<string> hashSet = (from c in Contacts
 			select Get(c, "id") into s
 			where s.Length > 0
 			select s).ToHashSet<string>(StringComparer.OrdinalIgnoreCase);
-		if (_contactsRoot["contactos_eliminados"] is JsonArray source)
+		if (_contactsRoot["contactos_eliminados"] is JsonArray archivedSource)
 		{
-			foreach (JsonObject item in source.OfType<JsonObject>())
+			foreach (JsonObject item in archivedSource.OfType<JsonObject>())
 			{
 				string text = Get(item, "id");
 				if (text != null && text.Length > 0)
@@ -535,16 +537,22 @@ internal sealed class ContactStore
 			select Get(c, "correo").Trim() into s
 			where s.Length > 0
 			select s).ToHashSet<string>(StringComparer.OrdinalIgnoreCase);
-		int num = 0;
-		int num2 = 0;
-		foreach (JsonObject item2 in jsonArray.OfType<JsonObject>())
+		List<JsonObject> ready = new List<JsonObject>();
+		int missingName = 0;
+		int duplicate = 0;
+		foreach (JsonObject item2 in importSource.Contacts)
 		{
 			JsonObject jsonObject = (JsonObject)item2.DeepClone();
 			string text2 = Get(jsonObject, "id").Trim();
 			string text3 = Get(jsonObject, "correo").Trim();
-			if (string.IsNullOrWhiteSpace(Get(jsonObject, "nombre")) || (text2.Length > 0 && hashSet.Contains(text2)) || (text3.Length > 0 && hashSet2.Contains(text3)))
+			if (string.IsNullOrWhiteSpace(Get(jsonObject, "nombre")))
 			{
-				num2++;
+				missingName++;
+				continue;
+			}
+			if ((text2.Length > 0 && hashSet.Contains(text2)) || (text3.Length > 0 && hashSet2.Contains(text3)))
+			{
+				duplicate++;
 				continue;
 			}
 			if (text2.Length == 0)
@@ -572,19 +580,36 @@ internal sealed class ContactStore
 			{
 				jsonObject["verificacion"] = "Importado: verificar dirección y pertinencia";
 			}
-			Contacts.Add(jsonObject);
+			ready.Add(jsonObject);
 			hashSet.Add(text2);
 			if (text3.Length > 0)
 			{
 				hashSet2.Add(text3);
 			}
-			num++;
 		}
-		if (num > 0)
+		return new ContactImportPlan(ready, importSource.SourceRows, missingName, duplicate, importSource.Format);
+	}
+
+	public ContactImportResult CommitImport(ContactImportPlan plan)
+	{
+		int skipped = plan.SkippedMissingName + plan.SkippedDuplicate;
+		if (plan.Contacts.Count == 0)
 		{
+			return new ContactImportResult(0, skipped, "");
+		}
+		string safetyBackup = Path.Combine(_directory, "copia_automatica_antes_de_importar_" + DateTime.Now.ToString("yyyyMMdd_HHmmssfff") + ".zip");
+		CreateBackup(safetyBackup);
+		try
+		{
+			Contacts.AddRange(plan.Contacts.Select(contact => (JsonObject)contact.DeepClone()));
 			SaveContacts();
 		}
-		return (added: num, skipped: num2);
+		catch
+		{
+			Load();
+			throw;
+		}
+		return new ContactImportResult(plan.Contacts.Count, skipped, safetyBackup);
 	}
 
 	private JsonObject BuildContactsRoot()

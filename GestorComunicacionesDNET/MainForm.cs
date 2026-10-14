@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text.Json.Nodes;
 using System.Windows.Forms;
@@ -198,7 +199,7 @@ internal sealed class MainForm : Form
 		flowLayoutPanel2.Controls.Add(Btn("Nuevo contacto", AddContact, 136));
 		flowLayoutPanel2.Controls.Add(Btn("Modificar contacto", EditContact, 160));
 		flowLayoutPanel2.Controls.Add(Btn("Borrar contacto", DeleteContact, 145));
-		flowLayoutPanel2.Controls.Add(Btn("Importar JSON", ImportJson, 130));
+		flowLayoutPanel2.Controls.Add(Btn("Importar JSON/CSV/VCF", ImportJson, 188));
 		flowLayoutPanel2.Controls.Add(Btn("Exportar JSON", ExportJson, 132));
 		_classifyAs.Items.AddRange(new object[5] { "empresa_medio", "organismo_publico", "red_publica", "entidad_civil", "sin_clasificar" });
 		_classifyAs.SelectedIndex = 0;
@@ -519,8 +520,8 @@ internal sealed class MainForm : Form
 	{
 		using OpenFileDialog openFileDialog = new OpenFileDialog
 		{
-			Title = UiText.Get("Importar contactos JSON"),
-			Filter = "JSON (*.json)|*.json"
+			Title = UiText.Get("Importar contactos"),
+			Filter = "Contactos compatibles (*.json;*.csv;*.vcf)|*.json;*.csv;*.vcf|Google/Outlook CSV (*.csv)|*.csv|vCard (*.vcf)|*.vcf|JSON (*.json)|*.json"
 		};
 		if (openFileDialog.ShowDialog(this) != DialogResult.OK)
 		{
@@ -528,14 +529,39 @@ internal sealed class MainForm : Form
 		}
 		try
 		{
-			var (value, value2) = _store.ImportContacts(openFileDialog.FileName);
+			ContactImportPlan plan = _store.PrepareImport(openFileDialog.FileName);
+			string sample = string.Join("\n", plan.Contacts.Take(8).Select(contact => "• " + ContactStore.Get(contact, "nombre") + FormatEmail(ContactStore.Get(contact, "correo"))));
+			if (plan.Contacts.Count > 8)
+			{
+				sample += $"\n… y {plan.Contacts.Count - 8} más";
+			}
+			string preview = $"Archivo: {Path.GetFileName(openFileDialog.FileName)}\nFormato: {plan.Format}\n\nRegistros detectados: {plan.SourceRows}\nListos para importar: {plan.Contacts.Count}\nRepetidos omitidos: {plan.SkippedDuplicate}\nSin nombre omitidos: {plan.SkippedMissingName}";
+			if (sample.Length > 0)
+			{
+				preview += "\n\nVista previa:\n" + sample;
+			}
+			if (plan.Contacts.Count == 0)
+			{
+				MessageBox.Show(this, preview + "\n\nNo hay contactos nuevos que importar.", UiText.Get("Importación"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+				return;
+			}
+			if (MessageBox.Show(this, preview + "\n\nAntes de importar se creará automáticamente una copia de seguridad.\nLos contactos existentes no se sobrescribirán.\n\n¿Continuar?", UiText.Get("Revisar datos antes de importar"), MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) != DialogResult.Yes)
+			{
+				return;
+			}
+			ContactImportResult result = _store.CommitImport(plan);
 			PopulateFilters();
 			RefreshList();
-			MessageBox.Show(UiText.Format("Importados: {0}\nOmitidos por ID/correo repetido o sin nombre: {1}\nLos contactos existentes NO se han sobrescrito.", value, value2), UiText.Get("Importación"));
+			MessageBox.Show(this, $"Importados: {result.Added}\nOmitidos: {result.Skipped}\n\nCopia de seguridad creada:\n{result.SafetyBackupPath}\n\nLos contactos existentes NO se han sobrescrito.", UiText.Get("Importación"), MessageBoxButtons.OK, MessageBoxIcon.Information);
 		}
 		catch (Exception ex)
 		{
 			Warn(UiText.Get("No se pudo importar el archivo:\n") + ex.Message);
+		}
+
+		static string FormatEmail(string email)
+		{
+			return email.Length == 0 ? " (sin correo)" : " — " + email;
 		}
 	}
 
