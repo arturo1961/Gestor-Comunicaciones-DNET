@@ -1,6 +1,6 @@
 # Importar contactos
 
-Gestor de Comunicaciones DNET 1.8.0 puede importar contactos sin conectarse a ninguna cuenta y sin solicitar contraseñas.
+Gestor de Comunicaciones DNET 1.8.1 puede importar contactos sin conectarse a ninguna cuenta y sin solicitar contraseñas.
 
 ## Formatos compatibles
 

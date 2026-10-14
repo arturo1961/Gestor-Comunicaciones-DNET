@@ -54,6 +54,8 @@ internal sealed class MainForm : Form
 
 	private string _lastPreparedVersion = "";
 
+	private bool _updatingFilters;
+
 	private static ComboBox Combo()
 	{
 		return new ComboBox
@@ -172,11 +174,24 @@ internal sealed class MainForm : Form
 		{
 			RefreshList();
 		};
-		ComboBox[] array = new ComboBox[6] { _country, _region, _lang, _type, _classFilter, _statusFilter };
+		_country.SelectedIndexChanged += delegate
+		{
+			if (_updatingFilters)
+			{
+				return;
+			}
+			PopulateRegionFilter();
+			RefreshList();
+		};
+		ComboBox[] array = new ComboBox[5] { _region, _lang, _type, _classFilter, _statusFilter };
 		for (int i = 0; i < array.Length; i++)
 		{
 			array[i].SelectedIndexChanged += delegate
 			{
+				if (_updatingFilters)
+				{
+					return;
+				}
 				RefreshList();
 			};
 		}
@@ -385,25 +400,53 @@ internal sealed class MainForm : Form
 
 	private void PopulateFilters()
 	{
-		Fill(_country, _store.Contacts.Select((JsonObject c) => ContactStore.Get(c, "pais")));
-		Fill(_region, _store.Contacts.Select((JsonObject c) => ContactStore.Get(c, "region")));
-		Fill(_lang, _store.Contacts.Select((JsonObject c) => ContactStore.Get(c, "idioma")));
-		Fill(_type, _store.Contacts.Select((JsonObject c) => ContactStore.Get(c, "tipo")));
-		Fill(_classFilter, _store.Contacts.Select((JsonObject c) => ContactStore.Get(c, "naturaleza")));
-		Fill(_statusFilter, _store.Contacts.Select((JsonObject c) => ContactStore.Get(c, "estado")));
-		static void Fill(ComboBox combo, IEnumerable<string> values)
+		_updatingFilters = true;
+		try
 		{
-			string text = combo.SelectedItem?.ToString();
-			combo.Items.Clear();
-			combo.Items.Add(UiText.Get("Todos"));
-			foreach (string item in from v in values.Where((string v) => !string.IsNullOrWhiteSpace(v)).Distinct<string>(StringComparer.OrdinalIgnoreCase)
-				orderby v
-				select v)
-			{
-				combo.Items.Add(item);
-			}
-			combo.SelectedItem = ((text != null && combo.Items.Contains(text)) ? text : UiText.Get("Todos"));
+			FillFilter(_country, _store.Contacts.Select((JsonObject c) => ContactStore.Get(c, "pais")));
+			PopulateRegionFilter();
+			FillFilter(_lang, _store.Contacts.Select((JsonObject c) => ContactStore.Get(c, "idioma")));
+			FillFilter(_type, _store.Contacts.Select((JsonObject c) => ContactStore.Get(c, "tipo")));
+			FillFilter(_classFilter, _store.Contacts.Select((JsonObject c) => ContactStore.Get(c, "naturaleza")));
+			FillFilter(_statusFilter, _store.Contacts.Select((JsonObject c) => ContactStore.Get(c, "estado")));
 		}
+		finally
+		{
+			_updatingFilters = false;
+		}
+	}
+
+	private void PopulateRegionFilter()
+	{
+		string? selectedCountry = _country.SelectedItem?.ToString();
+		if (selectedCountry == UiText.Get("Todos"))
+		{
+			selectedCountry = null;
+		}
+		FillFilter(_region, GetRegionsForCountry(_store.Contacts, selectedCountry));
+	}
+
+	internal static IReadOnlyList<string> GetRegionsForCountry(IEnumerable<JsonObject> contacts, string? selectedCountry)
+	{
+		return contacts
+			.Where((JsonObject contact) => string.IsNullOrWhiteSpace(selectedCountry) || string.Equals(ContactStore.Get(contact, "pais"), selectedCountry, StringComparison.OrdinalIgnoreCase))
+			.Select((JsonObject contact) => ContactStore.Get(contact, "region"))
+			.Where((string region) => !string.IsNullOrWhiteSpace(region))
+			.Distinct(StringComparer.OrdinalIgnoreCase)
+			.OrderBy((string region) => region, StringComparer.CurrentCultureIgnoreCase)
+			.ToList();
+	}
+
+	private static void FillFilter(ComboBox combo, IEnumerable<string> values)
+	{
+		string? selectedValue = combo.SelectedItem?.ToString();
+		combo.Items.Clear();
+		combo.Items.Add(UiText.Get("Todos"));
+		foreach (string value in values.Where((string value) => !string.IsNullOrWhiteSpace(value)).Distinct(StringComparer.OrdinalIgnoreCase).OrderBy((string value) => value, StringComparer.CurrentCultureIgnoreCase))
+		{
+			combo.Items.Add(value);
+		}
+		combo.SelectedItem = selectedValue != null && combo.Items.Contains(selectedValue) ? selectedValue : UiText.Get("Todos");
 	}
 
 	private void RefreshList()

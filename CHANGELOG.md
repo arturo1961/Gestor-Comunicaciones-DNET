@@ -1,5 +1,11 @@
 # Historial de cambios
 
+## 1.8.1
+
+- El filtro Región muestra únicamente las regiones pertenecientes al país seleccionado.
+- Al cambiar de país, una región que ya no corresponde se restablece automáticamente a «Todos».
+- La opción «Todos» en País sigue mostrando todas las regiones disponibles.
+
 ## 1.8.0
 
 - Importación local de contactos desde Google Contacts y Outlook en formato CSV.
