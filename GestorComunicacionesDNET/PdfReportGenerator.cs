@@ -18,15 +18,15 @@ internal static class PdfReportGenerator
 	{
 		if (!IsAvailable)
 		{
-			throw new InvalidOperationException("No está instalada la impresora 'Microsoft Print to PDF' de Windows.");
+			throw new InvalidOperationException(UiText.Get("No está instalada la impresora 'Microsoft Print to PDF' de Windows."));
 		}
 		if (contacts.Count == 0)
 		{
-			throw new InvalidOperationException("No hay contactos para incluir en el informe.");
+			throw new InvalidOperationException(UiText.Get("No hay contactos para incluir en el informe."));
 		}
 		if (columns.Count == 0)
 		{
-			throw new InvalidOperationException("No se ha seleccionado ninguna columna.");
+			throw new InvalidOperationException(UiText.Get("No se ha seleccionado ninguna columna."));
 		}
 
 		Directory.CreateDirectory(Path.GetDirectoryName(Path.GetFullPath(path))!);
@@ -54,7 +54,7 @@ internal static class PdfReportGenerator
 
 		document.PrintPage += (_, e) =>
 		{
-			Graphics graphics = e.Graphics ?? throw new InvalidOperationException("No se pudo preparar la página del informe.");
+			Graphics graphics = e.Graphics ?? throw new InvalidOperationException(UiText.Get("No se pudo preparar la página del informe."));
 			pageNumber++;
 			Rectangle bounds = e.MarginBounds;
 			float x = bounds.Left;
@@ -65,7 +65,7 @@ internal static class PdfReportGenerator
 			y += 19f;
 			graphics.DrawString(title, titleFont, Brushes.Black, new RectangleF(x, y, width, 30f), cellFormat);
 			y += 31f;
-			string information = $"Fecha: {DateTime.Now:dd/MM/yyyy HH:mm}    ·    Contactos: {contacts.Count}    ·    {filterSummary}";
+			string information = UiText.Format("Fecha: {0}    ·    Contactos: {1}    ·    {2}", DateTime.Now.ToString("dd/MM/yyyy HH:mm"), contacts.Count, filterSummary);
 			graphics.DrawString(information, infoFont, Brushes.DimGray, new RectangleF(x, y, width, 28f), cellFormat);
 			y += 31f;
 
@@ -90,14 +90,14 @@ internal static class PdfReportGenerator
 			}
 
 			using StringFormat footerFormat = new() { Alignment = StringAlignment.Far };
-			graphics.DrawString($"Página {pageNumber}", infoFont, Brushes.DimGray, new RectangleF(x, bounds.Bottom - 16f, width, 16f), footerFormat);
+			graphics.DrawString(UiText.Format("Página {0}", pageNumber), infoFont, Brushes.DimGray, new RectangleF(x, bounds.Bottom - 16f, width, 16f), footerFormat);
 			e.HasMorePages = contactIndex < contacts.Count;
 		};
 
 		document.Print();
 		if (!File.Exists(path) || new FileInfo(path).Length == 0)
 		{
-			throw new IOException("Windows no pudo crear el archivo PDF.");
+			throw new IOException(UiText.Get("Windows no pudo crear el archivo PDF."));
 		}
 	}
 

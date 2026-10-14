@@ -4,7 +4,7 @@
 
 Aplicación personal para Windows que permite organizar contactos, filtrarlos y preparar un correo nuevo con los destinatarios seleccionados en el campo CCO.
 
-La versión 1.9.0 incluye **62 idiomas** en un único ejecutable, utiliza una base de datos SQLite para trabajar con listas grandes y permite importar contactos de Google, Outlook y otras agendas mediante CSV o vCard, sin pedir contraseñas. Los filtros de país y región están relacionados: al elegir un país sólo aparecen sus regiones. También crea informes PDF con los contactos visibles o marcados y las columnas elegidas. El idioma se cambia desde el menú superior y queda guardado para el siguiente inicio.
+La versión 1.9.0 incluye **62 idiomas** en un único ejecutable, también para las ventanas de importación y creación de PDF. Utiliza una base de datos SQLite para trabajar con listas grandes y permite importar contactos de Google, Outlook y otras agendas mediante CSV o vCard, sin pedir contraseñas. Los filtros de país y región están relacionados: al elegir un país sólo aparecen sus regiones. También crea informes PDF con los contactos visibles o marcados y las columnas elegidas. El idioma se cambia desde el menú superior y queda guardado para el siguiente inicio.
 
 El programa no envía mensajes automáticamente, no almacena contraseñas y no incorpora asuntos ni textos privados. El usuario revisa y completa personalmente cada correo en su aplicación de correo predeterminada.
 

@@ -565,7 +565,7 @@ internal sealed class MainForm : Form
 		using OpenFileDialog openFileDialog = new OpenFileDialog
 		{
 			Title = UiText.Get("Importar contactos"),
-			Filter = "Contactos compatibles (*.json;*.csv;*.vcf)|*.json;*.csv;*.vcf|Google/Outlook CSV (*.csv)|*.csv|vCard (*.vcf)|*.vcf|JSON (*.json)|*.json"
+			Filter = UiText.Get("Contactos compatibles") + " (*.json;*.csv;*.vcf)|*.json;*.csv;*.vcf|Google/Outlook CSV (*.csv)|*.csv|vCard (*.vcf)|*.vcf|JSON (*.json)|*.json"
 		};
 		if (openFileDialog.ShowDialog(this) != DialogResult.OK)
 		{
@@ -577,26 +577,26 @@ internal sealed class MainForm : Form
 			string sample = string.Join("\n", plan.Contacts.Take(8).Select(contact => "• " + ContactStore.Get(contact, "nombre") + FormatEmail(ContactStore.Get(contact, "correo"))));
 			if (plan.Contacts.Count > 8)
 			{
-				sample += $"\n… y {plan.Contacts.Count - 8} más";
+				sample += "\n" + UiText.Format("… y {0} más", plan.Contacts.Count - 8);
 			}
-			string preview = $"Archivo: {Path.GetFileName(openFileDialog.FileName)}\nFormato: {plan.Format}\n\nRegistros detectados: {plan.SourceRows}\nListos para importar: {plan.Contacts.Count}\nRepetidos omitidos: {plan.SkippedDuplicate}\nSin nombre omitidos: {plan.SkippedMissingName}";
+			string preview = UiText.Format("Archivo: {0}\nFormato: {1}\n\nRegistros detectados: {2}\nListos para importar: {3}\nRepetidos omitidos: {4}\nSin nombre omitidos: {5}", Path.GetFileName(openFileDialog.FileName), plan.Format, plan.SourceRows, plan.Contacts.Count, plan.SkippedDuplicate, plan.SkippedMissingName);
 			if (sample.Length > 0)
 			{
-				preview += "\n\nVista previa:\n" + sample;
+				preview += "\n\n" + UiText.Get("Vista previa:\n") + sample;
 			}
 			if (plan.Contacts.Count == 0)
 			{
-				MessageBox.Show(this, preview + "\n\nNo hay contactos nuevos que importar.", UiText.Get("Importación"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+				MessageBox.Show(this, preview + "\n\n" + UiText.Get("No hay contactos nuevos que importar."), UiText.Get("Importación"), MessageBoxButtons.OK, MessageBoxIcon.Information);
 				return;
 			}
-			if (MessageBox.Show(this, preview + "\n\nAntes de importar se creará automáticamente una copia de seguridad.\nLos contactos existentes no se sobrescribirán.\n\n¿Continuar?", UiText.Get("Revisar datos antes de importar"), MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) != DialogResult.Yes)
+			if (MessageBox.Show(this, preview + "\n\n" + UiText.Get("Antes de importar se creará automáticamente una copia de seguridad.\nLos contactos existentes no se sobrescribirán.\n\n¿Continuar?"), UiText.Get("Revisar datos antes de importar"), MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) != DialogResult.Yes)
 			{
 				return;
 			}
 			ContactImportResult result = _store.CommitImport(plan);
 			PopulateFilters();
 			RefreshList();
-			MessageBox.Show(this, $"Importados: {result.Added}\nOmitidos: {result.Skipped}\n\nCopia de seguridad creada:\n{result.SafetyBackupPath}\n\nLos contactos existentes NO se han sobrescrito.", UiText.Get("Importación"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+			MessageBox.Show(this, UiText.Format("Importados: {0}\nOmitidos: {1}\n\nCopia de seguridad creada:\n{2}\n\nLos contactos existentes NO se han sobrescrito.", result.Added, result.Skipped, result.SafetyBackupPath), UiText.Get("Importación"), MessageBoxButtons.OK, MessageBoxIcon.Information);
 		}
 		catch (Exception ex)
 		{
@@ -605,7 +605,7 @@ internal sealed class MainForm : Form
 
 		static string FormatEmail(string email)
 		{
-			return email.Length == 0 ? " (sin correo)" : " — " + email;
+			return email.Length == 0 ? " (" + UiText.Get("sin correo") + ")" : " — " + email;
 		}
 	}
 
@@ -772,18 +772,18 @@ internal sealed class MainForm : Form
 	private string CurrentFilterSummary(bool markedOnly)
 	{
 		List<string> filters = new();
-		AddFilter("País", _country);
-		AddFilter("Región", _region);
-		AddFilter("Idioma", _lang);
-		AddFilter("Tipo", _type);
-		AddFilter("Organización", _classFilter);
-		AddFilter("Estado", _statusFilter);
+		AddFilter(UiText.Get("País"), _country);
+		AddFilter(UiText.Get("Región"), _region);
+		AddFilter(UiText.Get("Idioma"), _lang);
+		AddFilter(UiText.Get("Tipo"), _type);
+		AddFilter(UiText.Get("Organización"), _classFilter);
+		AddFilter(UiText.Get("Estado"), _statusFilter);
 		if (!string.IsNullOrWhiteSpace(_search.Text))
 		{
-			filters.Add("Búsqueda: " + _search.Text.Trim());
+			filters.Add(UiText.Format("Búsqueda: {0}", _search.Text.Trim()));
 		}
-		string scope = markedOnly ? "Sólo marcados" : "Visibles";
-		return scope + " · " + (filters.Count == 0 ? "Sin filtros" : string.Join(" · ", filters));
+		string scope = markedOnly ? UiText.Get("Sólo marcados") : UiText.Get("Visibles");
+		return scope + " · " + (filters.Count == 0 ? UiText.Get("Sin filtros") : string.Join(" · ", filters));
 
 		void AddFilter(string label, ComboBox combo)
 		{

@@ -6,6 +6,7 @@
 - Elección entre todos los contactos visibles o solamente los contactos marcados.
 - Selección de las columnas que aparecerán en el informe.
 - El PDF incluye título, fecha, filtros aplicados, cantidad de contactos y páginas numeradas.
+- Los botones, ventanas, avisos de importación e informes PDF nuevos están traducidos en los 62 idiomas.
 
 ## 1.8.1
 
