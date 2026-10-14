@@ -4,7 +4,7 @@
 
 Aplicación personal para Windows que permite organizar contactos, filtrarlos y preparar un correo nuevo con los destinatarios seleccionados en el campo CCO.
 
-La versión 1.8.1 incluye **62 idiomas** en un único ejecutable, utiliza una base de datos SQLite para trabajar con listas grandes y permite importar contactos de Google, Outlook y otras agendas mediante CSV o vCard, sin pedir contraseñas. Los filtros de país y región están relacionados: al elegir un país sólo aparecen sus regiones. El idioma se cambia desde el menú superior y queda guardado para el siguiente inicio.
+La versión 1.9.0 incluye **62 idiomas** en un único ejecutable, utiliza una base de datos SQLite para trabajar con listas grandes y permite importar contactos de Google, Outlook y otras agendas mediante CSV o vCard, sin pedir contraseñas. Los filtros de país y región están relacionados: al elegir un país sólo aparecen sus regiones. También crea informes PDF con los contactos visibles o marcados y las columnas elegidas. El idioma se cambia desde el menú superior y queda guardado para el siguiente inicio.
 
 El programa no envía mensajes automáticamente, no almacena contraseñas y no incorpora asuntos ni textos privados. El usuario revisa y completa personalmente cada correo en su aplicación de correo predeterminada.
 
@@ -12,6 +12,7 @@ El programa no envía mensajes automáticamente, no almacena contraseñas y no i
 
 - Alta, modificación y eliminación controlada de contactos.
 - Filtros por país, región, idioma, tipo, organización y estado.
+- Informes PDF de la lista filtrada o de los contactos marcados, con selección de columnas.
 - Búsqueda instantánea por nombre, correo, ubicación, organización, estado o notas.
 - Selección de destinatarios y copia de direcciones en CCO.
 - Apertura de un borrador mediante `mailto`.
@@ -27,6 +28,8 @@ El programa no envía mensajes automáticamente, no almacena contraseñas y no i
 - Migración automática de los datos existentes a SQLite, con comprobación de registros e integridad.
 - JSON de compatibilidad para poder volver a una versión anterior si fuera necesario.
 - Recuperación automática de los cambios realizados al volver temporalmente a una versión anterior.
+
+La guía [INFORMES_PDF.md](INFORMES_PDF.md) explica paso a paso cómo filtrar la tabla y crear un informe.
 
 Consulta [IMPORTAR_CONTACTOS.md](IMPORTAR_CONTACTOS.md) para exportar e incorporar agendas de Google, Outlook u otros programas de forma local.
 

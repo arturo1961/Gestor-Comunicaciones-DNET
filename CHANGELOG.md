@@ -1,5 +1,12 @@
 # Historial de cambios
 
+## 1.9.0
+
+- Creación de informes PDF a partir de los filtros aplicados en la pantalla principal.
+- Elección entre todos los contactos visibles o solamente los contactos marcados.
+- Selección de las columnas que aparecerán en el informe.
+- El PDF incluye título, fecha, filtros aplicados, cantidad de contactos y páginas numeradas.
+
 ## 1.8.1
 
 - El filtro Región muestra únicamente las regiones pertenecientes al país seleccionado.

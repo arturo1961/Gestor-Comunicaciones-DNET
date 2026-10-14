@@ -216,6 +216,7 @@ internal sealed class MainForm : Form
 		flowLayoutPanel2.Controls.Add(Btn("Borrar contacto", DeleteContact, 145));
 		flowLayoutPanel2.Controls.Add(Btn("Importar JSON/CSV/VCF", ImportJson, 188));
 		flowLayoutPanel2.Controls.Add(Btn("Exportar JSON", ExportJson, 132));
+		flowLayoutPanel2.Controls.Add(Btn("Crear informe PDF", ExportPdf, 157));
 		_classifyAs.Items.AddRange(new object[5] { "empresa_medio", "organismo_publico", "red_publica", "entidad_civil", "sin_clasificar" });
 		_classifyAs.SelectedIndex = 0;
 		_classifyAs.Width = 165;
@@ -714,6 +715,83 @@ internal sealed class MainForm : Form
 		catch (Exception ex)
 		{
 			Warn(UiText.Get("No se pudo exportar el JSON:\n") + ex.Message);
+		}
+	}
+
+	private void ExportPdf(object? sender, EventArgs e)
+	{
+		_grid.EndEdit();
+		List<ContactRow> markedRows = SelectedRows();
+		using PdfReportOptionsForm options = new(_visibleRows.Count, markedRows.Count);
+		if (options.ShowDialog(this) != DialogResult.OK)
+		{
+			return;
+		}
+
+		List<JsonObject> contacts = (options.MarkedOnly ? markedRows : _visibleRows.ToList()).Select(row => row.Data).ToList();
+		if (contacts.Count == 0)
+		{
+			Warn(UiText.Get("No hay contactos para incluir en el informe."));
+			return;
+		}
+		if (!PdfReportGenerator.IsAvailable)
+		{
+			Warn(UiText.Get("No está instalada la impresora 'Microsoft Print to PDF' de Windows."));
+			return;
+		}
+
+		using SaveFileDialog saveFileDialog = new()
+		{
+			Title = UiText.Get("Guardar informe PDF"),
+			Filter = "PDF (*.pdf)|*.pdf",
+			FileName = "informe_contactos_" + DateTime.Now.ToString("yyyyMMdd_HHmm") + ".pdf",
+			InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+			OverwritePrompt = true,
+			AddExtension = true,
+			DefaultExt = "pdf"
+		};
+		if (saveFileDialog.ShowDialog(this) != DialogResult.OK)
+		{
+			return;
+		}
+
+		try
+		{
+			PdfReportGenerator.Create(saveFileDialog.FileName, contacts, options.SelectedColumns, options.ReportTitle, CurrentFilterSummary(options.MarkedOnly));
+			if (MessageBox.Show(this, UiText.Format("Informe PDF creado correctamente con {0} contactos.\n\n{1}\n\n¿Deseas abrirlo ahora?", contacts.Count, saveFileDialog.FileName), UiText.Get("Informe PDF completado"), MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+			{
+				Process.Start(new ProcessStartInfo(saveFileDialog.FileName) { UseShellExecute = true });
+			}
+		}
+		catch (Exception ex)
+		{
+			Warn(UiText.Get("No se pudo crear el informe PDF:\n") + ex.Message);
+		}
+	}
+
+	private string CurrentFilterSummary(bool markedOnly)
+	{
+		List<string> filters = new();
+		AddFilter("País", _country);
+		AddFilter("Región", _region);
+		AddFilter("Idioma", _lang);
+		AddFilter("Tipo", _type);
+		AddFilter("Organización", _classFilter);
+		AddFilter("Estado", _statusFilter);
+		if (!string.IsNullOrWhiteSpace(_search.Text))
+		{
+			filters.Add("Búsqueda: " + _search.Text.Trim());
+		}
+		string scope = markedOnly ? "Sólo marcados" : "Visibles";
+		return scope + " · " + (filters.Count == 0 ? "Sin filtros" : string.Join(" · ", filters));
+
+		void AddFilter(string label, ComboBox combo)
+		{
+			string? value = combo.SelectedItem?.ToString();
+			if (!string.IsNullOrWhiteSpace(value) && value != UiText.Get("Todos"))
+			{
+				filters.Add(label + ": " + value);
+			}
 		}
 	}
 
