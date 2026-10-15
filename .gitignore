@@ -1,6 +1,7 @@
 bin/
 obj/
 publicar*/
+/instalador-v*/
 .vs/
 *.user
 *.suo

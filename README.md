@@ -8,6 +8,8 @@ La versión 1.9.1 incluye **62 idiomas** en un único ejecutable, también para 
 
 El programa no envía mensajes automáticamente, no almacena contraseñas y no incorpora asuntos ni textos privados. El usuario revisa y completa personalmente cada correo en su aplicación de correo predeterminada.
 
+La descarga ofrece un ejecutable portátil y un instalador para Windows. El instalador detecta automáticamente el idioma visual de Windows, utiliza la traducción compatible correspondiente y conserva la elección en futuras actualizaciones. Si no existe una coincidencia, permite escoger el idioma antes de instalar.
+
 ## Funciones
 
 - Alta, modificación y eliminación controlada de contactos.
@@ -76,6 +78,8 @@ Ejecutable autónomo de Windows x64:
 ```powershell
 dotnet publish GestorComunicacionesDNET.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -p:DebugType=none -p:DebugSymbols=false -o publicar
 ```
+
+Para generar también el instalador multilingüe, instala Inno Setup 6 o 7 y ejecuta `Compilar_INSTALADOR.cmd`.
 
 ## Uso responsable
 
