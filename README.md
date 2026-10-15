@@ -4,7 +4,7 @@
 
 Aplicación personal para Windows que permite organizar contactos, filtrarlos y preparar un correo nuevo con los destinatarios seleccionados en el campo CCO.
 
-La versión 1.9.0 incluye **62 idiomas** en un único ejecutable, también para las ventanas de importación y creación de PDF. Utiliza una base de datos SQLite para trabajar con listas grandes y permite importar contactos de Google, Outlook y otras agendas mediante CSV o vCard, sin pedir contraseñas. Los filtros de país y región están relacionados: al elegir un país sólo aparecen sus regiones. También crea informes PDF con los contactos visibles o marcados y las columnas elegidas. El idioma se cambia desde el menú superior y queda guardado para el siguiente inicio.
+La versión 1.9.1 incluye **62 idiomas** en un único ejecutable, también para las ventanas de importación, creación de PDF y la función **NO CONTACTAR**. Utiliza una base de datos SQLite para trabajar con listas grandes y permite importar contactos de Google, Outlook y otras agendas mediante CSV o vCard, sin pedir contraseñas. Los filtros de país y región están relacionados: al elegir un país sólo aparecen sus regiones. También crea informes PDF con los contactos visibles o marcados y las columnas elegidas. El idioma se cambia desde el menú superior y queda guardado para el siguiente inicio.
 
 El programa no envía mensajes automáticamente, no almacena contraseñas y no incorpora asuntos ni textos privados. El usuario revisa y completa personalmente cada correo en su aplicación de correo predeterminada.
 
@@ -19,9 +19,10 @@ El programa no envía mensajes automáticamente, no almacena contraseñas y no i
 - Registro manual y consulta visual del historial de comunicaciones.
 - Papelera para recuperar contactos eliminados o borrarlos definitivamente.
 - Revisión de posibles contactos repetidos y correos incorrectos.
+- Lista **NO CONTACTAR**, identificada con un punto rojo, que impide seleccionar, preparar o reimportar direcciones excluidas.
 - Interfaz, editor, avisos, ayuda y operaciones principales traducidos a 62 idiomas.
 - Detección inicial del idioma de Windows y cambio sin reiniciar.
-- Importación de contactos desde Google/Outlook CSV, vCard (VCF) y JSON, con vista previa, detección de repetidos y copia automática previa.
+- Importación de contactos desde Google/Outlook CSV, vCard (VCF) y JSON, con vista previa, detección de repetidos y copia automática previa. Sólo se conservan las dos copias automáticas de importación más recientes.
 - Exportación de contactos en JSON.
 - Copia de seguridad completa de contactos e historial en ZIP.
 - Recuperación validada con copia automática previa del estado actual.
@@ -39,7 +40,7 @@ Los archivos incluidos en este repositorio están vacíos. Los datos privados se
 
 `%LOCALAPPDATA%\Gestor_Comunicaciones_DNET\`
 
-Desde la versión 1.7.0, `gestor_comunicaciones.db` es la base principal. En el primer arranque se crea automáticamente una copia ZIP de los JSON originales, se migran todos los registros y se comprueba que las cantidades coincidan antes de activar la base nueva. Los JSON siguen actualizándose como formato de compatibilidad y las copias de seguridad conservan el formato conocido. Si una versión anterior modifica esos JSON, la versión nueva lo detecta, protege primero su estado en otro ZIP y reincorpora los cambios.
+Desde la versión 1.7.0, `gestor_comunicaciones.db` es la base principal. En el primer arranque se crea automáticamente una copia ZIP de los JSON originales, se migran todos los registros y se comprueba que las cantidades coincidan antes de activar la base nueva. Los JSON siguen actualizándose como formato de compatibilidad y las copias de seguridad conservan el formato conocido. Si una versión anterior modifica esos JSON, la versión nueva lo detecta, protege primero su estado en otro ZIP y reincorpora los cambios. La lista interna **NO CONTACTAR** guarda únicamente la dirección, la fecha y el origen necesarios para evitar futuras comunicaciones; recuperar una copia antigua no reactiva estas direcciones.
 
 Los contactos y el historial reales permanecen fuera del repositorio. No publiques la base de datos, los JSON de esa carpeta ni las copias ZIP que genere la aplicación.
 
@@ -52,9 +53,10 @@ Los contactos y el historial reales permanecen fuera del repositorio. No publiqu
 5. Pulsa **Copiar CCO** para copiar las direcciones o **Preparar con mailto** para abrir un correo nuevo con los destinatarios colocados en CCO.
 6. Escribe personalmente el asunto y el mensaje, añade los archivos necesarios y revisa el campo CCO antes de enviar.
 7. Después de realizar el envío, vuelve al gestor y pulsa **Confirmar envío REAL** para anotarlo en el historial.
-8. En **Herramientas** puedes abrir la papelera, consultar el historial y revisar posibles duplicados o correos incorrectos.
-9. Utiliza **Copias de seguridad > Hacer copia de seguridad** para guardar juntos los contactos y el historial en un ZIP.
-10. Para volver a un estado anterior, utiliza **Recuperar copia de seguridad**. Antes de sustituir los datos, el programa conserva automáticamente otra copia del estado actual.
+8. Para atender una solicitud de baja, selecciona el contacto y pulsa **Marcar NO CONTACTAR**. El punto rojo confirma que no podrá incluirse en futuros destinatarios ni reaparecer mediante una importación.
+9. En **Herramientas** puedes abrir la papelera, consultar el historial y revisar posibles duplicados o correos incorrectos.
+10. Utiliza **Copias de seguridad > Hacer copia de seguridad** para guardar juntos los contactos y el historial en un ZIP.
+11. Para volver a un estado anterior, utiliza **Recuperar copia de seguridad**. Antes de sustituir los datos, el programa conserva automáticamente otra copia del estado actual y mantiene la lista **NO CONTACTAR** vigente.
 
 La lista completa está en [IDIOMAS.md](IDIOMAS.md). Las traducciones iniciales se han generado con ayuda automática y se aceptan correcciones de hablantes nativos.
 

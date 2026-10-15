@@ -204,6 +204,13 @@
     "No se pudo preparar la página del informe.": "Nuk mund të përgatitet faqja e raportit.",
     "Fecha: {0}    ·    Contactos: {1}    ·    {2}": "Data: {0}    ·    Kontakte: {1}    ·    {2}",
     "Página {0}": "Faqja {0}",
-    "Windows no pudo crear el archivo PDF.": "Windows nuk mund të krijojë skedarin PDF."
+    "Windows no pudo crear el archivo PDF.": "Windows nuk mund të krijojë skedarin PDF.",
+    "Marcar NO CONTACTAR": "Shënoni MOS KONTAKTO",
+    "NO CONTACTAR": "MOS KONTAKTO",
+    "Los contactos seleccionados quedarán bloqueados para futuras comunicaciones e importaciones.\n\n¿Marcar como NO CONTACTAR?": "Kontaktet e përzgjedhura do të bllokohen për komunikime dhe importime të ardhshme.\n\nA dëshironi të shënoni si MOS KONTAKTO?",
+    "Contactos añadidos a NO CONTACTAR: {0}.": "Kontaktet e shtuar në MOS KONTAKTO: {0}.",
+    "Lista de exclusión actualizada": "Lista e përjashtimit u përditësua",
+    "No se pudo actualizar la lista de exclusión:\n": "Nuk mund të përditësohet lista e përjashtimit:",
+    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "Një kontakt nga lista MOS KONTAKTO nuk mund të rinaktivizohet nga modifikimi normal."
   }
 }

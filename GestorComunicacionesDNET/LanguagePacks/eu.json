@@ -204,6 +204,13 @@
     "No se pudo preparar la página del informe.": "Ezinezkoa izan da txostenaren orria prestatzea.",
     "Fecha: {0}    ·    Contactos: {1}    ·    {2}": "Data: {0}    ·    Harremanak: {1}    ·    {2}",
     "Página {0}": "Orria {0}",
-    "Windows no pudo crear el archivo PDF.": "Windows-ek ezin izan du PDF fitxategia sortu."
+    "Windows no pudo crear el archivo PDF.": "Windows-ek ezin izan du PDF fitxategia sortu.",
+    "Marcar NO CONTACTAR": "EZ KONTAKTATZEA markatu",
+    "NO CONTACTAR": "EZ KONTAKTATZEA",
+    "Los contactos seleccionados quedarán bloqueados para futuras comunicaciones e importaciones.\n\n¿Marcar como NO CONTACTAR?": "Hautatutako kontaktuak blokeatuta geratuko dira etorkizuneko komunikazio eta inportazioetarako.\n\nEZ KONTAKTATZEA moduan markatu?",
+    "Contactos añadidos a NO CONTACTAR: {0}.": "EZ KONTAKTATZEA-ra gehitutako kontaktuak: {0}.",
+    "Lista de exclusión actualizada": "Bazterketa zerrenda eguneratua",
+    "No se pudo actualizar la lista de exclusión:\n": "Ezin izan da bazterketa zerrenda eguneratu:",
+    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "EZ KONTAKTATZEA zerrendako kontaktu bat ezin da berriro aktibatu ohiko edizioetik."
   }
 }

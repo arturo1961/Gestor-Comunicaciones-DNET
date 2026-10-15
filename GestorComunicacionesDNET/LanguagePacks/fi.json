@@ -204,6 +204,13 @@
     "No se pudo preparar la página del informe.": "Raporttisivua ei voitu valmistella.",
     "Fecha: {0}    ·    Contactos: {1}    ·    {2}": "Päivämäärä: {0}    ·    Yhteystiedot: {1}    ·    {2}",
     "Página {0}": "Sivu {0}",
-    "Windows no pudo crear el archivo PDF.": "Windows ei voinut luoda PDF-tiedostoa."
+    "Windows no pudo crear el archivo PDF.": "Windows ei voinut luoda PDF-tiedostoa.",
+    "Marcar NO CONTACTAR": "Merkitse EI OTA YHTEYTTÄ",
+    "NO CONTACTAR": "EI OTA YHTEYTTÄ",
+    "Los contactos seleccionados quedarán bloqueados para futuras comunicaciones e importaciones.\n\n¿Marcar como NO CONTACTAR?": "Valitut yhteystiedot estetään tulevilta viestinnöiltä ja tuonnilta.\n\nHaluatko merkitä EI OTA YHTEYTTÄ?",
+    "Contactos añadidos a NO CONTACTAR: {0}.": "Yhteystiedot lisätty EI OTA YHTEYTTÄ -listalle: {0}.",
+    "Lista de exclusión actualizada": "Poissuljettu lista päivitetty",
+    "No se pudo actualizar la lista de exclusión:\n": "Poissuljettua listaa ei voitu päivittää:",
+    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "EI OTA YHTEYTTÄ -listan yhteystietoa ei voi aktivoida uudelleen normaalin muokkauksen kautta."
   }
 }

@@ -204,6 +204,13 @@
     "No se pudo preparar la página del informe.": "Methwyd â pharatoi tudalen yr adroddiad.",
     "Fecha: {0}    ·    Contactos: {1}    ·    {2}": "Dyddiad: {0}    ·    Cysylltiadau: {1}    ·    {2}",
     "Página {0}": "Tudalen {0}",
-    "Windows no pudo crear el archivo PDF.": "Methodd Windows i greu'r ffeil PDF."
+    "Windows no pudo crear el archivo PDF.": "Methodd Windows i greu'r ffeil PDF.",
+    "Marcar NO CONTACTAR": "Marcio PEIDIO CYSWLLTU",
+    "NO CONTACTAR": "PEIDIO CYSWLLTU",
+    "Los contactos seleccionados quedarán bloqueados para futuras comunicaciones e importaciones.\n\n¿Marcar como NO CONTACTAR?": "Bydd y cysylltiadau a ddewiswyd yn cael eu blocio ar gyfer cyfathrebiadau a mewnforion yn y dyfodol.\n\nA wnewch chi farcio fel PEIDIO CYSWLLTU?",
+    "Contactos añadidos a NO CONTACTAR: {0}.": "Cysylltiadau wedi'u hychwanegu at PEIDIO CYSWLLTU: {0}.",
+    "Lista de exclusión actualizada": "Rhestr eithrio wedi'u diweddaru",
+    "No se pudo actualizar la lista de exclusión:\n": "Ni ellir diweddaru'r rhestr eithrio:",
+    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "Ni ellir adfywio cyswllt o'r rhestr PEIDIO CYSWLLTU o'r golygu arferol."
   }
 }

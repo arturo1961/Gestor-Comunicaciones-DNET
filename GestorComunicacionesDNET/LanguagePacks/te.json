@@ -204,6 +204,13 @@
     "No se pudo preparar la página del informe.": "రిపోర్ట్ పేజీ సిద్ధం చేయలేకపోయాం.",
     "Fecha: {0}    ·    Contactos: {1}    ·    {2}": "తేదీ: {0}    ·    వ్యక్తిక్రింది: {1}    ·    {2}",
     "Página {0}": "పేజీ {0}",
-    "Windows no pudo crear el archivo PDF.": "Windows PDF ఫైల్ సృష్టించలేకపోయింది."
+    "Windows no pudo crear el archivo PDF.": "Windows PDF ఫైల్ సృష్టించలేకపోయింది.",
+    "Marcar NO CONTACTAR": "సంప్రదించవద్దని గుర్తించండి",
+    "NO CONTACTAR": "సంప్రదించవద్దని గుర్తించండి",
+    "Los contactos seleccionados quedarán bloqueados para futuras comunicaciones e importaciones.\n\n¿Marcar como NO CONTACTAR?": "ఎంచుకున్న సంప్రదింపులు భవిష్యత్తులో కమ్యూనికేషన్లు మరియు దిగుమతుల కోసం బ్లాక్ చేయబడతాయి.\n\nసంప్రదించవద్దని గుర్తించాలో?",
+    "Contactos añadidos a NO CONTACTAR: {0}.": "సంప్రదింపులు సంప్రదించవద్దని జాబితాకు జోడించబడ్డాయి: {0}.",
+    "Lista de exclusión actualizada": "నిరాకరణ జాబితా అందుబాటులోకి తెచ్చబడింది",
+    "No se pudo actualizar la lista de exclusión:\n": "నిరాకరణ జాబితాను నవీకరించలేకపోయాం:",
+    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "సంప్రదించవద్దని జాబితాలో ఉన్న ఒక సంప్రదింపును సాధారణ సవరింపు ద్వారా మళ్ళీ యాక్టివేట్ చేయలేరు."
   }
 }

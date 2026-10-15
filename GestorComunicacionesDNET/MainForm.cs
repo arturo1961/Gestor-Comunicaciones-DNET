@@ -213,6 +213,9 @@ internal sealed class MainForm : Form
 		}, 133));
 		flowLayoutPanel2.Controls.Add(Btn("Nuevo contacto", AddContact, 136));
 		flowLayoutPanel2.Controls.Add(Btn("Modificar contacto", EditContact, 160));
+		Button noContact = Btn("Marcar NO CONTACTAR", MarkNoContact, 188);
+		noContact.BackColor = Color.FromArgb(180, 32, 45);
+		flowLayoutPanel2.Controls.Add(noContact);
 		flowLayoutPanel2.Controls.Add(Btn("Borrar contacto", DeleteContact, 145));
 		flowLayoutPanel2.Controls.Add(Btn("Importar JSON/CSV/VCF", ImportJson, 188));
 		flowLayoutPanel2.Controls.Add(Btn("Exportar JSON", ExportJson, 132));
@@ -362,6 +365,7 @@ internal sealed class MainForm : Form
 			HeaderText = "✓",
 			Width = 43
 		});
+		AddGridCol("NO CONTACTAR", "NoContactar", 105);
 		AddGridCol("Nombre", "Nombre", 210);
 		AddGridCol("Correo", "Correo", 215);
 		AddGridCol("País", "Pais", 92);
@@ -521,13 +525,45 @@ internal sealed class MainForm : Form
 		UpdateStatus();
 	}
 
-	private static bool Eligible(JsonObject c)
+	private bool Eligible(JsonObject c)
 	{
-		if (string.Equals(ContactStore.Get(c, "canal"), "email", StringComparison.OrdinalIgnoreCase) && !string.IsNullOrWhiteSpace(ContactStore.Get(c, "correo")) && !ContactStore.Flag(c, "no_contactar"))
+		if (string.Equals(ContactStore.Get(c, "canal"), "email", StringComparison.OrdinalIgnoreCase) && !string.IsNullOrWhiteSpace(ContactStore.Get(c, "correo")) && !_store.IsSuppressed(c))
 		{
 			return !string.Equals(ContactStore.Get(c, "estado"), "no_contactar_por_ahora", StringComparison.OrdinalIgnoreCase);
 		}
 		return false;
+	}
+
+	private void MarkNoContact(object? sender, EventArgs e)
+	{
+		List<ContactRow> rows = SelectedRows();
+		if (rows.Count == 0)
+		{
+			ContactRow? current = CurrentContact();
+			if (current != null) rows.Add(current);
+		}
+		if (rows.Count == 0)
+		{
+			Warn(UiText.Get("Selecciona uno o varios contactos."));
+			return;
+		}
+		if (MessageBox.Show(this, UiText.Get("Los contactos seleccionados quedarán bloqueados para futuras comunicaciones e importaciones.\n\n¿Marcar como NO CONTACTAR?"), UiText.Get("Marcar NO CONTACTAR"), MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) != DialogResult.Yes)
+		{
+			return;
+		}
+
+		try
+		{
+			int changed = _store.MarkNoContact(rows.Select(row => row.Data));
+			_lastPrepared.Clear();
+			PopulateFilters();
+			RefreshList();
+			MessageBox.Show(this, UiText.Format("Contactos añadidos a NO CONTACTAR: {0}.", changed), UiText.Get("Lista de exclusión actualizada"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+		}
+		catch (Exception ex)
+		{
+			Warn(UiText.Get("No se pudo actualizar la lista de exclusión:\n") + ex.Message);
+		}
 	}
 
 	private List<ContactRow> SelectedRows()

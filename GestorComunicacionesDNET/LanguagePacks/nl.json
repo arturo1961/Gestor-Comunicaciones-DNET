@@ -204,6 +204,13 @@
     "No se pudo preparar la página del informe.": "Het rapportpagina kon niet worden voorbereid.",
     "Fecha: {0}    ·    Contactos: {1}    ·    {2}": "Datum: {0}    ·    Contacten: {1}    ·    {2}",
     "Página {0}": "Pagina {0}",
-    "Windows no pudo crear el archivo PDF.": "Windows kon het PDF-bestand niet maken."
+    "Windows no pudo crear el archivo PDF.": "Windows kon het PDF-bestand niet maken.",
+    "Marcar NO CONTACTAR": "Markeer NIET CONTACTEREN",
+    "NO CONTACTAR": "NIET CONTACTEREN",
+    "Los contactos seleccionados quedarán bloqueados para futuras comunicaciones e importaciones.\n\n¿Marcar como NO CONTACTAR?": "De geselecteerde contacten zullen worden geblokkeerd voor toekomstige communicatie en import.\n\nMarkeren als NIET CONTACTEREN?",
+    "Contactos añadidos a NO CONTACTAR: {0}.": "Contacten toegevoegd aan NIET CONTACTEREN: {0}.",
+    "Lista de exclusión actualizada": "Uitsluitingslijst bijgewerkt",
+    "No se pudo actualizar la lista de exclusión:\n": "De uitsluitingslijst kon niet worden bijgewerkt:",
+    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "Een contact op de NIET CONTACTEREN-lijst kan niet worden geheractiveerd via de normale bewerking."
   }
 }

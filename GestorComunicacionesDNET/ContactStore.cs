@@ -13,6 +13,9 @@ namespace GestorComunicacionesDNET;
 
 internal sealed class ContactStore
 {
+	private const string SuppressionCollection = "exclusiones_no_contactar";
+	private const string ImportBackupPrefix = "copia_automatica_antes_de_importar_";
+	private const int ImportBackupsToKeep = 2;
 	private static readonly JsonSerializerOptions Options = new JsonSerializerOptions
 	{
 		WriteIndented = true
@@ -31,6 +34,8 @@ internal sealed class ContactStore
 	private JsonObject _contactsRoot = new JsonObject();
 
 	private JsonObject _historyRoot = new JsonObject();
+
+	private readonly HashSet<string> _suppressedEmails = new(StringComparer.OrdinalIgnoreCase);
 
 	public List<JsonObject> Contacts { get; } = new List<JsonObject>();
 
@@ -96,6 +101,7 @@ internal sealed class ContactStore
 		}
 		Contacts.Clear();
 		Contacts.AddRange(source.OfType<JsonObject>());
+		RefreshSuppressionCache();
 	}
 
 	public static string Get(JsonObject obj, string property)
@@ -114,6 +120,17 @@ internal sealed class ContactStore
 	{
 		bool result;
 		return bool.TryParse(Get(obj, name), out result) && result;
+	}
+
+	public static bool MarkedNoContact(JsonObject contact) =>
+		Flag(contact, "no_contactar") ||
+		Get(contact, "estado").Equals("no_contactar", StringComparison.OrdinalIgnoreCase);
+
+	public bool IsSuppressed(JsonObject contact)
+	{
+		if (MarkedNoContact(contact)) return true;
+		string email = NormalizeEmail(Get(contact, "correo"));
+		return email.Length > 0 && _suppressedEmails.Contains(email);
 	}
 
 	public bool AlreadyInformed(JsonObject contact, string version)
@@ -142,6 +159,11 @@ internal sealed class ContactStore
 
 	public void AddContact(JsonObject contact)
 	{
+		if (IsEmailSuppressed(Get(contact, "correo")))
+		{
+			contact["no_contactar"] = true;
+			contact["estado"] = "no_contactar";
+		}
 		ValidateForSave(contact);
 		if (Contacts.Any((JsonObject c) => Get(c, "id").Equals(Get(contact, "id"), StringComparison.OrdinalIgnoreCase)) || (_contactsRoot["contactos_eliminados"] is JsonArray source && source.OfType<JsonObject>().Any((JsonObject c) => Get(c, "id").Equals(Get(contact, "id"), StringComparison.OrdinalIgnoreCase))))
 		{
@@ -166,6 +188,16 @@ internal sealed class ContactStore
 		{
 			throw new InvalidDataException("El ID no puede modificarse: lo utiliza el historial de envíos.");
 		}
+		if (IsSuppressed(original) && !MarkedNoContact(updated))
+		{
+			throw new InvalidOperationException(UiText.Get("Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal."));
+		}
+		if (MarkedNoContact(updated) || IsEmailSuppressed(Get(updated, "correo")))
+		{
+			updated["no_contactar"] = true;
+			updated["estado"] = "no_contactar";
+			AddSuppression(Get(updated, "correo"), "edicion_contacto");
+		}
 		ValidateForSave(updated);
 		if (HasDuplicateEmail(updated, original))
 		{
@@ -173,6 +205,26 @@ internal sealed class ContactStore
 		}
 		Contacts[num] = (JsonObject)updated.DeepClone();
 		SaveContacts();
+	}
+
+	public int MarkNoContact(IEnumerable<JsonObject> contacts)
+	{
+		List<JsonObject> selected = contacts.Distinct().Where(Contacts.Contains).ToList();
+		if (selected.Count == 0) return 0;
+
+		int changed = 0;
+		foreach (JsonObject contact in selected)
+		{
+			string email = NormalizeEmail(Get(contact, "correo"));
+			if (email.Length == 0) continue;
+			if (!IsSuppressed(contact)) changed++;
+			contact["no_contactar"] = true;
+			contact["estado"] = "no_contactar";
+			contact["fecha_no_contactar"] = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:sszzz");
+			AddSuppression(email, "marcado_manual");
+		}
+		SaveContacts();
+		return changed;
 	}
 
 	public void DeleteContact(JsonObject contact)
@@ -359,6 +411,7 @@ internal sealed class ContactStore
 
 	public (string safetyBackupPath, int contacts, int shipments) RestoreBackup(string source)
 	{
+		HashSet<string> currentSuppressions = SuppressedEmails();
 		string fullPath = Path.GetFullPath(source);
 		if (!File.Exists(fullPath))
 		{
@@ -374,6 +427,7 @@ internal sealed class ContactStore
 		}
 		JsonObject contactsRoot = ValidateDataFile(contactsText, "contactos", "contactos.json");
 		JsonObject historyRoot = ValidateDataFile(historyText, "envios", "envios.json");
+		MergeSuppressions(contactsRoot, currentSuppressions);
 		int contactCount = (contactsRoot["contactos"] as JsonArray)?.Count ?? 0;
 		int shipmentCount = (historyRoot["envios"] as JsonArray)?.Count ?? 0;
 		string safetyBackup = Path.Combine(_directory, "copia_automatica_antes_de_recuperar_" + DateTime.Now.ToString("yyyyMMdd_HHmmssfff") + ".zip");
@@ -472,6 +526,107 @@ internal sealed class ContactStore
 		return false;
 	}
 
+	private static string NormalizeEmail(string email) => email.Trim().ToLowerInvariant();
+
+	private bool IsEmailSuppressed(string email)
+	{
+		string normalized = NormalizeEmail(email);
+		return normalized.Length > 0 && _suppressedEmails.Contains(normalized);
+	}
+
+	private void RefreshSuppressionCache()
+	{
+		_suppressedEmails.Clear();
+		if (_contactsRoot[SuppressionCollection] is JsonArray exclusions)
+		{
+			foreach (JsonObject entry in exclusions.OfType<JsonObject>())
+			{
+				string email = NormalizeEmail(Get(entry, "correo"));
+				if (email.Length > 0) _suppressedEmails.Add(email);
+			}
+		}
+		foreach (JsonObject contact in Contacts.Where(MarkedNoContact))
+		{
+			string email = NormalizeEmail(Get(contact, "correo"));
+			if (email.Length > 0) _suppressedEmails.Add(email);
+		}
+		if (_contactsRoot["contactos_eliminados"] is JsonArray deleted)
+		{
+			foreach (JsonObject contact in deleted.OfType<JsonObject>().Where(MarkedNoContact))
+			{
+				string email = NormalizeEmail(Get(contact, "correo"));
+				if (email.Length > 0) _suppressedEmails.Add(email);
+			}
+		}
+	}
+
+	private HashSet<string> SuppressedEmails() => new(_suppressedEmails, StringComparer.OrdinalIgnoreCase);
+
+	private void AddSuppression(string email, string source)
+	{
+		string normalized = NormalizeEmail(email);
+		if (normalized.Length == 0) return;
+		_suppressedEmails.Add(normalized);
+		JsonArray exclusions = _contactsRoot[SuppressionCollection] as JsonArray ?? new JsonArray();
+		_contactsRoot[SuppressionCollection] = exclusions;
+		if (exclusions.OfType<JsonObject>().Any(entry => string.Equals(NormalizeEmail(Get(entry, "correo")), normalized, StringComparison.OrdinalIgnoreCase))) return;
+		exclusions.Add(new JsonObject
+		{
+			["correo"] = normalized,
+			["fecha"] = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:sszzz"),
+			["origen"] = source
+		});
+	}
+
+	private static void MergeSuppressions(JsonObject restoredRoot, IEnumerable<string> currentSuppressions)
+	{
+		JsonArray exclusions = restoredRoot[SuppressionCollection] as JsonArray ?? new JsonArray();
+		restoredRoot[SuppressionCollection] = exclusions;
+		HashSet<string> emails = exclusions.OfType<JsonObject>()
+			.Select(entry => NormalizeEmail(Get(entry, "correo")))
+			.Where(email => email.Length > 0)
+			.ToHashSet(StringComparer.OrdinalIgnoreCase);
+		foreach (string collection in new[] { "contactos", "contactos_eliminados" })
+		{
+			if (restoredRoot[collection] is not JsonArray restoredContacts) continue;
+			foreach (JsonObject contact in restoredContacts.OfType<JsonObject>().Where(MarkedNoContact))
+			{
+				string email = NormalizeEmail(Get(contact, "correo"));
+				if (email.Length > 0 && emails.Add(email))
+				{
+					exclusions.Add(new JsonObject
+					{
+						["correo"] = email,
+						["fecha"] = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:sszzz"),
+						["origen"] = "estado_en_copia_restaurada"
+					});
+				}
+			}
+		}
+		foreach (string email in currentSuppressions.Select(NormalizeEmail).Where(email => email.Length > 0))
+		{
+			if (emails.Add(email))
+			{
+				exclusions.Add(new JsonObject
+				{
+					["correo"] = email,
+					["fecha"] = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:sszzz"),
+					["origen"] = "conservado_al_restaurar"
+				});
+			}
+		}
+		foreach (string collection in new[] { "contactos", "contactos_eliminados" })
+		{
+			if (restoredRoot[collection] is not JsonArray contacts) continue;
+			foreach (JsonObject contact in contacts.OfType<JsonObject>())
+			{
+				if (!emails.Contains(NormalizeEmail(Get(contact, "correo")))) continue;
+				contact["no_contactar"] = true;
+				if (collection == "contactos") contact["estado"] = "no_contactar";
+			}
+		}
+	}
+
 	public void ConfirmSend(IReadOnlyList<JsonObject> contacts, string version)
 	{
 		if (!(_historyRoot["envios"] is JsonArray jsonArray))
@@ -537,6 +692,7 @@ internal sealed class ContactStore
 			select Get(c, "correo").Trim() into s
 			where s.Length > 0
 			select s).ToHashSet<string>(StringComparer.OrdinalIgnoreCase);
+		hashSet2.UnionWith(SuppressedEmails());
 		List<JsonObject> ready = new List<JsonObject>();
 		int missingName = 0;
 		int duplicate = 0;
@@ -597,8 +753,9 @@ internal sealed class ContactStore
 		{
 			return new ContactImportResult(0, skipped, "");
 		}
-		string safetyBackup = Path.Combine(_directory, "copia_automatica_antes_de_importar_" + DateTime.Now.ToString("yyyyMMdd_HHmmssfff") + ".zip");
+		string safetyBackup = Path.Combine(_directory, ImportBackupPrefix + DateTime.Now.ToString("yyyyMMdd_HHmmssfff") + ".zip");
 		CreateBackup(safetyBackup);
+		PruneAutomaticImportBackups();
 		try
 		{
 			Contacts.AddRange(plan.Contacts.Select(contact => (JsonObject)contact.DeepClone()));
@@ -612,11 +769,33 @@ internal sealed class ContactStore
 		return new ContactImportResult(plan.Contacts.Count, skipped, safetyBackup);
 	}
 
+	private void PruneAutomaticImportBackups()
+	{
+		IEnumerable<string> obsolete = Directory.EnumerateFiles(_directory, ImportBackupPrefix + "*.zip", SearchOption.TopDirectoryOnly)
+			.OrderByDescending(Path.GetFileName, StringComparer.OrdinalIgnoreCase)
+			.Skip(ImportBackupsToKeep);
+		foreach (string path in obsolete)
+		{
+			try { File.Delete(path); }
+			catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
+			{
+				// La importación puede continuar: la copia recién creada sigue intacta.
+			}
+		}
+	}
+
 	private JsonObject BuildContactsRoot()
 	{
 		JsonObject root = (JsonObject)_contactsRoot.DeepClone();
 		root["contactos"] = new JsonArray(Contacts.Select(contact => contact.DeepClone()).ToArray());
 		root["contactos_eliminados"] ??= new JsonArray();
+		JsonArray exclusions = root[SuppressionCollection] as JsonArray ?? new JsonArray();
+		root[SuppressionCollection] = exclusions;
+		HashSet<string> known = exclusions.OfType<JsonObject>().Select(entry => NormalizeEmail(Get(entry, "correo"))).ToHashSet(StringComparer.OrdinalIgnoreCase);
+		foreach (string email in SuppressedEmails())
+		{
+			if (known.Add(email)) exclusions.Add(new JsonObject { ["correo"] = email, ["fecha"] = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:sszzz"), ["origen"] = "estado_contacto" });
+		}
 		return root;
 	}
 

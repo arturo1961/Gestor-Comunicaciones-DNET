@@ -204,6 +204,13 @@
     "No se pudo preparar la página del informe.": "Ma setgħetx tiġi ppreparata l-paġna tal-rapport.",
     "Fecha: {0}    ·    Contactos: {1}    ·    {2}": "Data: {0}    ·    Kuntatti: {1}    ·    {2}",
     "Página {0}": "Paġna {0}",
-    "Windows no pudo crear el archivo PDF.": "Windows ma setgħetx toħloq il-fajl PDF."
+    "Windows no pudo crear el archivo PDF.": "Windows ma setgħetx toħloq il-fajl PDF.",
+    "Marcar NO CONTACTAR": "Immarka LI MA TIKKONTAĊTAX",
+    "NO CONTACTAR": "LI MA TIKKONTAĊTAX",
+    "Los contactos seleccionados quedarán bloqueados para futuras comunicaciones e importaciones.\n\n¿Marcar como NO CONTACTAR?": "Il-kuntatti magħżula jiġu bllokati għal komunikazzjonijiet u importazzjonijiet futuri.\n\nTixtieq timmarka bħala LI MA TIKKONTAĊTAX?",
+    "Contactos añadidos a NO CONTACTAR: {0}.": "Kuntatti miżjuda ma' LI MA TIKKONTAĊTAX: {0}.",
+    "Lista de exclusión actualizada": "Lista ta' eżlużjoni aġġornata",
+    "No se pudo actualizar la lista de exclusión:\n": "Ma setgħetx tiġi aġġornata l-lista ta' eżlużjoni:",
+    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "Kuntatt minn lista LI MA TIKKONTAĊTAX ma jistax jerġa' jiġi attivat mill-edizzjoni normali."
   }
 }

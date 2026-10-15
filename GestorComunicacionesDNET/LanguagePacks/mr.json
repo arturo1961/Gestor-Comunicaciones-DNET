@@ -204,6 +204,13 @@
     "No se pudo preparar la página del informe.": "अहवाल पान तयार करता आले नाही.",
     "Fecha: {0}    ·    Contactos: {1}    ·    {2}": "दिनांक: {0}    ·    संपर्क: {1}    ·    {2}",
     "Página {0}": "पृष्ठ {0}",
-    "Windows no pudo crear el archivo PDF.": "विंडोज पीडीएफ फाइल तयार करू शकले नाही."
+    "Windows no pudo crear el archivo PDF.": "विंडोज पीडीएफ फाइल तयार करू शकले नाही.",
+    "Marcar NO CONTACTAR": "संपर्क न करण्यासाठी चिन्हांकित करा",
+    "NO CONTACTAR": "संपर्क करू नका",
+    "Los contactos seleccionados quedarán bloqueados para futuras comunicaciones e importaciones.\n\n¿Marcar como NO CONTACTAR?": "निवडलेले संपर्क भविष्यातील संवाद आणि आयातसाठी ब्लॉक केले जातील.\n\nसंपर्क न करण्यासाठी चिन्हांकित करायचे का?",
+    "Contactos añadidos a NO CONTACTAR: {0}.": "संपर्क न करण्यासाठी जोडलेले Kontakte: {0}.",
+    "Lista de exclusión actualizada": "वगळण्याची यादी अद्यतनित केली",
+    "No se pudo actualizar la lista de exclusión:\n": "वगळण्याची यादी अद्यतनित केली जाऊ शकली नाही:",
+    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "संपर्क न करण्याच्या यादीतील एखादा संपर्क सामान्य संपादनातून पुनःसक्रिय केला जाऊ शकत नाही."
   }
 }

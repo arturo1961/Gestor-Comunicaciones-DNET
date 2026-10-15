@@ -204,6 +204,13 @@
     "No se pudo preparar la página del informe.": "보고서 페이지를 준비할 수 없습니다.",
     "Fecha: {0}    ·    Contactos: {1}    ·    {2}": "날짜: {0}    ·    연락처: {1}    ·    {2}",
     "Página {0}": "페이지 {0}",
-    "Windows no pudo crear el archivo PDF.": "Windows가 PDF 파일을 생성할 수 없습니다."
+    "Windows no pudo crear el archivo PDF.": "Windows가 PDF 파일을 생성할 수 없습니다.",
+    "Marcar NO CONTACTAR": "연락하지 않음으로 표시",
+    "NO CONTACTAR": "연락하지 않음",
+    "Los contactos seleccionados quedarán bloqueados para futuras comunicaciones e importaciones.\n\n¿Marcar como NO CONTACTAR?": "선택한 연락처는 향후 통신 및 가져오기에서 차단됩니다.\n\n연락하지 않음으로 표시하시겠습니까?",
+    "Contactos añadidos a NO CONTACTAR: {0}.": "연락하지 않음으로 추가된 연락처: {0}.",
+    "Lista de exclusión actualizada": "제외 목록 업데이트됨",
+    "No se pudo actualizar la lista de exclusión:\n": "제외 목록을 업데이트할 수 없음:",
+    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "연락하지 않음 목록에 있는 연락처는 일반 편집에서 재활성화할 수 없습니다."
   }
 }

@@ -204,6 +204,13 @@
     "No se pudo preparar la página del informe.": "Priprava strani poročila ni bila mogoča.",
     "Fecha: {0}    ·    Contactos: {1}    ·    {2}": "Datum: {0}    ·    Stiki: {1}    ·    {2}",
     "Página {0}": "Stran {0}",
-    "Windows no pudo crear el archivo PDF.": "Windows ni mogel ustvariti PDF datoteke."
+    "Windows no pudo crear el archivo PDF.": "Windows ni mogel ustvariti PDF datoteke.",
+    "Marcar NO CONTACTAR": "Označi NE KONTAKTIRAJ",
+    "NO CONTACTAR": "NE KONTAKTIRAJ",
+    "Los contactos seleccionados quedarán bloqueados para futuras comunicaciones e importaciones.\n\n¿Marcar como NO CONTACTAR?": "Izbrani stiki bodo blokirani za prihodnja sporočila in uvoze.\n\nAli označiti kot NE KONTAKTIRAJ?",
+    "Contactos añadidos a NO CONTACTAR: {0}.": "Stiki dodani na seznam NE KONTAKTIRAJ: {0}.",
+    "Lista de exclusión actualizada": "Seznam izključitev je bil posodobljen",
+    "No se pudo actualizar la lista de exclusión:\n": "Seznama izključitev ni bilo mogoče posodobiti:",
+    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "Stika s seznama NE KONTAKTIRAJ ni mogoče ponovno aktivirati prek običajnega urejanja."
   }
 }

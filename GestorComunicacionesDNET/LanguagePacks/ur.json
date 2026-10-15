@@ -204,6 +204,13 @@
     "No se pudo preparar la página del informe.": "رپورٹ کا صفحہ تیار نہیں کیا جا سکا۔",
     "Fecha: {0}    ·    Contactos: {1}    ·    {2}": "تاریخ: {0}    ·    رابطے: {1}    ·    {2}",
     "Página {0}": "صفحہ {0}",
-    "Windows no pudo crear el archivo PDF.": "ونڈوز PDF فائل تخلیق نہیں کر سکا۔"
+    "Windows no pudo crear el archivo PDF.": "ونڈوز PDF فائل تخلیق نہیں کر سکا۔",
+    "Marcar NO CONTACTAR": "NO CONTACTAR پر نشان لگائیں",
+    "NO CONTACTAR": "NO CONTACTAR",
+    "Los contactos seleccionados quedarán bloqueados para futuras comunicaciones e importaciones.\n\n¿Marcar como NO CONTACTAR?": "منتخب کردہ رابطے مستقبل کی مواصلات اور درآمدات کے لیے بند کر دیے جائیں گے۔\n\nکیا NO CONTACTAR پر نشان لگائیں؟",
+    "Contactos añadidos a NO CONTACTAR: {0}.": "NO CONTACTAR میں شامل رابطے: {0}۔",
+    "Lista de exclusión actualizada": "خارجی فہرست کو اپ ڈیٹ کیا گیا",
+    "No se pudo actualizar la lista de exclusión:\n": "خارجی فہرست کو اپ ڈیٹ نہیں کیا جا سکا:",
+    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "NO CONTACTAR کی فہرست میں موجود ایک رابطہ عام ترمیم سے دوبارہ فعال نہیں کیا جا سکتا۔"
   }
 }

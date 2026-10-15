@@ -204,6 +204,13 @@
     "No se pudo preparar la página del informe.": "Det gick inte att förbereda rapportens sida.",
     "Fecha: {0}    ·    Contactos: {1}    ·    {2}": "Datum: {0}    ·    Kontakter: {1}    ·    {2}",
     "Página {0}": "Sida {0}",
-    "Windows no pudo crear el archivo PDF.": "Windows kunde inte skapa PDF-filen."
+    "Windows no pudo crear el archivo PDF.": "Windows kunde inte skapa PDF-filen.",
+    "Marcar NO CONTACTAR": "Markera INTE KONTAKTA",
+    "NO CONTACTAR": "INTE KONTAKTA",
+    "Los contactos seleccionados quedarán bloqueados para futuras comunicaciones e importaciones.\n\n¿Marcar como NO CONTACTAR?": "De valda kontakterna kommer att blockeras för framtida kommunikationer och importer.\n\nVill du markera som INTE KONTAKTA?",
+    "Contactos añadidos a NO CONTACTAR: {0}.": "Kontakter tillagda till INTE KONTAKTA: {0}.",
+    "Lista de exclusión actualizada": "Uppdaterad uteslutningslista",
+    "No se pudo actualizar la lista de exclusión:\n": "Det gick inte att uppdatera uteslutningslistan:",
+    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "En kontakt på INTE KONTAKTA-listan kan inte återaktiveras från normal redigering."
   }
 }

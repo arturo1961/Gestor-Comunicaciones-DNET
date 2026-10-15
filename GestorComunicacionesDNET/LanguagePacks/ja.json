@@ -204,6 +204,13 @@
     "No se pudo preparar la página del informe.": "レポートページを準備できませんでした。",
     "Fecha: {0}    ·    Contactos: {1}    ·    {2}": "日付: {0}    ·    連絡先: {1}    ·    {2}",
     "Página {0}": "ページ {0}",
-    "Windows no pudo crear el archivo PDF.": "Windows は PDF ファイルを作成できませんでした。"
+    "Windows no pudo crear el archivo PDF.": "Windows は PDF ファイルを作成できませんでした。",
+    "Marcar NO CONTACTAR": "連絡禁止としてマークする",
+    "NO CONTACTAR": "連絡禁止",
+    "Los contactos seleccionados quedarán bloqueados para futuras comunicaciones e importaciones.\n\n¿Marcar como NO CONTACTAR?": "選択された連絡先は今後の通信およびインポートのためにブロックされます。\n\n連絡禁止としてマークしますか？",
+    "Contactos añadidos a NO CONTACTAR: {0}.": "連絡禁止に追加された連絡先: {0}。",
+    "Lista de exclusión actualizada": "除外リストが更新されました",
+    "No se pudo actualizar la lista de exclusión:\n": "除外リストを更新できませんでした:",
+    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "連絡禁止リストの連絡先は、通常の編集から再有効化することはできません。"
   }
 }

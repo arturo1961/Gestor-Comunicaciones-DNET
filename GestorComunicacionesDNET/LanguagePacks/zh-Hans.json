@@ -204,6 +204,13 @@
     "No se pudo preparar la página del informe.": "无法准备报表页面。",
     "Fecha: {0}    ·    Contactos: {1}    ·    {2}": "日期：{0}    ·    联系人：{1}    ·    {2}",
     "Página {0}": "第 {0} 页",
-    "Windows no pudo crear el archivo PDF.": "Windows 无法创建 PDF 文件。"
+    "Windows no pudo crear el archivo PDF.": "Windows 无法创建 PDF 文件。",
+    "Marcar NO CONTACTAR": "标记为不联系",
+    "NO CONTACTAR": "不联系",
+    "Los contactos seleccionados quedarán bloqueados para futuras comunicaciones e importaciones.\n\n¿Marcar como NO CONTACTAR?": "所选联系人将被阻止以进行未来的通信和导入。\n\n要标记为不联系吗？",
+    "Contactos añadidos a NO CONTACTAR: {0}.": "已添加到不联系的联系人：{0}。",
+    "Lista de exclusión actualizada": "已更新排除列表",
+    "No se pudo actualizar la lista de exclusión:\n": "无法更新排除列表：",
+    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "不联系列表中的联系人无法通过普通编辑重新激活。"
   }
 }

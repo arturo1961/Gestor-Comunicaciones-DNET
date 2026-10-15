@@ -204,6 +204,13 @@
     "No se pudo preparar la página del informe.": "Nepavyko paruošti ataskaitos puslapio.",
     "Fecha: {0}    ·    Contactos: {1}    ·    {2}": "Data: {0}    ·    Kontaktai: {1}    ·    {2}",
     "Página {0}": "Puslapis {0}",
-    "Windows no pudo crear el archivo PDF.": "Windows negalėjo sukurti PDF failo."
+    "Windows no pudo crear el archivo PDF.": "Windows negalėjo sukurti PDF failo.",
+    "Marcar NO CONTACTAR": "Pažymėti NEKONTAKTUOTI",
+    "NO CONTACTAR": "NEKONTAKTUOTI",
+    "Los contactos seleccionados quedarán bloqueados para futuras comunicaciones e importaciones.\n\n¿Marcar como NO CONTACTAR?": "Pasirinkti kontaktai bus užblokuoti tolimesniam bendravimui ir importavimui.\n\nPažymėti kaip NEKONTAKTUOTI?",
+    "Contactos añadidos a NO CONTACTAR: {0}.": "Kontaktai pridėti prie NEKONTAKTUOTI: {0}.",
+    "Lista de exclusión actualizada": "Nepageidaujamos sąrašo atnaujintas",
+    "No se pudo actualizar la lista de exclusión:\n": "Nepavyko atnaujinti nepageidaujamos sąrašo:",
+    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "Kontaktas iš NEKONTAKTUOTI sąrašo negali būti aktyvuotas iš įprasto redagavimo."
   }
 }

@@ -204,6 +204,13 @@
     "No se pudo preparar la página del informe.": "Nelze připravit stránku zprávy.",
     "Fecha: {0}    ·    Contactos: {1}    ·    {2}": "Datum: {0}    ·    Kontakty: {1}    ·    {2}",
     "Página {0}": "Stránka {0}",
-    "Windows no pudo crear el archivo PDF.": "Windows nemohl vytvořit soubor PDF."
+    "Windows no pudo crear el archivo PDF.": "Windows nemohl vytvořit soubor PDF.",
+    "Marcar NO CONTACTAR": "Označit NENAVAZOVAT KONTAKT",
+    "NO CONTACTAR": "NENAVAZOVAT KONTAKT",
+    "Los contactos seleccionados quedarán bloqueados para futuras comunicaciones e importaciones.\n\n¿Marcar como NO CONTACTAR?": "Vybraní kontakty budou zablokováni pro budoucí komunikaci a importy.\n\nOznačit jako NENAVAZOVAT KONTAKT?",
+    "Contactos añadidos a NO CONTACTAR: {0}.": "Kontakty přidané do NENAVAZOVAT KONTAKT: {0}.",
+    "Lista de exclusión actualizada": "Seznam výjimek aktualizován",
+    "No se pudo actualizar la lista de exclusión:\n": "Nepodařilo se aktualizovat seznam výjimek:",
+    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "Kontakt ze seznamu NENAVAZOVAT KONTAKT nelze znovu aktivovat běžnou úpravou."
   }
 }

@@ -204,6 +204,13 @@
     "No se pudo preparar la página del informe.": "Не удалось подготовить страницу отчета.",
     "Fecha: {0}    ·    Contactos: {1}    ·    {2}": "Дата: {0}    ·    Контакты: {1}    ·    {2}",
     "Página {0}": "Страница {0}",
-    "Windows no pudo crear el archivo PDF.": "Windows не удалось создать PDF-файл."
+    "Windows no pudo crear el archivo PDF.": "Windows не удалось создать PDF-файл.",
+    "Marcar NO CONTACTAR": "Отметить НЕ СВЯЗЫВАТЬСЯ",
+    "NO CONTACTAR": "НЕ СВЯЗЫВАТЬСЯ",
+    "Los contactos seleccionados quedarán bloqueados para futuras comunicaciones e importaciones.\n\n¿Marcar como NO CONTACTAR?": "Выбранные контакты будут заблокированы для будущих коммуникаций и импортов.\n\nОтметить как НЕ СВЯЗЫВАТЬСЯ?",
+    "Contactos añadidos a NO CONTACTAR: {0}.": "Контакты добавлены в НЕ СВЯЗЫВАТЬСЯ: {0}.",
+    "Lista de exclusión actualizada": "Список исключений обновлен",
+    "No se pudo actualizar la lista de exclusión:\n": "Не удалось обновить список исключений:",
+    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "Контакт из списка НЕ СВЯЗЫВАТЬСЯ не может быть восстановлен через обычное редактирование."
   }
 }

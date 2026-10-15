@@ -204,6 +204,13 @@
     "No se pudo preparar la página del informe.": "Не можеше да се подготви страницата на извештајот.",
     "Fecha: {0}    ·    Contactos: {1}    ·    {2}": "Датум: {0}    ·    Контакти: {1}    ·    {2}",
     "Página {0}": "Страница {0}",
-    "Windows no pudo crear el archivo PDF.": "Windows не можеше да го креира PDF фајлот."
+    "Windows no pudo crear el archivo PDF.": "Windows не можеше да го креира PDF фајлот.",
+    "Marcar NO CONTACTAR": "Означи НЕ КОНТАКТИРАЈ",
+    "NO CONTACTAR": "НЕ КОНТАКТИРАЈ",
+    "Los contactos seleccionados quedarán bloqueados para futuras comunicaciones e importaciones.\n\n¿Marcar como NO CONTACTAR?": "Селектираните контакти ќе бидат блокирани за идни комуникации и увози.\n\nДали да се означи како НЕ КОНТАКТИРАЈ?",
+    "Contactos añadidos a NO CONTACTAR: {0}.": "Контактите додадени во НЕ КОНТАКТИРАЈ: {0}.",
+    "Lista de exclusión actualizada": "Листата на исклучоци е ажурирана",
+    "No se pudo actualizar la lista de exclusión:\n": "Не можеше да се ажурира листата на исклучоци:",
+    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "Контакт од листата НЕ КОНТАКТИРАЈ не може да се активира повторно преку обичната уредување."
   }
 }

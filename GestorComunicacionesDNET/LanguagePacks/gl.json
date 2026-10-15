@@ -204,6 +204,13 @@
     "No se pudo preparar la página del informe.": "Non se puido preparar a páxina do informe.",
     "Fecha: {0}    ·    Contactos: {1}    ·    {2}": "Data: {0}    ·    Contactos: {1}    ·    {2}",
     "Página {0}": "Páxina {0}",
-    "Windows no pudo crear el archivo PDF.": "Windows non puido crear o arquivo PDF."
+    "Windows no pudo crear el archivo PDF.": "Windows non puido crear o arquivo PDF.",
+    "Marcar NO CONTACTAR": "Marcar NON CONTACTAR",
+    "NO CONTACTAR": "NON CONTACTAR",
+    "Los contactos seleccionados quedarán bloqueados para futuras comunicaciones e importaciones.\n\n¿Marcar como NO CONTACTAR?": "Os contactos seleccionados quedarán bloqueados para futuras comunicacións e importacións.\n\n¿Marcar como NON CONTACTAR?",
+    "Contactos añadidos a NO CONTACTAR: {0}.": "Contactos engadidos a NON CONTACTAR: {0}.",
+    "Lista de exclusión actualizada": "Lista de exclusión actualizada",
+    "No se pudo actualizar la lista de exclusión:\n": "Non se puido actualizar a lista de exclusión:",
+    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "Un contacto da lista NON CONTACTAR non pode reactivarse desde a edición normal."
   }
 }

@@ -204,6 +204,13 @@
     "No se pudo preparar la página del informe.": "Hindi maihanda ang pahina ng ulat.",
     "Fecha: {0}    ·    Contactos: {1}    ·    {2}": "Petsa: {0}    ·    Mga Contacto: {1}    ·    {2}",
     "Página {0}": "Pahina {0}",
-    "Windows no pudo crear el archivo PDF.": "Hindi makalikha ang Windows ng PDF na file."
+    "Windows no pudo crear el archivo PDF.": "Hindi makalikha ang Windows ng PDF na file.",
+    "Marcar NO CONTACTAR": "Tandaan HUWAG MAKIPAG-UGNAY",
+    "NO CONTACTAR": "HUWAG MAKIPAG-UGNAY",
+    "Los contactos seleccionados quedarán bloqueados para futuras comunicaciones e importaciones.\n\n¿Marcar como NO CONTACTAR?": "Ang mga napiling kontak ay ma-block para sa mga hinaharap na komunikasyon at importasyon.\n\nTandaan ba bilang HUWAG MAKIPAG-UGNAY?",
+    "Contactos añadidos a NO CONTACTAR: {0}.": "Mga kontak na idinagdag sa HUWAG MAKIPAG-UGNAY: {0}.",
+    "Lista de exclusión actualizada": "Na-update ang listahan ng pagbubukod",
+    "No se pudo actualizar la lista de exclusión:\n": "Hindi ma-update ang listahan ng pagbubukod:",
+    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "Ang isang kontak sa listahan ng HUWAG MAKIPAG-UGNAY ay hindi maaaring ma-reactivate mula sa normal na edit."
   }
 }

@@ -204,6 +204,13 @@
     "No se pudo preparar la página del informe.": "Không thể chuẩn bị trang báo cáo.",
     "Fecha: {0}    ·    Contactos: {1}    ·    {2}": "Ngày: {0}    ·    Liên hệ: {1}    ·    {2}",
     "Página {0}": "Trang {0}",
-    "Windows no pudo crear el archivo PDF.": "Windows không thể tạo tệp PDF."
+    "Windows no pudo crear el archivo PDF.": "Windows không thể tạo tệp PDF.",
+    "Marcar NO CONTACTAR": "Đánh dấu KHÔNG LIÊN HỆ",
+    "NO CONTACTAR": "KHÔNG LIÊN HỆ",
+    "Los contactos seleccionados quedarán bloqueados para futuras comunicaciones e importaciones.\n\n¿Marcar como NO CONTACTAR?": "Các liên hệ được chọn sẽ bị chặn cho các liên lạc và nhập khẩu trong tương lai.\n\nĐánh dấu là KHÔNG LIÊN HỆ?",
+    "Contactos añadidos a NO CONTACTAR: {0}.": "Liên hệ đã được thêm vào KHÔNG LIÊN HỆ: {0}.",
+    "Lista de exclusión actualizada": "Danh sách loại trừ đã được cập nhật",
+    "No se pudo actualizar la lista de exclusión:\n": "Không thể cập nhật danh sách loại trừ:",
+    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "Một liên hệ trong danh sách KHÔNG LIÊN HỆ không thể được kích hoạt lại từ chỉnh sửa bình thường."
   }
 }

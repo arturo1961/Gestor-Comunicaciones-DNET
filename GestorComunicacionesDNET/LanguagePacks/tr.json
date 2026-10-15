@@ -204,6 +204,13 @@
     "No se pudo preparar la página del informe.": "Rapor sayfası hazırlanamadı.",
     "Fecha: {0}    ·    Contactos: {1}    ·    {2}": "Tarih: {0}    ·    Kişiler: {1}    ·    {2}",
     "Página {0}": "Sayfa {0}",
-    "Windows no pudo crear el archivo PDF.": "Windows PDF dosyasını oluşturamadı."
+    "Windows no pudo crear el archivo PDF.": "Windows PDF dosyasını oluşturamadı.",
+    "Marcar NO CONTACTAR": "İLETİŞİME GEÇMEYİN olarak işaretle",
+    "NO CONTACTAR": "İLETİŞİME GEÇMEYİN",
+    "Los contactos seleccionados quedarán bloqueados para futuras comunicaciones e importaciones.\n\n¿Marcar como NO CONTACTAR?": "Seçilen kişiler gelecekteki iletişim ve ithalatlar için engellenecektir.\n\nİLETİŞİME GEÇMEYİN olarak işaretlensin mi?",
+    "Contactos añadidos a NO CONTACTAR: {0}.": "İLETİŞİME GEÇMEYİN listesine eklenen kişiler: {0}.",
+    "Lista de exclusión actualizada": "Hariç tutma listesi güncellendi",
+    "No se pudo actualizar la lista de exclusión:\n": "Hariç tutma listesi güncellenemedi:",
+    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "İLETİŞİME GEÇMEYİN listesinde yer alan bir kişi normal düzenleme ile yeniden aktifleştirilemez."
   }
 }

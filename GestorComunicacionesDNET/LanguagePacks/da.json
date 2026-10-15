@@ -204,6 +204,13 @@
     "No se pudo preparar la página del informe.": "Siden til rapporten kunne ikke forberedes.",
     "Fecha: {0}    ·    Contactos: {1}    ·    {2}": "Dato: {0}    ·    Kontakter: {1}    ·    {2}",
     "Página {0}": "Side {0}",
-    "Windows no pudo crear el archivo PDF.": "Windows kunne ikke oprette PDF-filen."
+    "Windows no pudo crear el archivo PDF.": "Windows kunne ikke oprette PDF-filen.",
+    "Marcar NO CONTACTAR": "Marker IKKE KONTAKT",
+    "NO CONTACTAR": "IKKE KONTAKT",
+    "Los contactos seleccionados quedarán bloqueados para futuras comunicaciones e importaciones.\n\n¿Marcar como NO CONTACTAR?": "De valgte kontakter vil blive blokeret for fremtidige kommunikationer og import.\n\nVil du markere som IKKE KONTAKT?",
+    "Contactos añadidos a NO CONTACTAR: {0}.": "Kontakter tilføjet til IKKE KONTAKT: {0}.",
+    "Lista de exclusión actualizada": "Eksklusionsliste opdateret",
+    "No se pudo actualizar la lista de exclusión:\n": "Kunne ikke opdatere eksklusionslisten:",
+    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "En kontakt på IKKE KONTAKT-listen kan ikke genaktiveres fra normal redigering."
   }
 }

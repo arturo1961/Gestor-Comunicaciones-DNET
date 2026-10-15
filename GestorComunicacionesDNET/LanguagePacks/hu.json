@@ -204,6 +204,13 @@
     "No se pudo preparar la página del informe.": "Nem sikerült előkészíteni a jelentés oldalát.",
     "Fecha: {0}    ·    Contactos: {1}    ·    {2}": "Dátum: {0}    ·    Kapcsolatok: {1}    ·    {2}",
     "Página {0}": "Oldal {0}",
-    "Windows no pudo crear el archivo PDF.": "A Windows nem tudta létrehozni a PDF fájlt."
+    "Windows no pudo crear el archivo PDF.": "A Windows nem tudta létrehozni a PDF fájlt.",
+    "Marcar NO CONTACTAR": "Jelölés: NE KAPCSOLATBA LÉPNI",
+    "NO CONTACTAR": "NE KAPCSOLATBA LÉPNI",
+    "Los contactos seleccionados quedarán bloqueados para futuras comunicaciones e importaciones.\n\n¿Marcar como NO CONTACTAR?": "A kiválasztott kapcsolatok le lesznek tiltva a jövőbeni kommunikáció és importálás számára.\n\nJelölje NE KAPCSOLATBA LÉPNI-ként?",
+    "Contactos añadidos a NO CONTACTAR: {0}.": "A NE KAPCSOLATBA LÉPNI listához hozzáadott kapcsolatok: {0}.",
+    "Lista de exclusión actualizada": "Kizárási lista frissítve",
+    "No se pudo actualizar la lista de exclusión:\n": "Nem sikerült frissíteni a kizárási listát:",
+    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "A NE KAPCSOLATBA LÉPNI listán szereplő kapcsolat nem aktiválható újra a normál szerkesztésből."
   }
 }

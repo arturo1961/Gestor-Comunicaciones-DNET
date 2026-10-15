@@ -204,6 +204,13 @@
     "No se pudo preparar la página del informe.": "صفحه گزارش آماده نشد.",
     "Fecha: {0}    ·    Contactos: {1}    ·    {2}": "تاریخ: {0}    ·    مخاطبین: {1}    ·    {2}",
     "Página {0}": "صفحه {0}",
-    "Windows no pudo crear el archivo PDF.": "ویندوز نتوانست فایل PDF را ایجاد کند."
+    "Windows no pudo crear el archivo PDF.": "ویندوز نتوانست فایل PDF را ایجاد کند.",
+    "Marcar NO CONTACTAR": "علامت‌گذاری به عنوان عدم تماس",
+    "NO CONTACTAR": "عدم تماس",
+    "Los contactos seleccionados quedarán bloqueados para futuras comunicaciones e importaciones.\n\n¿Marcar como NO CONTACTAR?": "تماس‌های انتخاب‌شده برای ارتباطات و واردات آینده مسدود خواهند شد.\n\nآیا علامت‌گذاری به عنوان عدم تماس؟",
+    "Contactos añadidos a NO CONTACTAR: {0}.": "تماس‌های اضافه‌شده به عدم تماس: {0}.",
+    "Lista de exclusión actualizada": "لیست استثناء به‌روزرسانی شد",
+    "No se pudo actualizar la lista de exclusión:\n": "به‌روزرسانی لیست استثناء امکان‌پذیر نبود:",
+    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "یک تماس در لیست عدم تماس نمی‌تواند از ویرایش عادی فعال شود."
   }
 }

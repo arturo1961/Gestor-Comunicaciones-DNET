@@ -204,6 +204,13 @@
     "No se pudo preparar la página del informe.": "Pagina raportului nu a putut fi pregătită.",
     "Fecha: {0}    ·    Contactos: {1}    ·    {2}": "Data: {0}    ·    Contacte: {1}    ·    {2}",
     "Página {0}": "Pagina {0}",
-    "Windows no pudo crear el archivo PDF.": "Windows nu a putut crea fișierul PDF."
+    "Windows no pudo crear el archivo PDF.": "Windows nu a putut crea fișierul PDF.",
+    "Marcar NO CONTACTAR": "Marcare NU CONTACTAȚI",
+    "NO CONTACTAR": "NU CONTACTAȚI",
+    "Los contactos seleccionados quedarán bloqueados para futuras comunicaciones e importaciones.\n\n¿Marcar como NO CONTACTAR?": "Contactele selectate vor fi blocate pentru comunicații și importuri viitoare.\n\nSă marcăm ca NU CONTACTAȚI?",
+    "Contactos añadidos a NO CONTACTAR: {0}.": "Contacte adăugate la NU CONTACTAȚI: {0}.",
+    "Lista de exclusión actualizada": "Lista de excludere actualizată",
+    "No se pudo actualizar la lista de exclusión:\n": "Nu s-a putut actualiza lista de excludere:",
+    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "Un contact din lista NU CONTACTAȚI nu poate fi reactivat din editarea normală."
   }
 }

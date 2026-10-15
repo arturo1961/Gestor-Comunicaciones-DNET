@@ -204,6 +204,13 @@
     "No se pudo preparar la página del informe.": "Die verslagblad kon nie voorberei word nie.",
     "Fecha: {0}    ·    Contactos: {1}    ·    {2}": "Datum: {0}    ·    Kontakte: {1}    ·    {2}",
     "Página {0}": "Bladsy {0}",
-    "Windows no pudo crear el archivo PDF.": "Windows kon die PDF-lêer nie skep nie."
+    "Windows no pudo crear el archivo PDF.": "Windows kon die PDF-lêer nie skep nie.",
+    "Marcar NO CONTACTAR": "Merk NIE KONTAKTE  ",
+    "NO CONTACTAR": "  \nNIE KONTAKTE  ",
+    "Los contactos seleccionados quedarán bloqueados para futuras comunicaciones e importaciones.\n\n¿Marcar como NO CONTACTAR?": "  \nDie geselekteerde kontakte sal geblokkeer word vir toekomstige kommunikasies en invoere.  \n\nMerk as NIE KONTAKTE?  ",
+    "Contactos añadidos a NO CONTACTAR: {0}.": "  \nKontakte bygevoeg tot NIE KONTAKTE: {0}.  ",
+    "Lista de exclusión actualizada": "  \nUitsluitingslys opgedateer  ",
+    "No se pudo actualizar la lista de exclusión:\n": "  \nKon nie die uitsluitingslys opdateer nie:  ",
+    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "  \n'N kontak op die NIE KONTAKTE-lys kan nie vanaf die gewone redigering geaktiveer word nie."
   }
 }

@@ -204,6 +204,13 @@
     "No se pudo preparar la página del informe.": "Neizdevās sagatavot pārskata lapu.",
     "Fecha: {0}    ·    Contactos: {1}    ·    {2}": "Datums: {0}    ·    Kontakti: {1}    ·    {2}",
     "Página {0}": "Lapa {0}",
-    "Windows no pudo crear el archivo PDF.": "Windows nevarēja izveidot PDF failu."
+    "Windows no pudo crear el archivo PDF.": "Windows nevarēja izveidot PDF failu.",
+    "Marcar NO CONTACTAR": "Atzīmēt NEKONTAKTĒT",
+    "NO CONTACTAR": "NEKONTAKTĒT",
+    "Los contactos seleccionados quedarán bloqueados para futuras comunicaciones e importaciones.\n\n¿Marcar como NO CONTACTAR?": "Atlasītie kontakti tiks bloķēti turpmākai saziņai un importam.\n\nAtzīmēt kā NEKONTAKTĒT?",
+    "Contactos añadidos a NO CONTACTAR: {0}.": "Kontakti pievienoti NEKONTAKTĒT: {0}.",
+    "Lista de exclusión actualizada": "Eksklūzijas saraksts atjaunināts",
+    "No se pudo actualizar la lista de exclusión:\n": "Neizdevās atjaunināt eksklūzijas sarakstu:",
+    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "Kontakts NEKONTAKTĒT sarakstā nevar tikt aktivizēts no parastās rediģēšanas."
   }
 }

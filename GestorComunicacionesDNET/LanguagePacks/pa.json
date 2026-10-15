@@ -204,6 +204,13 @@
     "No se pudo preparar la página del informe.": "ਰਿਪੋਰਟ ਪੇਜ਼ ਤਿਆਰ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਿਆ।",
     "Fecha: {0}    ·    Contactos: {1}    ·    {2}": "ਤਾਰੀਖ: {0}    ·    ਸੰਪਰਕ: {1}    ·    {2}",
     "Página {0}": "ਪੰਨਾ {0}",
-    "Windows no pudo crear el archivo PDF.": "ਵਿੰਡੋਜ਼ PDF ਫਾਈਲ ਬਣਾਉਣ ਵਿੱਚ ਅਸਫਲ ਰਿਹਾ।"
+    "Windows no pudo crear el archivo PDF.": "ਵਿੰਡੋਜ਼ PDF ਫਾਈਲ ਬਣਾਉਣ ਵਿੱਚ ਅਸਫਲ ਰਿਹਾ।",
+    "Marcar NO CONTACTAR": "ਨੋ ਸੰਪਰਕ ਮਾਰਕ ਕਰੋ",
+    "NO CONTACTAR": "ਨੋ ਸੰਪਰਕ",
+    "Los contactos seleccionados quedarán bloqueados para futuras comunicaciones e importaciones.\n\n¿Marcar como NO CONTACTAR?": "ਚੁਣੇ ਗਏ ਸੰਪਰਕ ਅਗਲੀ ਸੰਚਾਰ ਅਤੇ ਆਯਾਤ ਲਈ ਰੋਕੀ ਦਿੱਤੇ ਜਾਣਗੇ।\n\nਨੋ ਸੰਪਰਕ ਵਜੋਂ ਮਾਰਕ ਕੀਤਾ ਜਾਵੇ?",
+    "Contactos añadidos a NO CONTACTAR: {0}.": "ਨੋ ਸੰਪਰਕ ਵਿੱਚ ਜੋੜੇ ਗਏ ਸੰਪਰਕ: {0}.",
+    "Lista de exclusión actualizada": "ਬਾਹਰ ਰੱਖਣ ਦੀ ਸੂਚੀ ਅੱਪਡੇਟ ਕੀਤੀ ਗਈ",
+    "No se pudo actualizar la lista de exclusión:\n": "ਬਾਹਰ ਰੱਖਣ ਦੀ ਸੂਚੀ ਅੱਪਡੇਟ ਨਹੀਂ ਹੋ ਸਕੀ:",
+    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "ਨੋ ਸੰਪਰਕ ਸੂਚੀ ਵਿੱਚੋਂ ਇੱਕ ਸੰਪਰਕ ਸਧਾਰਣ ਸੰਪਾਦਨ ਤੋਂ ਮੁੜ ਸਰਗਰਮ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਦਾ."
   }
 }

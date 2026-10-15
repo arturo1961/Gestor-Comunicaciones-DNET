@@ -45,6 +45,8 @@ internal sealed class ContactRow : INotifyPropertyChanged
 
 	public string Estado => ContactStore.Get(Data, "estado");
 
+	public string NoContactar => ContactStore.MarkedNoContact(Data) ? "🔴" : "";
+
 	private void OnPropertyChanged([CallerMemberName] string? propertyName = null)
 	{
 		PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

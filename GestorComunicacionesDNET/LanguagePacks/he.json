@@ -204,6 +204,13 @@
     "No se pudo preparar la página del informe.": "לא ניתן היה להכין את דף הדו\"ח.",
     "Fecha: {0}    ·    Contactos: {1}    ·    {2}": "תאריך: {0}    ·    אנשי קשר: {1}    ·    {2}",
     "Página {0}": "דף {0}",
-    "Windows no pudo crear el archivo PDF.": "Windows לא הצליחה ליצור את קובץ ה-PDF."
+    "Windows no pudo crear el archivo PDF.": "Windows לא הצליחה ליצור את קובץ ה-PDF.",
+    "Marcar NO CONTACTAR": "סמן כלא ליצור קשר",
+    "NO CONTACTAR": "לא ליצור קשר",
+    "Los contactos seleccionados quedarán bloqueados para futuras comunicaciones e importaciones.\n\n¿Marcar como NO CONTACTAR?": "האנשים שנבחרו יחוסמו לתקשורות וייבוא עתידיים.\n\nלסמן כלא ליצור קשר?",
+    "Contactos añadidos a NO CONTACTAR: {0}.": "אנשים שנוספו לרשימת לא ליצור קשר: {0}.",
+    "Lista de exclusión actualizada": "רשימת ההחרגה עודכנה",
+    "No se pudo actualizar la lista de exclusión:\n": "לא ניתן היה לעדכן את רשימת ההחרגה:",
+    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "איש קשר ברשימת לא ליצור קשר אינו יכול להיות מופעל מחדש מהעריכה הרגילה."
   }
 }

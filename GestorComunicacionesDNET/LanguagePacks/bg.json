@@ -204,6 +204,13 @@
     "No se pudo preparar la página del informe.": "Не можа да се подготви страницата на отчета.",
     "Fecha: {0}    ·    Contactos: {1}    ·    {2}": "Дата: {0}    ·    Контакти: {1}    ·    {2}",
     "Página {0}": "Страница {0}",
-    "Windows no pudo crear el archivo PDF.": "Windows не можа да създаде PDF файла."
+    "Windows no pudo crear el archivo PDF.": "Windows не можа да създаде PDF файла.",
+    "Marcar NO CONTACTAR": "Маркирай КАТО НЕ СЕ СВЪРЗВАЙ",
+    "NO CONTACTAR": "НЕ СЕ СВЪРЗВАЙ",
+    "Los contactos seleccionados quedarán bloqueados para futuras comunicaciones e importaciones.\n\n¿Marcar como NO CONTACTAR?": "Избраните контакти ще бъдат блокирани за бъдещи комуникации и импорти.\n\nДа се маркира ли като НЕ СЕ СВЪРЗВАЙ?",
+    "Contactos añadidos a NO CONTACTAR: {0}.": "Контакти, добавени към НЕ СЕ СВЪРЗВАЙ: {0}.",
+    "Lista de exclusión actualizada": "Списъкът за изключения е актуализиран",
+    "No se pudo actualizar la lista de exclusión:\n": "Не можа да се актуализира списъкът за изключения:",
+    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "Контакт от списъка НЕ СЕ СВЪРЗВАЙ не може да бъде реактивиран чрез нормалното редактиране."
   }
 }

@@ -204,6 +204,13 @@
     "No se pudo preparar la página del informe.": "Níorbh fhéidir an leathanach tuarascála a ullmhú.",
     "Fecha: {0}    ·    Contactos: {1}    ·    {2}": "Dáta: {0}    ·    Teagmhálacha: {1}    ·    {2}",
     "Página {0}": "Leathanach {0}",
-    "Windows no pudo crear el archivo PDF.": "Níorbh fhéidir le Windows an comhad PDF a chruthú."
+    "Windows no pudo crear el archivo PDF.": "Níorbh fhéidir le Windows an comhad PDF a chruthú.",
+    "Marcar NO CONTACTAR": "Marcáil NÁ DÉAN TEAGMHÁIL",
+    "NO CONTACTAR": "NÁ DÉAN TEAGMHÁIL",
+    "Los contactos seleccionados quedarán bloqueados para futuras comunicaciones e importaciones.\n\n¿Marcar como NO CONTACTAR?": "Beidh na teagmhálacha roghnaithe bábhlaithe le haghaidh cumarsáide agus allmhairiú amach anseo.\n\nAn gcuirtear marc mar NÁ DÉAN TEAGMHÁIL?",
+    "Contactos añadidos a NO CONTACTAR: {0}.": "Teagmhálacha curtha leis NÁ DÉAN TEAGMHÁIL: {0}.",
+    "Lista de exclusión actualizada": "Liosta eisiacha nuashonraithe",
+    "No se pudo actualizar la lista de exclusión:\n": "Níor éirigh leis an liosta eisiacha a nuashonrú:",
+    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "Ní féidir teagmháil ón liosta NÁ DÉAN TEAGMHÁIL a athghníomhachtú ó eagarthóireacht ghnáth."
   }
 }

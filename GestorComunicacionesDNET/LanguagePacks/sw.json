@@ -204,6 +204,13 @@
     "No se pudo preparar la página del informe.": "Haiwezi kuandaa ukurasa wa ripoti.",
     "Fecha: {0}    ·    Contactos: {1}    ·    {2}": "Tarehe: {0}    ·    Mawasiliano: {1}    ·    {2}",
     "Página {0}": "Ukurasa {0}",
-    "Windows no pudo crear el archivo PDF.": "Windows haiwezi kuunda faili la PDF."
+    "Windows no pudo crear el archivo PDF.": "Windows haiwezi kuunda faili la PDF.",
+    "Marcar NO CONTACTAR": "Chagua USIWASHI WASILIANO",
+    "NO CONTACTAR": "USIWASHI WASILIANO",
+    "Los contactos seleccionados quedarán bloqueados para futuras comunicaciones e importaciones.\n\n¿Marcar como NO CONTACTAR?": "Wasiliano waliyochaguliwa watakuzwa kwa mawasiliano na uingizaji data wa baadaye.\n\nChagua kama USIWASHI WASILIANO?",
+    "Contactos añadidos a NO CONTACTAR: {0}.": "Wasiliano walioongezwa kwenye USIWASHI WASILIANO: {0}.",
+    "Lista de exclusión actualizada": "Orodha ya kuachwa imeboreshwa",
+    "No se pudo actualizar la lista de exclusión:\n": "Haiwezi kuboresha orodha ya kuachwa:",
+    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "Mtu mmoja kwenye orodha ya USIWASHI WASILIANO hawezi kuanzishwa upya kutoka kwenye uhariri wa kawaida."
   }
 }

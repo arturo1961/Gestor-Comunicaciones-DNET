@@ -204,6 +204,13 @@
     "No se pudo preparar la página del informe.": "Halaman laporan tidak dapat dipersiapkan.",
     "Fecha: {0}    ·    Contactos: {1}    ·    {2}": "Tanggal: {0}    ·    Kontak: {1}    ·    {2}",
     "Página {0}": "Halaman {0}",
-    "Windows no pudo crear el archivo PDF.": "Windows tidak dapat membuat file PDF."
+    "Windows no pudo crear el archivo PDF.": "Windows tidak dapat membuat file PDF.",
+    "Marcar NO CONTACTAR": "Tandai JANGAN DIHUBUNGI",
+    "NO CONTACTAR": "JANGAN DIHUBUNGI",
+    "Los contactos seleccionados quedarán bloqueados para futuras comunicaciones e importaciones.\n\n¿Marcar como NO CONTACTAR?": "Kontak yang dipilih akan diblokir untuk komunikasi dan impor di masa mendatang.\n\nTandai sebagai JANGAN DIHUBUNGI?",
+    "Contactos añadidos a NO CONTACTAR: {0}.": "Kontak yang ditambahkan ke JANGAN DIHUBUNGI: {0}.",
+    "Lista de exclusión actualizada": "Daftar pengecualian diperbarui",
+    "No se pudo actualizar la lista de exclusión:\n": "Tidak dapat memperbarui daftar pengecualian:",
+    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "Satu kontak dalam daftar JANGAN DIHUBUNGI tidak dapat diaktifkan kembali melalui pengeditan normal."
   }
 }

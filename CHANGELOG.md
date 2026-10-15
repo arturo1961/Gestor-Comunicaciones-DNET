@@ -1,5 +1,14 @@
 # Historial de cambios
 
+## 1.9.1
+
+- Nueva marca roja **NO CONTACTAR** para conservar y reconocer las direcciones que han solicitado no recibir comunicaciones.
+- Los contactos excluidos no pueden seleccionarse, copiarse a CCO ni añadirse a un borrador mediante `mailto`.
+- Las importaciones omiten las direcciones excluidas aunque vuelvan a aparecer en archivos JSON, CSV o vCard.
+- La lista de exclusión se conserva al recuperar una copia de seguridad anterior y almacena únicamente el correo necesario para reconocerlo.
+- Las copias automáticas creadas antes de importar se limitan a las dos más recientes; las copias manuales no se eliminan.
+- Botón, columna, confirmaciones y avisos nuevos traducidos en los 62 idiomas.
+
 ## 1.9.0
 
 - Creación de informes PDF a partir de los filtros aplicados en la pantalla principal.

@@ -1,6 +1,6 @@
 # Importar contactos
 
-Gestor de Comunicaciones DNET 1.9.0 puede importar contactos sin conectarse a ninguna cuenta y sin solicitar contraseñas.
+Gestor de Comunicaciones DNET 1.9.1 puede importar contactos sin conectarse a ninguna cuenta y sin solicitar contraseñas.
 
 ## Formatos compatibles
 
@@ -17,7 +17,7 @@ Gestor de Comunicaciones DNET 1.9.0 puede importar contactos sin conectarse a ni
 4. Revisa la cantidad de registros, los repetidos detectados y la muestra presentada.
 5. Confirma únicamente si la vista previa es correcta.
 
-Antes de incorporar contactos, el programa crea automáticamente una copia ZIP completa del estado actual. Los contactos que ya tengan el mismo correo o identificador se omiten y nunca sobrescriben los existentes.
+Antes de incorporar contactos, el programa crea automáticamente una copia ZIP completa del estado actual. Conserva las dos copias automáticas de importación más recientes sin eliminar las copias creadas manualmente. Los contactos que ya tengan el mismo correo o identificador se omiten y nunca sobrescriben los existentes. También se omite cualquier dirección incluida en la lista **NO CONTACTAR**, aunque aparezca de nuevo en otro archivo.
 
 Después de importar, conviene revisar los registros desde **Herramientas > Revisar duplicados y correos**. Los contactos importados quedan en estado pendiente y su dirección debe verificarse antes de utilizarla.
 

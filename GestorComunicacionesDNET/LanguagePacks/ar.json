@@ -204,6 +204,13 @@
     "No se pudo preparar la página del informe.": "تعذر إعداد صفحة التقرير.",
     "Fecha: {0}    ·    Contactos: {1}    ·    {2}": "التاريخ: {0}    ·    جهات الاتصال: {1}    ·    {2}",
     "Página {0}": "الصفحة {0}",
-    "Windows no pudo crear el archivo PDF.": "تعذر على ويندوز إنشاء ملف PDF."
+    "Windows no pudo crear el archivo PDF.": "تعذر على ويندوز إنشاء ملف PDF.",
+    "Marcar NO CONTACTAR": "وضع علامة عدم الاتصال",
+    "NO CONTACTAR": "عدم الاتصال",
+    "Los contactos seleccionados quedarán bloqueados para futuras comunicaciones e importaciones.\n\n¿Marcar como NO CONTACTAR?": "سيتم حظر جهات الاتصال المحددة للاتصالات والاستيرادات المستقبلية.\n\nهل تريد وضع علامة كعدم الاتصال؟",
+    "Contactos añadidos a NO CONTACTAR: {0}.": "تمت إضافة جهات الاتصال إلى عدم الاتصال: {0}.",
+    "Lista de exclusión actualizada": "تم تحديث قائمة الاستبعاد",
+    "No se pudo actualizar la lista de exclusión:\n": "تعذر تحديث قائمة الاستبعاد:",
+    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "لا يمكن إعادة تنشيط جهة اتصال من قائمة عدم الاتصال من خلال التحرير العادي."
   }
 }

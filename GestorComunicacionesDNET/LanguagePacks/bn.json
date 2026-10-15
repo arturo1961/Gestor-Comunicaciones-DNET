@@ -204,6 +204,13 @@
     "No se pudo preparar la página del informe.": "রিপোর্ট পৃষ্ঠাটি প্রস্তুত করতে সক্ষম হয়নি।",
     "Fecha: {0}    ·    Contactos: {1}    ·    {2}": "তারিখ: {0}    ·    যোগাযোগ: {1}    ·    {2}",
     "Página {0}": "পৃষ্ঠা {0}",
-    "Windows no pudo crear el archivo PDF.": "উইন্ডোজ পিডিএফ ফাইলটি তৈরি করতে পারেনি।"
+    "Windows no pudo crear el archivo PDF.": "উইন্ডোজ পিডিএফ ফাইলটি তৈরি করতে পারেনি।",
+    "Marcar NO CONTACTAR": "NO CONTACTAR হিসেবে মার্ক করুন",
+    "NO CONTACTAR": "NO CONTACTAR",
+    "Los contactos seleccionados quedarán bloqueados para futuras comunicaciones e importaciones.\n\n¿Marcar como NO CONTACTAR?": "নির্বাচিত যোগাযোগগুলো ভবিষ্যতের যোগাযোগ এবং আমদানির জন্য ব্লক হয়ে যাবে।\n\nNO CONTACTAR হিসেবে মার্ক করা হবে?",
+    "Contactos añadidos a NO CONTACTAR: {0}.": "NO CONTACTAR-এ যোগ করা হয়েছে এমন যোগাযোগ: {0}.",
+    "Lista de exclusión actualizada": "অপসারণ তালিকা আপডেট হয়েছে",
+    "No se pudo actualizar la lista de exclusión:\n": "অপসারণ তালিকা আপডেট করা যায়নি:",
+    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "NO CONTACTAR তালিকার একটি যোগাযোগ সাধারণ সম্পাদনার মাধ্যমে পুনরায় সক্রিয় করা যায় না।"
   }
 }

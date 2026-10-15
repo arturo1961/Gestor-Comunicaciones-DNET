@@ -204,6 +204,13 @@
     "No se pudo preparar la página del informe.": "அறிக்கை பக்கத்தை தயாரிக்க முடியவில்லை.",
     "Fecha: {0}    ·    Contactos: {1}    ·    {2}": "திகதி: {0}    ·    தொடர்புகள்: {1}    ·    {2}",
     "Página {0}": "பக்கம் {0}",
-    "Windows no pudo crear el archivo PDF.": "Windows PDF கோப்பை உருவாக்க முடியவில்லை."
+    "Windows no pudo crear el archivo PDF.": "Windows PDF கோப்பை உருவாக்க முடியவில்லை.",
+    "Marcar NO CONTACTAR": "தொடர்பு கொள்ள வேண்டாம் என்று குறிக்கவும்",
+    "NO CONTACTAR": "தொடர்பு கொள்ள வேண்டாம்",
+    "Los contactos seleccionados quedarán bloqueados para futuras comunicaciones e importaciones.\n\n¿Marcar como NO CONTACTAR?": "தேர்ந்தெடுக்கப்பட்ட தொடர்புகள் எதிர்கால தொடர்புக்கான மற்றும் இறக்குமதிகளுக்கான தடுப்புக்குள் அடங்கும்.\n\nதொடர்பு கொள்ள வேண்டாம் என்று குறிக்கவுள்ளீர்களா?",
+    "Contactos añadidos a NO CONTACTAR: {0}.": "தொடர்புகள் தொடர்பில் சேர்க்கப்பட்டுள்ளன: {0}.",
+    "Lista de exclusión actualizada": "விலக்கப்பட்ட பட்டியல் புதுப்பிக்கப்பட்டது",
+    "No se pudo actualizar la lista de exclusión:\n": "விலக்கப்பட்ட பட்டியலை புதுப்பிக்க முடியவில்லை:",
+    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "தொடர்பு கொள்ள வேண்டாம் பட்டியலில் உள்ள ஒரு தொடர்பு சாதாரண எடிட்டிங் மூலம் மீண்டும் செயல்படுத்த முடியாது."
   }
 }
