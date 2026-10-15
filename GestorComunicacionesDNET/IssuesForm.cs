@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace GestorComunicacionesDNET;
 
-internal sealed class IssuesForm : Form
+internal sealed class IssuesForm : DnetForm
 {
 	public IssuesForm(ContactStore store)
 	{

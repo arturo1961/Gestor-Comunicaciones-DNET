@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace GestorComunicacionesDNET;
 
-internal sealed class HistoryForm : Form
+internal sealed class HistoryForm : DnetForm
 {
 	private sealed record HistoryRow(string Fecha, string Nombre, string Correo, string Version, string Estado, string Medio, string Observaciones);
 

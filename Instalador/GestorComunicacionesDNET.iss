@@ -19,6 +19,7 @@ DisableProgramGroupPage=yes
 LicenseFile=..\LICENSE
 OutputDir=..\instalador-v1.9.1
 OutputBaseFilename=Instalar_GestorComunicacionesDNET_1.9.1
+SetupIconFile=..\GestorComunicacionesDNET\Assets\GestorComunicacionesDNET.ico
 UninstallDisplayIcon={app}\{#MyAppExeName}
 Compression=lzma2/ultra64
 SolidCompression=yes

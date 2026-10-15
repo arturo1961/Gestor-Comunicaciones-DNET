@@ -2,6 +2,7 @@
 
 ## 1.9.1
 
+- Nuevo icono propio para el ejecutable, las ventanas, los accesos directos y el instalador.
 - Nuevo instalador multilingüe que adopta automáticamente el idioma visual de Windows y conserva la elección al actualizar.
 - La vista previa de importación muestra por separado cuántos registros se omiten por pertenecer a **NO CONTACTAR**.
 - La barra inferior muestra permanentemente la cantidad de contactos incluidos en **NO CONTACTAR**.

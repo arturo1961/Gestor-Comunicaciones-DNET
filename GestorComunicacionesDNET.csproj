@@ -9,6 +9,7 @@
     <Nullable>annotations</Nullable>
     <EnableWindowsTargeting>true</EnableWindowsTargeting>
     <RootNamespace>GestorComunicacionesDNET</RootNamespace>
+    <ApplicationIcon>GestorComunicacionesDNET\Assets\GestorComunicacionesDNET.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <LangVersion>12.0</LangVersion>
@@ -21,5 +22,6 @@
     <EmbeddedResource Include="GestorComunicacionesDNET.Datos.envios.json" LogicalName="GestorComunicacionesDNET.Datos.envios.json" />
     <EmbeddedResource Include="GestorComunicacionesDNET\SpanishTexts.json" LogicalName="GestorComunicacionesDNET.SpanishTexts.json" />
     <EmbeddedResource Include="GestorComunicacionesDNET\LanguagePacks\*.json" />
+    <EmbeddedResource Include="GestorComunicacionesDNET\Assets\GestorComunicacionesDNET.ico" LogicalName="GestorComunicacionesDNET.AppIcon.ico" />
   </ItemGroup>
 </Project>

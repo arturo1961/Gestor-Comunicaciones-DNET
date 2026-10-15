@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace GestorComunicacionesDNET;
 
-internal sealed class RecycleBinForm : Form
+internal sealed class RecycleBinForm : DnetForm
 {
 	private sealed class DeletedRow
 	{

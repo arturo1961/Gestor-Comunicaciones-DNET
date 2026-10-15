@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace GestorComunicacionesDNET;
 
-internal sealed class MainForm : Form
+internal sealed class MainForm : DnetForm
 {
 	private readonly ContactStore _store;
 

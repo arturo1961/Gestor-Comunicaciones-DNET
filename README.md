@@ -10,6 +10,8 @@ El programa no envía mensajes automáticamente, no almacena contraseñas y no i
 
 La descarga ofrece un ejecutable portátil y un instalador para Windows. El instalador detecta automáticamente el idioma visual de Windows, utiliza la traducción compatible correspondiente y conserva la elección en futuras actualizaciones. Si no existe una coincidencia, permite escoger el idioma antes de instalar.
 
+El icono propio del Gestor identifica el ejecutable, las ventanas, los accesos directos y el instalador. Sus archivos PNG e ICO están incluidos en `GestorComunicacionesDNET/Assets/`.
+
 ## Funciones
 
 - Alta, modificación y eliminación controlada de contactos.

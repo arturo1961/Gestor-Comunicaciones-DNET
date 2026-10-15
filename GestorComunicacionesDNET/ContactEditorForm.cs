@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace GestorComunicacionesDNET;
 
-internal sealed class ContactEditorForm : Form
+internal sealed class ContactEditorForm : DnetForm
 {
 	private sealed record FieldDef(string Key, string Caption, string[]? Choices = null, bool Multiline = false);
 

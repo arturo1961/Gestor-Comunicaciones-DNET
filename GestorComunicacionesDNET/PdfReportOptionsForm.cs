@@ -11,7 +11,7 @@ internal sealed record PdfReportColumn(string Field, string Header, float Weight
 	public override string ToString() => Header;
 }
 
-internal sealed class PdfReportOptionsForm : Form
+internal sealed class PdfReportOptionsForm : DnetForm
 {
 	private readonly RadioButton _visible;
 	private readonly RadioButton _marked;
