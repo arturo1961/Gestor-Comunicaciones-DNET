@@ -692,15 +692,20 @@ internal sealed class ContactStore
 			select Get(c, "correo").Trim() into s
 			where s.Length > 0
 			select s).ToHashSet<string>(StringComparer.OrdinalIgnoreCase);
-		hashSet2.UnionWith(SuppressedEmails());
 		List<JsonObject> ready = new List<JsonObject>();
 		int missingName = 0;
 		int duplicate = 0;
+		int noContact = 0;
 		foreach (JsonObject item2 in importSource.Contacts)
 		{
 			JsonObject jsonObject = (JsonObject)item2.DeepClone();
 			string text2 = Get(jsonObject, "id").Trim();
 			string text3 = Get(jsonObject, "correo").Trim();
+			if (text3.Length > 0 && _suppressedEmails.Contains(NormalizeEmail(text3)))
+			{
+				noContact++;
+				continue;
+			}
 			if (string.IsNullOrWhiteSpace(Get(jsonObject, "nombre")))
 			{
 				missingName++;
@@ -743,12 +748,12 @@ internal sealed class ContactStore
 				hashSet2.Add(text3);
 			}
 		}
-		return new ContactImportPlan(ready, importSource.SourceRows, missingName, duplicate, importSource.Format);
+		return new ContactImportPlan(ready, importSource.SourceRows, missingName, duplicate, noContact, importSource.Format);
 	}
 
 	public ContactImportResult CommitImport(ContactImportPlan plan)
 	{
-		int skipped = plan.SkippedMissingName + plan.SkippedDuplicate;
+		int skipped = plan.SkippedMissingName + plan.SkippedDuplicate + plan.SkippedNoContact;
 		if (plan.Contacts.Count == 0)
 		{
 			return new ContactImportResult(0, skipped, "");

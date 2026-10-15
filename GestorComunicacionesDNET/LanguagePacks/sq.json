@@ -211,6 +211,8 @@
     "Contactos añadidos a NO CONTACTAR: {0}.": "Kontaktet e shtuar në MOS KONTAKTO: {0}.",
     "Lista de exclusión actualizada": "Lista e përjashtimit u përditësua",
     "No se pudo actualizar la lista de exclusión:\n": "Nuk mund të përditësohet lista e përjashtimit:",
-    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "Një kontakt nga lista MOS KONTAKTO nuk mund të rinaktivizohet nga modifikimi normal."
+    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "Një kontakt nga lista MOS KONTAKTO nuk mund të rinaktivizohet nga modifikimi normal.",
+    "NO CONTACTAR omitidos: {0}": "MOS KONTAKTONI të anashkaluarit: {0}",
+    "Contactos en base: {0}    ·    Visibles: {1}    ·    Marcados: {2}    ·    NO CONTACTAR: {3}    ·    Dirección CCO oculta para otros destinatarios.": "Kontaktet në bazë: {0}    ·    Të dukshme: {1}    ·    Të shënuar: {2}    ·    MOS KONTAKTO: {3}    ·    Adresa BCC e fshehur për marrësit e tjerë."
   }
 }

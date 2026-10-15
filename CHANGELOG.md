@@ -2,6 +2,8 @@
 
 ## 1.9.1
 
+- La vista previa de importación muestra por separado cuántos registros se omiten por pertenecer a **NO CONTACTAR**.
+- La barra inferior muestra permanentemente la cantidad de contactos incluidos en **NO CONTACTAR**.
 - Nueva marca roja **NO CONTACTAR** para conservar y reconocer las direcciones que han solicitado no recibir comunicaciones.
 - Los contactos excluidos no pueden seleccionarse, copiarse a CCO ni añadirse a un borrador mediante `mailto`.
 - Las importaciones omiten las direcciones excluidas aunque vuelvan a aparecer en archivos JSON, CSV o vCard.

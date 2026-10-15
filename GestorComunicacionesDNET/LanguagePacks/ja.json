@@ -211,6 +211,8 @@
     "Contactos añadidos a NO CONTACTAR: {0}.": "連絡禁止に追加された連絡先: {0}。",
     "Lista de exclusión actualizada": "除外リストが更新されました",
     "No se pudo actualizar la lista de exclusión:\n": "除外リストを更新できませんでした:",
-    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "連絡禁止リストの連絡先は、通常の編集から再有効化することはできません。"
+    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "連絡禁止リストの連絡先は、通常の編集から再有効化することはできません。",
+    "NO CONTACTAR omitidos: {0}": "連絡しないで省略された: {0}",
+    "Contactos en base: {0}    ·    Visibles: {1}    ·    Marcados: {2}    ·    NO CONTACTAR: {3}    ·    Dirección CCO oculta para otros destinatarios.": "データベース内の連絡先: {0}    ·    表示: {1}    ·    マーク済み: {2}    ·    連絡禁止: {3}    ·    他の受信者には非表示のBCCアドレス。"
   }
 }

@@ -211,6 +211,8 @@
     "Contactos añadidos a NO CONTACTAR: {0}.": "Cysylltiadau wedi'u hychwanegu at PEIDIO CYSWLLTU: {0}.",
     "Lista de exclusión actualizada": "Rhestr eithrio wedi'u diweddaru",
     "No se pudo actualizar la lista de exclusión:\n": "Ni ellir diweddaru'r rhestr eithrio:",
-    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "Ni ellir adfywio cyswllt o'r rhestr PEIDIO CYSWLLTU o'r golygu arferol."
+    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "Ni ellir adfywio cyswllt o'r rhestr PEIDIO CYSWLLTU o'r golygu arferol.",
+    "NO CONTACTAR omitidos: {0}": "DIM CYSWLLTU wedi'i hepgor: {0}",
+    "Contactos en base: {0}    ·    Visibles: {1}    ·    Marcados: {2}    ·    NO CONTACTAR: {3}    ·    Dirección CCO oculta para otros destinatarios.": "Cyswllt yn y gronfa: {0}    ·    Yn weladwy: {1}    ·    Wedi'i farcio: {2}    ·    PEIDIWCH Â CHYSWLLTU: {3}    ·    Cyfeiriad CCO wedi'i guddio rhag derbynnwyr eraill."
   }
 }

@@ -211,6 +211,8 @@
     "Contactos añadidos a NO CONTACTAR: {0}.": "已添加到不联系的联系人：{0}。",
     "Lista de exclusión actualizada": "已更新排除列表",
     "No se pudo actualizar la lista de exclusión:\n": "无法更新排除列表：",
-    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "不联系列表中的联系人无法通过普通编辑重新激活。"
+    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "不联系列表中的联系人无法通过普通编辑重新激活。",
+    "NO CONTACTAR omitidos: {0}": "未联系的忽略项：{0}",
+    "Contactos en base: {0}    ·    Visibles: {1}    ·    Marcados: {2}    ·    NO CONTACTAR: {3}    ·    Dirección CCO oculta para otros destinatarios.": "基础联系人: {0}    ·    可见: {1}    ·    已标记: {2}    ·    不联系: {3}    ·    隐藏的密送地址对其他收件人不可见。"
   }
 }

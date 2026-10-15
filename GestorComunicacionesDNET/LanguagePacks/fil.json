@@ -211,6 +211,8 @@
     "Contactos añadidos a NO CONTACTAR: {0}.": "Mga kontak na idinagdag sa HUWAG MAKIPAG-UGNAY: {0}.",
     "Lista de exclusión actualizada": "Na-update ang listahan ng pagbubukod",
     "No se pudo actualizar la lista de exclusión:\n": "Hindi ma-update ang listahan ng pagbubukod:",
-    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "Ang isang kontak sa listahan ng HUWAG MAKIPAG-UGNAY ay hindi maaaring ma-reactivate mula sa normal na edit."
+    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "Ang isang kontak sa listahan ng HUWAG MAKIPAG-UGNAY ay hindi maaaring ma-reactivate mula sa normal na edit.",
+    "NO CONTACTAR omitidos: {0}": "Huwag Makipag-ugnayan na nalaktawan: {0}",
+    "Contactos en base: {0}    ·    Visibles: {1}    ·    Marcados: {2}    ·    NO CONTACTAR: {3}    ·    Dirección CCO oculta para otros destinatarios.": "Mga contact sa base: {0}    ·    Nakikita: {1}    ·    Naka-check: {2}    ·    HUWAG MAKIPAG-UGNAY: {3}    ·    Nakakubling CCO address para sa ibang mga tatanggap."
   }
 }

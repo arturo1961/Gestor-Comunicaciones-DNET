@@ -211,6 +211,8 @@
     "Contactos añadidos a NO CONTACTAR: {0}.": "సంప్రదింపులు సంప్రదించవద్దని జాబితాకు జోడించబడ్డాయి: {0}.",
     "Lista de exclusión actualizada": "నిరాకరణ జాబితా అందుబాటులోకి తెచ్చబడింది",
     "No se pudo actualizar la lista de exclusión:\n": "నిరాకరణ జాబితాను నవీకరించలేకపోయాం:",
-    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "సంప్రదించవద్దని జాబితాలో ఉన్న ఒక సంప్రదింపును సాధారణ సవరింపు ద్వారా మళ్ళీ యాక్టివేట్ చేయలేరు."
+    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "సంప్రదించవద్దని జాబితాలో ఉన్న ఒక సంప్రదింపును సాధారణ సవరింపు ద్వారా మళ్ళీ యాక్టివేట్ చేయలేరు.",
+    "NO CONTACTAR omitidos: {0}": "సంపర్కించవద్దు వదిలివేయబడింది: {0}",
+    "Contactos en base: {0}    ·    Visibles: {1}    ·    Marcados: {2}    ·    NO CONTACTAR: {3}    ·    Dirección CCO oculta para otros destinatarios.": "ఆధారంలో సాంప్రదాయాలు: {0}    ·    దృశ్యమానంగా: {1}    ·    గుర్తించబడినవి: {2}    ·    సంప్రదించవద్దు: {3}    ·    ఇతర గ్రహీతల కోసం CCO చిరునామా దాచబడింది."
   }
 }

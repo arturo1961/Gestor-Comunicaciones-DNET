@@ -211,6 +211,8 @@
     "Contactos añadidos a NO CONTACTAR: {0}.": "Kontaktai pridėti prie NEKONTAKTUOTI: {0}.",
     "Lista de exclusión actualizada": "Nepageidaujamos sąrašo atnaujintas",
     "No se pudo actualizar la lista de exclusión:\n": "Nepavyko atnaujinti nepageidaujamos sąrašo:",
-    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "Kontaktas iš NEKONTAKTUOTI sąrašo negali būti aktyvuotas iš įprasto redagavimo."
+    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "Kontaktas iš NEKONTAKTUOTI sąrašo negali būti aktyvuotas iš įprasto redagavimo.",
+    "NO CONTACTAR omitidos: {0}": "NEKONTAKTUOTI praleista: {0}",
+    "Contactos en base: {0}    ·    Visibles: {1}    ·    Marcados: {2}    ·    NO CONTACTAR: {3}    ·    Dirección CCO oculta para otros destinatarios.": "Kontaktai bazėje: {0}    ·    Matomi: {1}    ·    Pažymėti: {2}    ·    NEKONTAKTUOTI: {3}    ·    BCC adresas paslėptas nuo kitų gavėjų."
   }
 }

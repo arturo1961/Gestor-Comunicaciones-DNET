@@ -211,6 +211,8 @@
     "Contactos añadidos a NO CONTACTAR: {0}.": "Kuntatti miżjuda ma' LI MA TIKKONTAĊTAX: {0}.",
     "Lista de exclusión actualizada": "Lista ta' eżlużjoni aġġornata",
     "No se pudo actualizar la lista de exclusión:\n": "Ma setgħetx tiġi aġġornata l-lista ta' eżlużjoni:",
-    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "Kuntatt minn lista LI MA TIKKONTAĊTAX ma jistax jerġa' jiġi attivat mill-edizzjoni normali."
+    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "Kuntatt minn lista LI MA TIKKONTAĊTAX ma jistax jerġa' jiġi attivat mill-edizzjoni normali.",
+    "NO CONTACTAR omitidos: {0}": "MHUX KONTAĊT OMITTUT: {0}",
+    "Contactos en base: {0}    ·    Visibles: {1}    ·    Marcados: {2}    ·    NO CONTACTAR: {3}    ·    Dirección CCO oculta para otros destinatarios.": "Kuntatti fil-bażi: {0}    ·    Viżibbli: {1}    ·    Immarkati: {2}    ·    TIDĦOLX KUNTATT: {3}    ·    Indirizz BCC moħbi għal riċevituri oħra."
   }
 }

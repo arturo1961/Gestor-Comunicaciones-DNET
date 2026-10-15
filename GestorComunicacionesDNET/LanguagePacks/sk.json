@@ -211,6 +211,8 @@
     "Contactos añadidos a NO CONTACTAR: {0}.": "Kontakty pridané do NEKONTAKTOVAŤ: {0}.",
     "Lista de exclusión actualizada": "Aktualizovaný zoznam vylúčenia",
     "No se pudo actualizar la lista de exclusión:\n": "Nepodarilo sa aktualizovať zoznam vylúčenia:",
-    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "Kontakt zo zoznamu NEKONTAKTOVAŤ sa nedá znovu aktivovať z bežnej úpravy."
+    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "Kontakt zo zoznamu NEKONTAKTOVAŤ sa nedá znovu aktivovať z bežnej úpravy.",
+    "NO CONTACTAR omitidos: {0}": "NEKONTAKTOVAŤ vynechané: {0}",
+    "Contactos en base: {0}    ·    Visibles: {1}    ·    Marcados: {2}    ·    NO CONTACTAR: {3}    ·    Dirección CCO oculta para otros destinatarios.": "Kontakty v databáze: {0}    ·    Viditeľné: {1}    ·    Označené: {2}    ·    NEKONTAKTOVAŤ: {3}    ·    Adresa skrytého príjemcu (BCC) pre ostatných príjemcov."
   }
 }

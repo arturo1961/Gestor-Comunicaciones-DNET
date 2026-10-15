@@ -211,6 +211,8 @@
     "Contactos añadidos a NO CONTACTAR: {0}.": "รายชื่อติดต่อที่ถูกเพิ่มไปยังไม่ติดต่อ: {0}.",
     "Lista de exclusión actualizada": "รายการยกเว้นได้รับการอัปเดต",
     "No se pudo actualizar la lista de exclusión:\n": "ไม่สามารถอัปเดตรายการยกเว้นได้:",
-    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "รายชื่อติดต่อในรายการไม่ติดต่อไม่สามารถเปิดใช้งานใหม่จากการแก้ไขปกติ"
+    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "รายชื่อติดต่อในรายการไม่ติดต่อไม่สามารถเปิดใช้งานใหม่จากการแก้ไขปกติ",
+    "NO CONTACTAR omitidos: {0}": "ไม่ติดต่อ ข้าม: {0}",
+    "Contactos en base: {0}    ·    Visibles: {1}    ·    Marcados: {2}    ·    NO CONTACTAR: {3}    ·    Dirección CCO oculta para otros destinatarios.": "รายชื่อติดต่อในฐานข้อมูล: {0}    ·    มองเห็นได้: {1}    ·    ทำเครื่องหมาย: {2}    ·    ไม่ติดต่อ: {3}    ·    ที่อยู่ BCC ซ่อนสำหรับผู้รับอื่น"
   }
 }

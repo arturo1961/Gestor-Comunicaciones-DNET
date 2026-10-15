@@ -211,6 +211,8 @@
     "Contactos añadidos a NO CONTACTAR: {0}.": "સંપર્કોને સંપર્ક ન કરવા માટે ઉમેરાયો: {0}.",
     "Lista de exclusión actualizada": "બહાર રાખવાની યાદી અપડેટ થઈ ગઈ",
     "No se pudo actualizar la lista de exclusión:\n": "બહાર રાખવાની યાદી અપડેટ કરી શકાશે નહીં:",
-    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "સંપર્ક ન કરવા માટેની યાદી中的 સંપર્કને સામાન્ય સંપાદનમાંથી પુનઃસક્રિય કરી શકાય નહીં."
+    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "સંપર્ક ન કરવા માટેની યાદી中的 સંપર્કને સામાન્ય સંપાદનમાંથી પુનઃસક્રિય કરી શકાય નહીં.",
+    "NO CONTACTAR omitidos: {0}": "સંપર્ક ન કરો ટાળી દીધા: {0}",
+    "Contactos en base: {0}    ·    Visibles: {1}    ·    Marcados: {2}    ·    NO CONTACTAR: {3}    ·    Dirección CCO oculta para otros destinatarios.": "સંપર્ક આધારમાં: {0}    ·    દૃશ્યમાન: {1}    ·    ચિહ્નિત: {2}    ·    સંપર્ક ન કરો: {3}    ·    બીજાં પ્રાપકો માટે છુપાયેલ બી.સી.સી. સરનામું."
   }
 }

@@ -211,6 +211,8 @@
     "Contactos añadidos a NO CONTACTAR: {0}.": "Yhteystiedot lisätty EI OTA YHTEYTTÄ -listalle: {0}.",
     "Lista de exclusión actualizada": "Poissuljettu lista päivitetty",
     "No se pudo actualizar la lista de exclusión:\n": "Poissuljettua listaa ei voitu päivittää:",
-    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "EI OTA YHTEYTTÄ -listan yhteystietoa ei voi aktivoida uudelleen normaalin muokkauksen kautta."
+    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "EI OTA YHTEYTTÄ -listan yhteystietoa ei voi aktivoida uudelleen normaalin muokkauksen kautta.",
+    "NO CONTACTAR omitidos: {0}": "EI OTA YHTEYTTÄ ohitetut: {0}",
+    "Contactos en base: {0}    ·    Visibles: {1}    ·    Marcados: {2}    ·    NO CONTACTAR: {3}    ·    Dirección CCO oculta para otros destinatarios.": "Yhteystiedot tietokannassa: {0}    ·    Näkyvissä: {1}    ·    Merkitty: {2}    ·    ÄLÄ OTA YHTEYTTÄ: {3}    ·    CCO-osoite piilotettu muilta vastaanottajilta."
   }
 }

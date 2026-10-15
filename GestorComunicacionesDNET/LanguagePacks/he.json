@@ -211,6 +211,8 @@
     "Contactos añadidos a NO CONTACTAR: {0}.": "אנשים שנוספו לרשימת לא ליצור קשר: {0}.",
     "Lista de exclusión actualizada": "רשימת ההחרגה עודכנה",
     "No se pudo actualizar la lista de exclusión:\n": "לא ניתן היה לעדכן את רשימת ההחרגה:",
-    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "איש קשר ברשימת לא ליצור קשר אינו יכול להיות מופעל מחדש מהעריכה הרגילה."
+    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "איש קשר ברשימת לא ליצור קשר אינו יכול להיות מופעל מחדש מהעריכה הרגילה.",
+    "NO CONTACTAR omitidos: {0}": "אל ליצור קשר הושמטו: {0}",
+    "Contactos en base: {0}    ·    Visibles: {1}    ·    Marcados: {2}    ·    NO CONTACTAR: {3}    ·    Dirección CCO oculta para otros destinatarios.": "אנשי קשר בבסיס: {0}    ·    נראים: {1}    ·    מסומנים: {2}    ·    לא ליצור קשר: {3}    ·    כתובת BCC מוסתרת לשאר הנמענים."
   }
 }

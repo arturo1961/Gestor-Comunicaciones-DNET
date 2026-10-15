@@ -211,6 +211,8 @@
     "Contactos añadidos a NO CONTACTAR: {0}.": "Wasiliano walioongezwa kwenye USIWASHI WASILIANO: {0}.",
     "Lista de exclusión actualizada": "Orodha ya kuachwa imeboreshwa",
     "No se pudo actualizar la lista de exclusión:\n": "Haiwezi kuboresha orodha ya kuachwa:",
-    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "Mtu mmoja kwenye orodha ya USIWASHI WASILIANO hawezi kuanzishwa upya kutoka kwenye uhariri wa kawaida."
+    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "Mtu mmoja kwenye orodha ya USIWASHI WASILIANO hawezi kuanzishwa upya kutoka kwenye uhariri wa kawaida.",
+    "NO CONTACTAR omitidos: {0}": "USIWAONEKANE waliosahaulika: {0}",
+    "Contactos en base: {0}    ·    Visibles: {1}    ·    Marcados: {2}    ·    NO CONTACTAR: {3}    ·    Dirección CCO oculta para otros destinatarios.": "Mawasiliano katika hifadhidata: {0}    ·    Yanaonekana: {1}    ·    Yamechaguliwa: {2}    ·    USIWASILIANE: {3}    ·    Anwani ya CCO iliyofichwa kwa wapokeaji wengine."
   }
 }

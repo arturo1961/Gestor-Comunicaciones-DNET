@@ -211,6 +211,8 @@
     "Contactos añadidos a NO CONTACTAR: {0}.": "Liên hệ đã được thêm vào KHÔNG LIÊN HỆ: {0}.",
     "Lista de exclusión actualizada": "Danh sách loại trừ đã được cập nhật",
     "No se pudo actualizar la lista de exclusión:\n": "Không thể cập nhật danh sách loại trừ:",
-    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "Một liên hệ trong danh sách KHÔNG LIÊN HỆ không thể được kích hoạt lại từ chỉnh sửa bình thường."
+    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "Một liên hệ trong danh sách KHÔNG LIÊN HỆ không thể được kích hoạt lại từ chỉnh sửa bình thường.",
+    "NO CONTACTAR omitidos: {0}": "KHÔNG LIÊN HỆ bị bỏ qua: {0}",
+    "Contactos en base: {0}    ·    Visibles: {1}    ·    Marcados: {2}    ·    NO CONTACTAR: {3}    ·    Dirección CCO oculta para otros destinatarios.": "Liên hệ trong cơ sở: {0}    ·    Hiển thị: {1}    ·    Đã đánh dấu: {2}    ·    KHÔNG LIÊN HỆ: {3}    ·    Địa chỉ BCC ẩn với những người nhận khác."
   }
 }

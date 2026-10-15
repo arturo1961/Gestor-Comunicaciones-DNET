@@ -211,6 +211,8 @@
     "Contactos añadidos a NO CONTACTAR: {0}.": "Teagmhálacha curtha leis NÁ DÉAN TEAGMHÁIL: {0}.",
     "Lista de exclusión actualizada": "Liosta eisiacha nuashonraithe",
     "No se pudo actualizar la lista de exclusión:\n": "Níor éirigh leis an liosta eisiacha a nuashonrú:",
-    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "Ní féidir teagmháil ón liosta NÁ DÉAN TEAGMHÁIL a athghníomhachtú ó eagarthóireacht ghnáth."
+    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "Ní féidir teagmháil ón liosta NÁ DÉAN TEAGMHÁIL a athghníomhachtú ó eagarthóireacht ghnáth.",
+    "NO CONTACTAR omitidos: {0}": "NÍL TEAGMHÁIL in easnamh: {0}",
+    "Contactos en base: {0}    ·    Visibles: {1}    ·    Marcados: {2}    ·    NO CONTACTAR: {3}    ·    Dirección CCO oculta para otros destinatarios.": "Teagmhálacha sa bhunachar: {0}    ·    Le feiceáil: {1}    ·    Marcáilte: {2}    ·    NÁ DÉAN TEAGMHÁIL: {3}    ·    Seoladh Rúnda CCO i bhfolach do dhaoine eile a fhaigheann é."
   }
 }

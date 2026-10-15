@@ -211,6 +211,8 @@
     "Contactos añadidos a NO CONTACTAR: {0}.": "Kontakty dodane do NIE KONTAKTOWAĆ: {0}.",
     "Lista de exclusión actualizada": "Lista wykluczeń zaktualizowana",
     "No se pudo actualizar la lista de exclusión:\n": "Nie udało się zaktualizować listy wykluczeń:",
-    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "Kontakt z listy NIE KONTAKTOWAĆ nie może zostać reaktywowany w normalnej edycji."
+    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "Kontakt z listy NIE KONTAKTOWAĆ nie może zostać reaktywowany w normalnej edycji.",
+    "NO CONTACTAR omitidos: {0}": "NIE KONTAKTOWAĆ pominięto: {0}",
+    "Contactos en base: {0}    ·    Visibles: {1}    ·    Marcados: {2}    ·    NO CONTACTAR: {3}    ·    Dirección CCO oculta para otros destinatarios.": "Kontakty w bazie: {0}    ·    Widoczne: {1}    ·    Oznaczone: {2}    ·    NIE KONTAKTOWAĆ: {3}    ·    Adres BCC ukryty dla innych odbiorców."
   }
 }

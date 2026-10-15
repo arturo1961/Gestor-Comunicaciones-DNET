@@ -211,6 +211,8 @@
     "Contactos añadidos a NO CONTACTAR: {0}.": "A NE KAPCSOLATBA LÉPNI listához hozzáadott kapcsolatok: {0}.",
     "Lista de exclusión actualizada": "Kizárási lista frissítve",
     "No se pudo actualizar la lista de exclusión:\n": "Nem sikerült frissíteni a kizárási listát:",
-    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "A NE KAPCSOLATBA LÉPNI listán szereplő kapcsolat nem aktiválható újra a normál szerkesztésből."
+    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "A NE KAPCSOLATBA LÉPNI listán szereplő kapcsolat nem aktiválható újra a normál szerkesztésből.",
+    "NO CONTACTAR omitidos: {0}": "NEM KAPCSOLAT elhagyva: {0}",
+    "Contactos en base: {0}    ·    Visibles: {1}    ·    Marcados: {2}    ·    NO CONTACTAR: {3}    ·    Dirección CCO oculta para otros destinatarios.": "Kapcsolatok az adatbázisban: {0}    ·    Látható: {1}    ·    Megjelölt: {2}    ·    NEM KAPCSOLAT: {3}    ·    A CCO címzett címe rejtve más címzettek elől."
   }
 }

@@ -211,6 +211,8 @@
     "Contactos añadidos a NO CONTACTAR: {0}.": "NO CONTACTAR میں شامل رابطے: {0}۔",
     "Lista de exclusión actualizada": "خارجی فہرست کو اپ ڈیٹ کیا گیا",
     "No se pudo actualizar la lista de exclusión:\n": "خارجی فہرست کو اپ ڈیٹ نہیں کیا جا سکا:",
-    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "NO CONTACTAR کی فہرست میں موجود ایک رابطہ عام ترمیم سے دوبارہ فعال نہیں کیا جا سکتا۔"
+    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "NO CONTACTAR کی فہرست میں موجود ایک رابطہ عام ترمیم سے دوبارہ فعال نہیں کیا جا سکتا۔",
+    "NO CONTACTAR omitidos: {0}": "رابطہ نہ کریں چھوڑ دیے گئے: {0}",
+    "Contactos en base: {0}    ·    Visibles: {1}    ·    Marcados: {2}    ·    NO CONTACTAR: {3}    ·    Dirección CCO oculta para otros destinatarios.": "بنیاد پر رابطے: {0}    ·    دکھائی دینے والے: {1}    ·    نشان زدہ: {2}    ·    رابطہ نہ کریں: {3}    ·    دیگر وصول کنندگان کے لیے مخفی BCC پتہ۔"
   }
 }

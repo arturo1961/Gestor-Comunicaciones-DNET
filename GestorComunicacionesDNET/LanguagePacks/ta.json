@@ -211,6 +211,8 @@
     "Contactos añadidos a NO CONTACTAR: {0}.": "தொடர்புகள் தொடர்பில் சேர்க்கப்பட்டுள்ளன: {0}.",
     "Lista de exclusión actualizada": "விலக்கப்பட்ட பட்டியல் புதுப்பிக்கப்பட்டது",
     "No se pudo actualizar la lista de exclusión:\n": "விலக்கப்பட்ட பட்டியலை புதுப்பிக்க முடியவில்லை:",
-    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "தொடர்பு கொள்ள வேண்டாம் பட்டியலில் உள்ள ஒரு தொடர்பு சாதாரண எடிட்டிங் மூலம் மீண்டும் செயல்படுத்த முடியாது."
+    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "தொடர்பு கொள்ள வேண்டாம் பட்டியலில் உள்ள ஒரு தொடர்பு சாதாரண எடிட்டிங் மூலம் மீண்டும் செயல்படுத்த முடியாது.",
+    "NO CONTACTAR omitidos: {0}": "தொடர்பு கொள்ளாதவர்கள் தவற விட்டனர்: {0}",
+    "Contactos en base: {0}    ·    Visibles: {1}    ·    Marcados: {2}    ·    NO CONTACTAR: {3}    ·    Dirección CCO oculta para otros destinatarios.": "தரவுத்தளத்தில் உள்ள தொடர்புகள்: {0}    ·    காட்சி: {1}    ·    குறிக்கப்பட்டது: {2}    ·    தொடர்பு கொள்ள வேண்டாம்: {3}    ·    பிற பெறுநர்களுக்கு மறைக்கப்பட்ட CCO முகவரி."
   }
 }

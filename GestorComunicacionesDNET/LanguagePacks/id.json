@@ -211,6 +211,8 @@
     "Contactos añadidos a NO CONTACTAR: {0}.": "Kontak yang ditambahkan ke JANGAN DIHUBUNGI: {0}.",
     "Lista de exclusión actualizada": "Daftar pengecualian diperbarui",
     "No se pudo actualizar la lista de exclusión:\n": "Tidak dapat memperbarui daftar pengecualian:",
-    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "Satu kontak dalam daftar JANGAN DIHUBUNGI tidak dapat diaktifkan kembali melalui pengeditan normal."
+    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "Satu kontak dalam daftar JANGAN DIHUBUNGI tidak dapat diaktifkan kembali melalui pengeditan normal.",
+    "NO CONTACTAR omitidos: {0}": "JANGAN MENGHUBUNGI diabaikan: {0}",
+    "Contactos en base: {0}    ·    Visibles: {1}    ·    Marcados: {2}    ·    NO CONTACTAR: {3}    ·    Dirección CCO oculta para otros destinatarios.": "Kontak dalam basis: {0}    ·    Terlihat: {1}    ·    Ditandai: {2}    ·    JANGAN HUBUNGI: {3}    ·    Alamat BCC tersembunyi untuk penerima lain."
   }
 }

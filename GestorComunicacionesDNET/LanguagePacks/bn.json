@@ -211,6 +211,8 @@
     "Contactos añadidos a NO CONTACTAR: {0}.": "NO CONTACTAR-এ যোগ করা হয়েছে এমন যোগাযোগ: {0}.",
     "Lista de exclusión actualizada": "অপসারণ তালিকা আপডেট হয়েছে",
     "No se pudo actualizar la lista de exclusión:\n": "অপসারণ তালিকা আপডেট করা যায়নি:",
-    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "NO CONTACTAR তালিকার একটি যোগাযোগ সাধারণ সম্পাদনার মাধ্যমে পুনরায় সক্রিয় করা যায় না।"
+    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "NO CONTACTAR তালিকার একটি যোগাযোগ সাধারণ সম্পাদনার মাধ্যমে পুনরায় সক্রিয় করা যায় না।",
+    "NO CONTACTAR omitidos: {0}": "অপূর্ণ সংযোগ এড়িয়ে চলুন: {0}",
+    "Contactos en base: {0}    ·    Visibles: {1}    ·    Marcados: {2}    ·    NO CONTACTAR: {3}    ·    Dirección CCO oculta para otros destinatarios.": "বেসে যোগাযোগ: {0}    ·    দৃশ্যমান: {1}    ·    চিহ্নিত: {2}    ·    যোগাযোগ করবেন না: {3}    ·    অন্যান্য প্রাপকদের জন্য গোপন CCO ঠিকানা।"
   }
 }

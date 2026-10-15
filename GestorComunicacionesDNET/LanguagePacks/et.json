@@ -211,6 +211,8 @@
     "Contactos añadidos a NO CONTACTAR: {0}.": "Kontaktid lisatud ÄRA VÕTA ÜHENDUST nimekirja: {0}.",
     "Lista de exclusión actualizada": "Väljaarvatud loend on uuendatud",
     "No se pudo actualizar la lista de exclusión:\n": "Väljaarvamisloendit ei õnnestunud uuendada:",
-    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "ÄRA VÕTA ÜHENDUST nimekirjas olevat kontakti ei saa tavapärasest redigeerimisest uuesti aktiveerida."
+    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "ÄRA VÕTA ÜHENDUST nimekirjas olevat kontakti ei saa tavapärasest redigeerimisest uuesti aktiveerida.",
+    "NO CONTACTAR omitidos: {0}": "EI VÕTTA KONTAKTI jäetud: {0}",
+    "Contactos en base: {0}    ·    Visibles: {1}    ·    Marcados: {2}    ·    NO CONTACTAR: {3}    ·    Dirección CCO oculta para otros destinatarios.": "Andmebaasi kontaktid: {0}    ·    Nähtavad: {1}    ·    Märgistatud: {2}    ·    MITTE KONTAKTIDA: {3}    ·    BCC-aadress peidetud teistele saajatele."
   }
 }

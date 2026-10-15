@@ -211,6 +211,8 @@
     "Contactos añadidos a NO CONTACTAR: {0}.": "Contactes afegits a NO CONTACTAR: {0}.",
     "Lista de exclusión actualizada": "Llista d'exclusió actualitzada",
     "No se pudo actualizar la lista de exclusión:\n": "No s'ha pogut actualitzar la llista d'exclusió:",
-    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "Un contacte de la llista NO CONTACTAR no es pot reactivar des de l'edició normal."
+    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "Un contacte de la llista NO CONTACTAR no es pot reactivar des de l'edició normal.",
+    "NO CONTACTAR omitidos: {0}": "NO CONTACTAR ignorats: {0}",
+    "Contactos en base: {0}    ·    Visibles: {1}    ·    Marcados: {2}    ·    NO CONTACTAR: {3}    ·    Dirección CCO oculta para otros destinatarios.": "Contactes a la base: {0}    ·    Visibles: {1}    ·    Marcats: {2}    ·    NO CONTACTAR: {3}    ·    Adreça CCO oculta per a altres destinataris."
   }
 }

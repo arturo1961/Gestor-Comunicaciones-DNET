@@ -89,8 +89,8 @@ internal sealed class MainForm : Form
 	{
 		Text = "Gestor de Comunicaciones DNET — Uso personal";
 		base.StartPosition = FormStartPosition.CenterScreen;
-		MinimumSize = new Size(1080, 780);
-		base.Size = new Size(1450, 900);
+		MinimumSize = new Size(1120, 900);
+		base.Size = new Size(1520, 940);
 		base.AutoScaleMode = AutoScaleMode.Dpi;
 		Font = new Font("Segoe UI", 10f);
 		BackColor = Color.FromArgb(245, 247, 251);
@@ -107,13 +107,12 @@ internal sealed class MainForm : Form
 		{
 			Dock = DockStyle.Fill,
 			ColumnCount = 1,
-			RowCount = 4,
+			RowCount = 3,
 			Padding = new Padding(13)
 		};
 		tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 44f));
-		tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 218f));
+		tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 260f));
 		tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 100f));
-		tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 42f));
 		MenuStrip menuStrip = new MenuStrip
 		{
 			Dock = DockStyle.Top
@@ -153,7 +152,7 @@ internal sealed class MainForm : Form
 			ColumnCount = 1
 		};
 		tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Absolute, 96f));
-		tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 100f));
+		tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Absolute, 164f));
 		tableLayoutPanel.Controls.Add(tableLayoutPanel2, 0, 1);
 		FlowLayoutPanel flowLayoutPanel = new FlowLayoutPanel
 		{
@@ -303,13 +302,21 @@ internal sealed class MainForm : Form
 		_status.Dock = DockStyle.Fill;
 		_status.TextAlign = ContentAlignment.MiddleLeft;
 		_status.ForeColor = Color.FromArgb(70, 82, 105);
-		tableLayoutPanel.Controls.Add(_status, 0, 3);
+		Panel statusPanel = new Panel
+		{
+			Dock = DockStyle.Bottom,
+			Height = 42,
+			Padding = new Padding(13, 0, 13, 0),
+			BackColor = BackColor
+		};
+		statusPanel.Controls.Add(_status);
+		base.Controls.Add(statusPanel);
 		PopulateFilters();
 		RefreshList();
 		base.Shown += delegate
 		{
-			split.Panel1MinSize = 190;
-			split.Panel2MinSize = 230;
+			split.Panel1MinSize = 175;
+			split.Panel2MinSize = 190;
 			int max = Math.Max(split.Panel1MinSize, split.Height - split.SplitterWidth - split.Panel2MinSize);
 			split.SplitterDistance = Math.Clamp((int)((double)split.Height * 0.58), split.Panel1MinSize, max);
 		};
@@ -574,7 +581,8 @@ internal sealed class MainForm : Form
 	private void UpdateStatus()
 	{
 		List<ContactRow> list = SelectedRows();
-		_status.Text = UiText.Format("Contactos en base: {0}    ·    Visibles: {1}    ·    Marcados: {2}    ·    Dirección CCO oculta para otros destinatarios.", _store.Contacts.Count, _visibleRows.Count, list.Count);
+		int noContact = _store.Contacts.Count(contact => _store.IsSuppressed(contact));
+		_status.Text = UiText.Format("Contactos en base: {0}    ·    Visibles: {1}    ·    Marcados: {2}    ·    NO CONTACTAR: {3}    ·    Dirección CCO oculta para otros destinatarios.", _store.Contacts.Count, _visibleRows.Count, list.Count, noContact);
 	}
 
 	private void ApplyClassification(object? sender, EventArgs e)
@@ -616,6 +624,7 @@ internal sealed class MainForm : Form
 				sample += "\n" + UiText.Format("… y {0} más", plan.Contacts.Count - 8);
 			}
 			string preview = UiText.Format("Archivo: {0}\nFormato: {1}\n\nRegistros detectados: {2}\nListos para importar: {3}\nRepetidos omitidos: {4}\nSin nombre omitidos: {5}", Path.GetFileName(openFileDialog.FileName), plan.Format, plan.SourceRows, plan.Contacts.Count, plan.SkippedDuplicate, plan.SkippedMissingName);
+			preview += "\n" + UiText.Format("NO CONTACTAR omitidos: {0}", plan.SkippedNoContact);
 			if (sample.Length > 0)
 			{
 				preview += "\n\n" + UiText.Get("Vista previa:\n") + sample;

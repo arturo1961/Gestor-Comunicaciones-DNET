@@ -211,6 +211,8 @@
     "Contactos añadidos a NO CONTACTAR: {0}.": "Stiki dodani na seznam NE KONTAKTIRAJ: {0}.",
     "Lista de exclusión actualizada": "Seznam izključitev je bil posodobljen",
     "No se pudo actualizar la lista de exclusión:\n": "Seznama izključitev ni bilo mogoče posodobiti:",
-    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "Stika s seznama NE KONTAKTIRAJ ni mogoče ponovno aktivirati prek običajnega urejanja."
+    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "Stika s seznama NE KONTAKTIRAJ ni mogoče ponovno aktivirati prek običajnega urejanja.",
+    "NO CONTACTAR omitidos: {0}": "NE KONTAKTIRATI spregledani: {0}",
+    "Contactos en base: {0}    ·    Visibles: {1}    ·    Marcados: {2}    ·    NO CONTACTAR: {3}    ·    Dirección CCO oculta para otros destinatarios.": "Stiki v bazi: {0}    ·    Vidni: {1}    ·    Oznanjeni: {2}    ·    NE KONTAKTIRAJTE: {3}    ·    Skriti naslov CCO za druge prejemnike."
   }
 }

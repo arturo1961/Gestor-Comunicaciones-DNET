@@ -211,6 +211,8 @@
     "Contactos añadidos a NO CONTACTAR: {0}.": "संपर्क न करण्यासाठी जोडलेले Kontakte: {0}.",
     "Lista de exclusión actualizada": "वगळण्याची यादी अद्यतनित केली",
     "No se pudo actualizar la lista de exclusión:\n": "वगळण्याची यादी अद्यतनित केली जाऊ शकली नाही:",
-    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "संपर्क न करण्याच्या यादीतील एखादा संपर्क सामान्य संपादनातून पुनःसक्रिय केला जाऊ शकत नाही."
+    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "संपर्क न करण्याच्या यादीतील एखादा संपर्क सामान्य संपादनातून पुनःसक्रिय केला जाऊ शकत नाही.",
+    "NO CONTACTAR omitidos: {0}": "संपर्क करू नका वगळले: {0}",
+    "Contactos en base: {0}    ·    Visibles: {1}    ·    Marcados: {2}    ·    NO CONTACTAR: {3}    ·    Dirección CCO oculta para otros destinatarios.": "संपर्क क्रमांक: {0}    ·    दिसणारे: {1}    ·    चिन्हांकित: {2}    ·    संपर्क करू नका: {3}    ·    इतर प्राप्तकर्त्यांसाठी लपलेला BCC पत्ता."
   }
 }

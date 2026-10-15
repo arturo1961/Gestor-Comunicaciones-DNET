@@ -211,6 +211,8 @@
     "Contactos añadidos a NO CONTACTAR: {0}.": "تماس‌های اضافه‌شده به عدم تماس: {0}.",
     "Lista de exclusión actualizada": "لیست استثناء به‌روزرسانی شد",
     "No se pudo actualizar la lista de exclusión:\n": "به‌روزرسانی لیست استثناء امکان‌پذیر نبود:",
-    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "یک تماس در لیست عدم تماس نمی‌تواند از ویرایش عادی فعال شود."
+    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "یک تماس در لیست عدم تماس نمی‌تواند از ویرایش عادی فعال شود.",
+    "NO CONTACTAR omitidos: {0}": "تماس گرفته نشده نادیده گرفته شد: {0}",
+    "Contactos en base: {0}    ·    Visibles: {1}    ·    Marcados: {2}    ·    NO CONTACTAR: {3}    ·    Dirección CCO oculta para otros destinatarios.": "مخاطبین در پایگاه: {0}    ·    قابل مشاهده: {1}    ·    علامت‌گذاری شده: {2}    ·    عدم تماس: {3}    ·    آدرس BCC برای سایر گیرندگان مخفی است."
   }
 }

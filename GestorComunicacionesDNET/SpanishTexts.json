@@ -102,6 +102,7 @@
   "Nombre repetido": "Nombre repetido",
   "Correo posiblemente incorrecto": "Correo posiblemente incorrecto",
   "Contactos en base: {0}    ·    Visibles: {1}    ·    Marcados: {2}    ·    Dirección CCO oculta para otros destinatarios.": "Contactos en base: {0}    ·    Visibles: {1}    ·    Marcados: {2}    ·    Dirección CCO oculta para otros destinatarios.",
+  "Contactos en base: {0}    ·    Visibles: {1}    ·    Marcados: {2}    ·    NO CONTACTAR: {3}    ·    Dirección CCO oculta para otros destinatarios.": "Contactos en base: {0}    ·    Visibles: {1}    ·    Marcados: {2}    ·    NO CONTACTAR: {3}    ·    Dirección CCO oculta para otros destinatarios.",
   "Guardado": "Guardado",
   "Importación": "Importación",
   "Exportación": "Exportación",
@@ -206,5 +207,6 @@
   "Contactos añadidos a NO CONTACTAR: {0}.": "Contactos añadidos a NO CONTACTAR: {0}.",
   "Lista de exclusión actualizada": "Lista de exclusión actualizada",
   "No se pudo actualizar la lista de exclusión:\n": "No se pudo actualizar la lista de exclusión:\n",
-  "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal."
+  "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.",
+  "NO CONTACTAR omitidos: {0}": "NO CONTACTAR omitidos: {0}"
 }

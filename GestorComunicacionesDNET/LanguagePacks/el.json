@@ -211,6 +211,8 @@
     "Contactos añadidos a NO CONTACTAR: {0}.": "Επαφές που προστέθηκαν στο ΜΗΝ ΕΠΙΚΟΙΝΩΝΗΣΕΤΕ: {0}.",
     "Lista de exclusión actualizada": "Η λίστα αποκλεισμού ενημερώθηκε",
     "No se pudo actualizar la lista de exclusión:\n": "Δεν ήταν δυνατή η ενημέρωση της λίστας αποκλεισμού:",
-    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "Μια επαφή από τη λίστα ΜΗΝ ΕΠΙΚΟΙΝΩΝΗΣΕΤΕ δεν μπορεί να επανενεργοποιηθεί από την κανονική επεξεργασία."
+    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "Μια επαφή από τη λίστα ΜΗΝ ΕΠΙΚΟΙΝΩΝΗΣΕΤΕ δεν μπορεί να επανενεργοποιηθεί από την κανονική επεξεργασία.",
+    "NO CONTACTAR omitidos: {0}": "ΜΗΝ ΕΠΙΚΟΙΝΩΝΕΙΤΕ παραλειφθέντα: {0}",
+    "Contactos en base: {0}    ·    Visibles: {1}    ·    Marcados: {2}    ·    NO CONTACTAR: {3}    ·    Dirección CCO oculta para otros destinatarios.": "Επαφές στη βάση: {0}    ·    Ορατές: {1}    ·    Επισημασμένες: {2}    ·    ΜΗΝ ΕΠΙΚΟΙΝΩΝΗΣΕΤΕ: {3}    ·    Διεύθυνση BCC κρυφή για άλλους παραλήπτες."
   }
 }

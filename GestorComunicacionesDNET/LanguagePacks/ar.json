@@ -211,6 +211,8 @@
     "Contactos añadidos a NO CONTACTAR: {0}.": "تمت إضافة جهات الاتصال إلى عدم الاتصال: {0}.",
     "Lista de exclusión actualizada": "تم تحديث قائمة الاستبعاد",
     "No se pudo actualizar la lista de exclusión:\n": "تعذر تحديث قائمة الاستبعاد:",
-    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "لا يمكن إعادة تنشيط جهة اتصال من قائمة عدم الاتصال من خلال التحرير العادي."
+    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "لا يمكن إعادة تنشيط جهة اتصال من قائمة عدم الاتصال من خلال التحرير العادي.",
+    "NO CONTACTAR omitidos: {0}": "لم يتم الاتصال متجاهلين: {0}",
+    "Contactos en base: {0}    ·    Visibles: {1}    ·    Marcados: {2}    ·    NO CONTACTAR: {3}    ·    Dirección CCO oculta para otros destinatarios.": "جهات الاتصال في القاعدة: {0}    ·    المرئية: {1}    ·    المحددة: {2}    ·    لا تتواصل: {3}    ·    عنوان CCO مخفي لبقية المستلمين."
   }
 }

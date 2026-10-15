@@ -211,6 +211,8 @@
     "Contactos añadidos a NO CONTACTAR: {0}.": "Kontakti pievienoti NEKONTAKTĒT: {0}.",
     "Lista de exclusión actualizada": "Eksklūzijas saraksts atjaunināts",
     "No se pudo actualizar la lista de exclusión:\n": "Neizdevās atjaunināt eksklūzijas sarakstu:",
-    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "Kontakts NEKONTAKTĒT sarakstā nevar tikt aktivizēts no parastās rediģēšanas."
+    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "Kontakts NEKONTAKTĒT sarakstā nevar tikt aktivizēts no parastās rediģēšanas.",
+    "NO CONTACTAR omitidos: {0}": "NEKONTAKTĒT NEIZPILDĪTS: {0}",
+    "Contactos en base: {0}    ·    Visibles: {1}    ·    Marcados: {2}    ·    NO CONTACTAR: {3}    ·    Dirección CCO oculta para otros destinatarios.": "Kontakti datubāzē: {0}    ·    Redzami: {1}    ·    Atzīmēti: {2}    ·    NEKONTAKTĒT: {3}    ·    BCC adrese ir paslēpta citiem saņēmējiem."
   }
 }

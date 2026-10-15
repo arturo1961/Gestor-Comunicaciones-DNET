@@ -211,6 +211,8 @@
     "Contactos añadidos a NO CONTACTAR: {0}.": "Contacts added to DO NOT CONTACT: {0}.",
     "Lista de exclusión actualizada": "Exclusion list updated",
     "No se pudo actualizar la lista de exclusión:\n": "Could not update the exclusion list:",
-    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "A contact on the DO NOT CONTACT list cannot be reactivated from normal editing."
+    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "A contact on the DO NOT CONTACT list cannot be reactivated from normal editing.",
+    "NO CONTACTAR omitidos: {0}": "DO NOT CONTACT omitted: {0}",
+    "Contactos en base: {0}    ·    Visibles: {1}    ·    Marcados: {2}    ·    NO CONTACTAR: {3}    ·    Dirección CCO oculta para otros destinatarios.": "Contacts in database: {0}    ·    Visible: {1}    ·    Marked: {2}    ·    DO NOT CONTACT: {3}    ·    BCC address hidden from other recipients."
   }
 }

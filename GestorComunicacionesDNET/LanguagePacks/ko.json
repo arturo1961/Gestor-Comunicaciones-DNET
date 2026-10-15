@@ -211,6 +211,8 @@
     "Contactos añadidos a NO CONTACTAR: {0}.": "연락하지 않음으로 추가된 연락처: {0}.",
     "Lista de exclusión actualizada": "제외 목록 업데이트됨",
     "No se pudo actualizar la lista de exclusión:\n": "제외 목록을 업데이트할 수 없음:",
-    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "연락하지 않음 목록에 있는 연락처는 일반 편집에서 재활성화할 수 없습니다."
+    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "연락하지 않음 목록에 있는 연락처는 일반 편집에서 재활성화할 수 없습니다.",
+    "NO CONTACTAR omitidos: {0}": "연락 금지 누락: {0}",
+    "Contactos en base: {0}    ·    Visibles: {1}    ·    Marcados: {2}    ·    NO CONTACTAR: {3}    ·    Dirección CCO oculta para otros destinatarios.": "기본 연락처: {0}    ·    표시됨: {1}    ·    선택됨: {2}    ·    연락 금지: {3}    ·    다른 수신자에게 숨겨진 BCC 주소."
   }
 }

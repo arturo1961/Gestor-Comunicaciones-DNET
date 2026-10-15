@@ -211,6 +211,8 @@
     "Contactos añadidos a NO CONTACTAR: {0}.": "  \nКонтакти додати у НЕ КОНТАКТИРАЈ: {0}.  ",
     "Lista de exclusión actualizada": "  \nАжурирана листа искључења  ",
     "No se pudo actualizar la lista de exclusión:\n": "  \nЛиста искључења није могла бити ажурирана:  ",
-    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "  \nКонтакт са листе НЕ КОНТАКТИРАЈ не може бити реактивиран из нормалног уређивања."
+    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "  \nКонтакт са листе НЕ КОНТАКТИРАЈ не може бити реактивиран из нормалног уређивања.",
+    "NO CONTACTAR omitidos: {0}": "НЕ КОНТАКТИРАТИ изостављено: {0}",
+    "Contactos en base: {0}    ·    Visibles: {1}    ·    Marcados: {2}    ·    NO CONTACTAR: {3}    ·    Dirección CCO oculta para otros destinatarios.": "Контакти у бази: {0}    ·    Видљиви: {1}    ·    Ознаке: {2}    ·    НЕ КОНТАКТИРАТИ: {3}    ·    Број скривене адресе за друге примаоце."
   }
 }

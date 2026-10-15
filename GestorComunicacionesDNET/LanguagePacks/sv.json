@@ -211,6 +211,8 @@
     "Contactos añadidos a NO CONTACTAR: {0}.": "Kontakter tillagda till INTE KONTAKTA: {0}.",
     "Lista de exclusión actualizada": "Uppdaterad uteslutningslista",
     "No se pudo actualizar la lista de exclusión:\n": "Det gick inte att uppdatera uteslutningslistan:",
-    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "En kontakt på INTE KONTAKTA-listan kan inte återaktiveras från normal redigering."
+    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "En kontakt på INTE KONTAKTA-listan kan inte återaktiveras från normal redigering.",
+    "NO CONTACTAR omitidos: {0}": "KONTAKTA INTE utelämnade: {0}",
+    "Contactos en base: {0}    ·    Visibles: {1}    ·    Marcados: {2}    ·    NO CONTACTAR: {3}    ·    Dirección CCO oculta para otros destinatarios.": "Kontakter i databasen: {0}    ·    Synliga: {1}    ·    Markerade: {2}    ·    INTE KONTAKTA: {3}    ·    BCC-adress dold för andra mottagare."
   }
 }

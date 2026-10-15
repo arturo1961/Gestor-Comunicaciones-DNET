@@ -211,6 +211,8 @@
     "Contactos añadidos a NO CONTACTAR: {0}.": "EZ KONTAKTATZEA-ra gehitutako kontaktuak: {0}.",
     "Lista de exclusión actualizada": "Bazterketa zerrenda eguneratua",
     "No se pudo actualizar la lista de exclusión:\n": "Ezin izan da bazterketa zerrenda eguneratu:",
-    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "EZ KONTAKTATZEA zerrendako kontaktu bat ezin da berriro aktibatu ohiko edizioetik."
+    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "EZ KONTAKTATZEA zerrendako kontaktu bat ezin da berriro aktibatu ohiko edizioetik.",
+    "NO CONTACTAR omitidos: {0}": "EZ HARREMANETARAKO baztertuak: {0}",
+    "Contactos en base: {0}    ·    Visibles: {1}    ·    Marcados: {2}    ·    NO CONTACTAR: {3}    ·    Dirección CCO oculta para otros destinatarios.": "Ohar kontaktuak: {0}    ·    Ikusgarriak: {1}    ·    Markatuak: {2}    ·    EZ HARREMANDEGIN: {3}    ·    KOPIA KUTSARIK GABEKO helbidea beste hartzaileentzat ezkutatuta."
   }
 }

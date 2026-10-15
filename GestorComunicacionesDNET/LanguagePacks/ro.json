@@ -211,6 +211,8 @@
     "Contactos añadidos a NO CONTACTAR: {0}.": "Contacte adăugate la NU CONTACTAȚI: {0}.",
     "Lista de exclusión actualizada": "Lista de excludere actualizată",
     "No se pudo actualizar la lista de exclusión:\n": "Nu s-a putut actualiza lista de excludere:",
-    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "Un contact din lista NU CONTACTAȚI nu poate fi reactivat din editarea normală."
+    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "Un contact din lista NU CONTACTAȚI nu poate fi reactivat din editarea normală.",
+    "NO CONTACTAR omitidos: {0}": "NU CONTACTAți omise: {0}",
+    "Contactos en base: {0}    ·    Visibles: {1}    ·    Marcados: {2}    ·    NO CONTACTAR: {3}    ·    Dirección CCO oculta para otros destinatarios.": "Contacte în bază: {0}    ·    Vizibile: {1}    ·    Marcate: {2}    ·    NU CONTACTAȚI: {3}    ·    Adresă CCI ascunsă pentru ceilalți destinatari."
   }
 }

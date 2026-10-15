@@ -211,6 +211,8 @@
     "Contactos añadidos a NO CONTACTAR: {0}.": "Контакты добавлены в НЕ СВЯЗЫВАТЬСЯ: {0}.",
     "Lista de exclusión actualizada": "Список исключений обновлен",
     "No se pudo actualizar la lista de exclusión:\n": "Не удалось обновить список исключений:",
-    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "Контакт из списка НЕ СВЯЗЫВАТЬСЯ не может быть восстановлен через обычное редактирование."
+    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "Контакт из списка НЕ СВЯЗЫВАТЬСЯ не может быть восстановлен через обычное редактирование.",
+    "NO CONTACTAR omitidos: {0}": "НЕ СВЯЗЫВАТЬСЯ пропущены: {0}",
+    "Contactos en base: {0}    ·    Visibles: {1}    ·    Marcados: {2}    ·    NO CONTACTAR: {3}    ·    Dirección CCO oculta para otros destinatarios.": "Контакты в базе: {0}    ·    Видимые: {1}    ·    Отмеченные: {2}    ·    НЕ СВЯЗЫВАТЬСЯ: {3}    ·    Адрес BCC скрыт для других получателей."
   }
 }

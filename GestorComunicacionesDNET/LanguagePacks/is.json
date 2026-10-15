@@ -211,6 +211,8 @@
     "Contactos añadidos a NO CONTACTAR: {0}.": "Tengiliðir bættir við EKki HAF SAMBAND: {0}.",
     "Lista de exclusión actualizada": "Útilokunarskrá uppfærð",
     "No se pudo actualizar la lista de exclusión:\n": "Ekki tókst að uppfæra útilokunarskrána:",
-    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "Tengiliður af lista EKki HAF SAMBAND getur ekki verið endurvirkjaður frá venjulegri breyttingu."
+    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "Tengiliður af lista EKki HAF SAMBAND getur ekki verið endurvirkjaður frá venjulegri breyttingu.",
+    "NO CONTACTAR omitidos: {0}": "EKKI HAFA SAMBAND sleppt: {0}",
+    "Contactos en base: {0}    ·    Visibles: {1}    ·    Marcados: {2}    ·    NO CONTACTAR: {3}    ·    Dirección CCO oculta para otros destinatarios.": "Sambönd í gagnagrunni: {0}    ·    Sýnilegt: {1}    ·    Merkjað: {2}    ·    EKKI HAFÐ SAMBÖND VIÐ: {3}    ·    Ósýnileg CCO-tala fyrir aðra viðtakendur."
   }
 }

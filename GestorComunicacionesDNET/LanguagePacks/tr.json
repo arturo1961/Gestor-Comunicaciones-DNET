@@ -211,6 +211,8 @@
     "Contactos añadidos a NO CONTACTAR: {0}.": "İLETİŞİME GEÇMEYİN listesine eklenen kişiler: {0}.",
     "Lista de exclusión actualizada": "Hariç tutma listesi güncellendi",
     "No se pudo actualizar la lista de exclusión:\n": "Hariç tutma listesi güncellenemedi:",
-    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "İLETİŞİME GEÇMEYİN listesinde yer alan bir kişi normal düzenleme ile yeniden aktifleştirilemez."
+    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "İLETİŞİME GEÇMEYİN listesinde yer alan bir kişi normal düzenleme ile yeniden aktifleştirilemez.",
+    "NO CONTACTAR omitidos: {0}": "İLETİŞİME GEÇMEYİN atlandı: {0}",
+    "Contactos en base: {0}    ·    Visibles: {1}    ·    Marcados: {2}    ·    NO CONTACTAR: {3}    ·    Dirección CCO oculta para otros destinatarios.": "Veritabanındaki kişiler: {0}    ·    Görülebilir: {1}    ·    İşaretli: {2}    ·    İLETİŞİME GEÇME: {3}    ·    Diğer alıcılar için gizli BCC adresi."
   }
 }

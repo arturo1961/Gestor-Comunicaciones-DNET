@@ -8,6 +8,7 @@ internal sealed record ContactImportPlan(
 	int SourceRows,
 	int SkippedMissingName,
 	int SkippedDuplicate,
+	int SkippedNoContact,
 	string Format);
 
 internal sealed record ContactImportResult(int Added, int Skipped, string SafetyBackupPath);

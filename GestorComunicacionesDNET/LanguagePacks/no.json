@@ -211,6 +211,8 @@
     "Contactos añadidos a NO CONTACTAR: {0}.": "Kontakter lagt til IKKE KONTAKT: {0}.",
     "Lista de exclusión actualizada": "Eksklusjonsliste oppdatert",
     "No se pudo actualizar la lista de exclusión:\n": "Kunne ikke oppdatere eksklusjonslisten:",
-    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "En kontakt på IKKE KONTAKT-listen kan ikke gjenaktiveres fra vanlig redigering."
+    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "En kontakt på IKKE KONTAKT-listen kan ikke gjenaktiveres fra vanlig redigering.",
+    "NO CONTACTAR omitidos: {0}": "IKKE KONTAKT utelatt: {0}",
+    "Contactos en base: {0}    ·    Visibles: {1}    ·    Marcados: {2}    ·    NO CONTACTAR: {3}    ·    Dirección CCO oculta para otros destinatarios.": "Kontakter i databasen: {0}    ·    Synlige: {1}    ·    Markerte: {2}    ·    IKKE KONTAKTER: {3}    ·    BCC-adresse skjult for andre mottakere."
   }
 }

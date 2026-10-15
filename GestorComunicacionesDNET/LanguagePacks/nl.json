@@ -211,6 +211,8 @@
     "Contactos añadidos a NO CONTACTAR: {0}.": "Contacten toegevoegd aan NIET CONTACTEREN: {0}.",
     "Lista de exclusión actualizada": "Uitsluitingslijst bijgewerkt",
     "No se pudo actualizar la lista de exclusión:\n": "De uitsluitingslijst kon niet worden bijgewerkt:",
-    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "Een contact op de NIET CONTACTEREN-lijst kan niet worden geheractiveerd via de normale bewerking."
+    "Un contacto de la lista NO CONTACTAR no puede reactivarse desde la edición normal.": "Een contact op de NIET CONTACTEREN-lijst kan niet worden geheractiveerd via de normale bewerking.",
+    "NO CONTACTAR omitidos: {0}": "NIET CONTACTEREN overgeslagen: {0}",
+    "Contactos en base: {0}    ·    Visibles: {1}    ·    Marcados: {2}    ·    NO CONTACTAR: {3}    ·    Dirección CCO oculta para otros destinatarios.": "Contacten in database: {0}    ·    Zichtbaar: {1}    ·    Gemarkeerd: {2}    ·    NIET CONTACTEREN: {3}    ·    BCC-adres verborgen voor andere ontvangers."
   }
 }
