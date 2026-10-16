@@ -2,6 +2,7 @@
 
 ## 1.10.1
 
+- Corregida la conservación de los saltos de línea del cuerpo al abrir el borrador en Outlook o mediante `mailto`.
 - El usuario puede elegir la espera entre envíos confirmados, de 1 a 3.600 segundos.
 - El tiempo elegido se conserva al pausar, cerrar, reanudar o restaurar una copia de seguridad.
 - La ayuda muestra el tiempo configurado y la opción funciona en los 62 idiomas.
