@@ -7,6 +7,7 @@ Esta función prepara un solo mensaje cada vez. El gestor nunca pulsa **Enviar**
 1. Filtra y marca los contactos en la pantalla principal.
 2. Pulsa **Campaña individual...**.
 3. Escribe el asunto, el cuerpo y la versión que deseas registrar.
+   Puedes elegir cualquier campo del selector y pulsar **＋** para insertarlo donde esté el cursor, tanto en el asunto como en el cuerpo. Los códigos entre corchetes también pueden seguir escribiéndose manualmente.
 4. Añade uno o varios archivos si son necesarios.
 5. Pulsa **Crear cola con los marcados**.
 
@@ -30,6 +31,7 @@ Sin adjuntos, Windows abre la aplicación y cuenta de correo predeterminadas med
 
 - **Pausar y cerrar** conserva la cola en `%LOCALAPPDATA%\Gestor_Comunicaciones_DNET\campana_actual.json`.
 - El tiempo de espera elegido también se conserva en la campaña y en las copias de seguridad.
+- Puedes utilizar todos los campos presentes en la tabla, por ejemplo `{persona_contacto}`, `{web_contacto}`, `{tipo}`, `{notas}` o `{material}`.
 - Se cuentan todos los destinatarios confirmados ese día, también los reenvíos y los confirmados mediante el sistema CCO existente.
 - Al llegar a 45, no se prepara otro destinatario hasta el día siguiente.
 - Las copias ZIP incluyen la campaña guardada además de los contactos y el historial.

@@ -5,6 +5,8 @@
 - El usuario puede elegir la espera entre envíos confirmados, de 1 a 3.600 segundos.
 - El tiempo elegido se conserva al pausar, cerrar, reanudar o restaurar una copia de seguridad.
 - La ayuda muestra el tiempo configurado y la opción funciona en los 62 idiomas.
+- Selector para insertar cualquier campo disponible como `{campo}` en el asunto o el cuerpo, manteniendo también la escritura manual de los corchetes.
+- Ventana de campaña ampliada y adaptada al espacio disponible para evitar que los controles queden cortados por la derecha.
 
 ## 1.10.0
 

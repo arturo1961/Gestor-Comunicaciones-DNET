@@ -21,6 +21,7 @@ El icono propio del Gestor identifica el ejecutable, las ventanas, los accesos d
 - Selección de destinatarios y copia de direcciones en CCO.
 - Apertura de un borrador mediante `mailto`.
 - Campaña individual con asunto, cuerpo, adjuntos, personalización, cola reanudable y un solo destinatario por borrador.
+- Selector para insertar cualquier campo de la tabla como `{campo}` en el asunto o el cuerpo; los códigos también pueden escribirse manualmente.
 - Confirmación manual, espera configurable de 1 a 3.600 segundos y límite de 45 destinatarios confirmados por día, incluidos los reenvíos.
 - Registro manual y consulta visual del historial de comunicaciones.
 - Papelera para recuperar contactos eliminados o borrarlos definitivamente.

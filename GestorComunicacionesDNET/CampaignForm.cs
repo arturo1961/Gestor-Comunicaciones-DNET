@@ -12,6 +12,13 @@ internal sealed class CampaignForm : DnetForm
 {
 	private const int DailyLimit = 45;
 	private const int DefaultDelaySeconds = 20;
+	private static readonly string[] StandardTemplateFields =
+	{
+		"nombre", "correo", "pais", "region", "idioma", "tipo", "naturaleza", "organizacion", "canal",
+		"web_contacto", "persona_contacto", "uso_del_correo", "verificacion", "estado",
+		"ultima_version_comunicada", "fecha_ultimo_envio", "no_contactar", "notas", "material",
+		"respuesta_seguimiento", "origen_csv", "id"
+	};
 	private readonly ContactStore _store;
 	private readonly CampaignStateStore _stateStore;
 	private readonly List<JsonObject> _selectedContacts;
@@ -22,6 +29,8 @@ internal sealed class CampaignForm : DnetForm
 	private readonly Label _delayLabel = new() { Dock = DockStyle.Fill, TextAlign = ContentAlignment.MiddleLeft };
 	private readonly TextBox _body = new() { Dock = DockStyle.Fill, Multiline = true, ScrollBars = ScrollBars.Vertical, AcceptsReturn = true };
 	private readonly ListBox _attachments = new() { Dock = DockStyle.Fill, HorizontalScrollbar = true };
+	private readonly ComboBox _templateField = new() { DropDownStyle = ComboBoxStyle.DropDownList, Width = 255 };
+	private TextBox _templateTarget;
 	private readonly Label _summary = new() { Dock = DockStyle.Fill, AutoEllipsis = true, TextAlign = ContentAlignment.MiddleLeft };
 	private readonly Label _current = new() { Dock = DockStyle.Fill, AutoEllipsis = true, TextAlign = ContentAlignment.MiddleLeft };
 	private readonly Button _prepare;
@@ -37,13 +46,15 @@ internal sealed class CampaignForm : DnetForm
 		_selectedContacts = selectedContacts.ToList();
 		_stateStore = new CampaignStateStore(store.DataDirectory);
 		_state = _stateStore.Load();
+		_templateTarget = _body;
 		_state.DelaySeconds = Math.Clamp(_state.DelaySeconds, (int)_delay.Minimum, (int)_delay.Maximum);
 		if (_state.Queue.Count == 0 && _state.Version.Length == 0) _state.Version = initialVersion;
 
 		Text = "Campaña individual — preparación supervisada";
 		StartPosition = FormStartPosition.CenterParent;
-		MinimumSize = new Size(900, 720);
-		Size = new Size(1120, 860);
+		Rectangle workingArea = Screen.PrimaryScreen?.WorkingArea ?? new Rectangle(0, 0, 1280, 900);
+		MinimumSize = new Size(860, 700);
+		Size = new Size(Math.Min(1320, Math.Max(860, workingArea.Width - 30)), Math.Min(940, Math.Max(700, workingArea.Height - 30)));
 		Font = new Font("Segoe UI", 10f);
 		BackColor = Color.FromArgb(245, 247, 251);
 
@@ -88,20 +99,32 @@ internal sealed class CampaignForm : DnetForm
 		root.Controls.Add(bodyGroup, 0, 2);
 
 		GroupBox attachmentsGroup = new() { Text = "Archivos adjuntos", Dock = DockStyle.Fill, Padding = new Padding(9) };
-		TableLayoutPanel attachmentLayout = new() { Dock = DockStyle.Fill, ColumnCount = 1, RowCount = 2 };
+		TableLayoutPanel attachmentLayout = new() { Dock = DockStyle.Fill, ColumnCount = 1, RowCount = 3 };
 		attachmentLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
 		attachmentLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 48));
+		attachmentLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 48));
 		attachmentLayout.Controls.Add(_attachments, 0, 0);
-		FlowLayoutPanel attachmentButtons = new() { Dock = DockStyle.Fill, WrapContents = false };
+		FlowLayoutPanel attachmentButtons = new() { Dock = DockStyle.Fill, AutoScroll = true, WrapContents = false };
 		attachmentButtons.Controls.Add(NewButton("Añadir archivos...", AddAttachments, 150));
 		attachmentButtons.Controls.Add(NewButton("Quitar seleccionado", RemoveAttachment, 165));
-		attachmentButtons.Controls.Add(new Label
+		attachmentLayout.Controls.Add(attachmentButtons, 0, 1);
+		TableLayoutPanel templateLayout = new() { Dock = DockStyle.Fill, ColumnCount = 3, RowCount = 1 };
+		templateLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
+		templateLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 270));
+		templateLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 70));
+		templateLayout.Controls.Add(new Label
 		{
 			Text = "Puedes usar {nombre}, {organizacion}, {correo}, {pais} y {region} en el asunto o el cuerpo.",
-			AutoSize = true,
-			Margin = new Padding(15, 12, 0, 0)
-		});
-		attachmentLayout.Controls.Add(attachmentButtons, 0, 1);
+			Dock = DockStyle.Fill,
+			AutoEllipsis = true,
+			TextAlign = ContentAlignment.MiddleLeft,
+			Margin = new Padding(3, 3, 12, 3)
+		}, 0, 0);
+		_templateField.Dock = DockStyle.Fill;
+		_templateField.Margin = new Padding(3, 7, 7, 7);
+		templateLayout.Controls.Add(_templateField, 1, 0);
+		templateLayout.Controls.Add(NewButton("＋", InsertTemplateField, 55), 2, 0);
+		attachmentLayout.Controls.Add(templateLayout, 0, 2);
 		attachmentsGroup.Controls.Add(attachmentLayout);
 		root.Controls.Add(attachmentsGroup, 0, 3);
 
@@ -126,6 +149,8 @@ internal sealed class CampaignForm : DnetForm
 
 		_subject.Text = _state.Subject;
 		_body.Text = _state.Body;
+		_subject.Enter += (_, _) => _templateTarget = _subject;
+		_body.Enter += (_, _) => _templateTarget = _body;
 		_version.Text = _state.Version;
 		_delay.Value = _state.DelaySeconds;
 		_delay.ValueChanged += (_, _) =>
@@ -134,6 +159,7 @@ internal sealed class CampaignForm : DnetForm
 			UpdateDelayLabel();
 		};
 		ReloadAttachments();
+		PopulateTemplateFields();
 		_timer.Tick += (_, _) => UpdateStatus();
 		_timer.Start();
 		FormClosing += (_, _) => SaveEditorState();
@@ -180,6 +206,26 @@ internal sealed class CampaignForm : DnetForm
 	{
 		_attachments.Items.Clear();
 		_attachments.Items.AddRange(_state.Attachments.Cast<object>().ToArray());
+	}
+
+	private void PopulateTemplateFields()
+	{
+		IEnumerable<string> fields = StandardTemplateFields
+			.Concat(_store.Contacts.SelectMany(contact => contact.Select(property => property.Key)))
+			.Where(field => !string.IsNullOrWhiteSpace(field) && !field.Contains('{') && !field.Contains('}'))
+			.Distinct(StringComparer.OrdinalIgnoreCase);
+		_templateField.Items.Clear();
+		_templateField.Items.AddRange(fields.Select(field => (object)("{" + field + "}")).ToArray());
+		if (_templateField.Items.Count > 0) _templateField.SelectedIndex = 0;
+	}
+
+	private void InsertTemplateField(object? sender, EventArgs e)
+	{
+		if (_templateField.SelectedItem is not string token) return;
+		int insertionPoint = _templateTarget.SelectionStart;
+		_templateTarget.SelectedText = token;
+		_templateTarget.SelectionStart = insertionPoint + token.Length;
+		_templateTarget.Focus();
 	}
 
 	private void CreateQueue(object? sender, EventArgs e)
@@ -374,15 +420,14 @@ internal sealed class CampaignForm : DnetForm
 
 	private static string Personalize(string template, JsonObject contact)
 	{
-		Dictionary<string, string> values = new(StringComparer.OrdinalIgnoreCase)
+		bool hasOrganization = false;
+		foreach ((string field, JsonNode? _) in contact)
 		{
-			["{nombre}"] = ContactStore.Get(contact, "nombre"),
-			["{organizacion}"] = ContactStore.Get(contact, "nombre"),
-			["{correo}"] = ContactStore.Get(contact, "correo"),
-			["{pais}"] = ContactStore.Get(contact, "pais"),
-			["{region}"] = ContactStore.Get(contact, "region")
-		};
-		foreach ((string token, string value) in values) template = template.Replace(token, value, StringComparison.OrdinalIgnoreCase);
+			if (string.Equals(field, "organizacion", StringComparison.OrdinalIgnoreCase)) hasOrganization = true;
+			template = template.Replace("{" + field + "}", ContactStore.Get(contact, field), StringComparison.OrdinalIgnoreCase);
+		}
+		if (!hasOrganization)
+			template = template.Replace("{organizacion}", ContactStore.Get(contact, "nombre"), StringComparison.OrdinalIgnoreCase);
 		return template;
 	}
 
