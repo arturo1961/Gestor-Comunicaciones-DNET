@@ -1,5 +1,5 @@
 #define MyAppName "Gestor de Comunicaciones DNET"
-#define MyAppVersion "1.9.1"
+#define MyAppVersion "1.10.0"
 #define MyAppPublisher "arturo1961"
 #define MyAppURL "https://github.com/arturo1961/Gestor-Comunicaciones-DNET"
 #define MyAppExeName "GestorComunicacionesDNET.exe"
@@ -17,8 +17,8 @@ DefaultDirName={localappdata}\Programs\Gestor de Comunicaciones DNET
 DefaultGroupName=Gestor de Comunicaciones DNET
 DisableProgramGroupPage=yes
 LicenseFile=..\LICENSE
-OutputDir=..\instalador-v1.9.1
-OutputBaseFilename=Instalar_GestorComunicacionesDNET_1.9.1
+OutputDir=..\instalador-v1.10.0
+OutputBaseFilename=Instalar_GestorComunicacionesDNET_1.10.0
 SetupIconFile=..\GestorComunicacionesDNET\Assets\GestorComunicacionesDNET.ico
 UninstallDisplayIcon={app}\{#MyAppExeName}
 Compression=lzma2/ultra64
@@ -32,7 +32,7 @@ RestartApplications=no
 LanguageDetectionMethod=uilanguage
 ShowLanguageDialog=auto
 UsePreviousLanguage=yes
-VersionInfoVersion=1.9.1.0
+VersionInfoVersion=1.10.0.0
 VersionInfoCompany={#MyAppPublisher}
 VersionInfoDescription=Instalador de Gestor de Comunicaciones DNET
 VersionInfoProductName={#MyAppName}
@@ -75,7 +75,7 @@ Name: "tamil"; MessagesFile: "compiler:Languages\Tamil.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "..\publicar-v1.9.1\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\publicar-v1.10.0\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
 
 [Icons]
 Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"

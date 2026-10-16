@@ -298,6 +298,7 @@ internal sealed class MainForm : DnetForm
 		flowLayoutPanel3.Controls.Add(Btn("Copiar CCO", CopyBcc, 137));
 		flowLayoutPanel3.Controls.Add(Btn("Preparar con mailto", PrepareMail, 180));
 		flowLayoutPanel3.Controls.Add(Btn("Confirmar envío REAL", ConfirmSent, 215));
+		flowLayoutPanel3.Controls.Add(Btn("Campaña individual...", OpenIndividualCampaign, 180));
 		flowLayoutPanel3.Controls.Add(Btn("Ayuda", Help, 88));
 		_status.Dock = DockStyle.Fill;
 		_status.TextAlign = ContentAlignment.MiddleLeft;
@@ -987,6 +988,26 @@ internal sealed class MainForm : DnetForm
 		}
 	}
 
+	private void OpenIndividualCampaign(object? sender, EventArgs e)
+	{
+		_grid.EndEdit();
+		try
+		{
+			using CampaignForm form = new CampaignForm(_store, SelectedRows().Select(row => row.Data).ToList(), _version.Text.Trim());
+			form.ShowDialog(this);
+			if (form.HistoryChanged)
+			{
+				_lastPrepared.Clear();
+				PopulateFilters();
+				RefreshList();
+			}
+		}
+		catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or InvalidDataException)
+		{
+			Warn(UiText.Get("No se pudo abrir la campaña individual. No se ha modificado ningún envío.\n\n") + ex.Message);
+		}
+	}
+
 	private void OpenDataFolder(object? sender, EventArgs e)
 	{
 		try
@@ -1004,7 +1025,7 @@ internal sealed class MainForm : DnetForm
 
 	private void Help(object? sender, EventArgs e)
 	{
-		MessageBox.Show(UiText.Get("1) Busca por cualquier dato o utiliza los filtros para localizar contactos.\n2) Añade, modifica o borra contactos; también puedes importar y exportar JSON.\n3) Filtra y marca los destinatarios que quieras incluir.\n4) La versión es opcional y sólo sirve para el historial interno.\n5) 'Preparar con mailto' abre un único correo con los seleccionados en CCO.\n6) Después de enviarlo, vuelve aquí y confirma el envío real para registrarlo.\n7) En 'Herramientas' puedes recuperar contactos de la papelera, consultar el historial y revisar posibles duplicados.\n8) En 'Copias de seguridad' puedes guardar o recuperar juntos los contactos y el historial.\n\nIMPORTANTE: el gestor NO envía correos, no guarda contraseñas y no incluye asunto ni mensaje en el enlace mailto. Los JSON privados se guardan en AppData local."), UiText.Get("Cómo utilizar el gestor"));
+		MessageBox.Show(UiText.Get("1) Busca, filtra y marca los contactos que necesites.\n2) Para un grupo puedes mantener el sistema CCO existente.\n3) Para enviar uno a uno, abre 'Campaña individual', escribe el asunto y el cuerpo, añade los archivos y crea la cola.\n4) 'Preparar siguiente' abre un solo borrador en la aplicación y cuenta predeterminadas del usuario.\n5) Revisa el mensaje y pulsa Enviar personalmente. Después confirma el envío en el gestor.\n6) El siguiente se habilita tras 20 segundos y el gestor se detiene al llegar a 45 confirmados en el día.\n7) Puedes pausar, cerrar y continuar la cola posteriormente sin repetir destinatarios.\n8) NO CONTACTAR, la papelera y quienes ya recibieron la versión quedan excluidos.\n9) Las copias de seguridad incluyen los contactos, el historial y la campaña guardada.\n\nIMPORTANTE: el gestor no envía automáticamente ni guarda contraseñas. Abrir un borrador nunca lo marca como enviado."), UiText.Get("Cómo utilizar el gestor"));
 	}
 
 	private void Warn(string message)

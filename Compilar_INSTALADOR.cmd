@@ -2,8 +2,8 @@
 setlocal
 cd /d "%~dp0"
 
-echo Publicando Gestor de Comunicaciones DNET 1.9.1...
-dotnet publish GestorComunicacionesDNET.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -p:DebugType=none -p:DebugSymbols=false -o publicar-v1.9.1
+echo Publicando Gestor de Comunicaciones DNET 1.10.0...
+dotnet publish GestorComunicacionesDNET.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -p:DebugType=none -p:DebugSymbols=false -o publicar-v1.10.0
 if errorlevel 1 goto :error
 
 set "ISCC=%LOCALAPPDATA%\Programs\Inno Setup 7\ISCC.exe"
@@ -22,7 +22,7 @@ echo Creando el instalador multilingue...
 if errorlevel 1 goto :error
 
 echo.
-echo Instalador terminado en instalador-v1.9.1\Instalar_GestorComunicacionesDNET_1.9.1.exe
+echo Instalador terminado en instalador-v1.10.0\Instalar_GestorComunicacionesDNET_1.10.0.exe
 pause
 exit /b 0
 

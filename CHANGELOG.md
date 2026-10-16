@@ -1,5 +1,18 @@
 # Historial de cambios
 
+## 1.10.0
+
+- Nueva ventana **Campaña individual** con asunto, cuerpo, versión y selección de varios archivos adjuntos.
+- Cola persistente de destinatarios que excluye contactos **NO CONTACTAR**, eliminados, duplicados y quienes ya recibieron la misma versión.
+- Preparación supervisada de un solo borrador cada vez; abrirlo nunca se registra como envío.
+- Confirmación manual del envío antes de actualizar el contacto y el historial.
+- Espera mínima de 20 segundos entre confirmaciones y límite de 45 destinatarios confirmados por día, incluidos los reenvíos.
+- Pausa y reanudación de la cola después de cerrar el programa.
+- Uso de la aplicación y cuenta predeterminadas de Windows; con Outlook de escritorio compatible se añaden automáticamente los archivos.
+- Personalización opcional mediante `{nombre}`, `{organizacion}`, `{correo}`, `{pais}` y `{region}`.
+- La campaña guardada se incorpora a las copias de seguridad y se recupera junto con los contactos y el historial.
+- Ventana, botones, contadores, confirmaciones y avisos traducidos en los 62 idiomas.
+
 ## 1.9.1
 
 - Nuevo icono propio para el ejecutable, las ventanas, los accesos directos y el instalador.

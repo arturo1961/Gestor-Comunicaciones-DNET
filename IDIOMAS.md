@@ -1,6 +1,6 @@
 # Idiomas incluidos
 
-Gestor de Comunicaciones DNET 1.9.1 incluye 62 idiomas dentro del mismo ejecutable. El idioma se detecta inicialmente desde Windows, puede cambiarse sin reiniciar y queda guardado para el siguiente inicio. La columna, el botón y todos los avisos de **NO CONTACTAR** están incluidos en esos 62 idiomas.
+Gestor de Comunicaciones DNET 1.10.0 incluye 62 idiomas dentro del mismo ejecutable. El idioma se detecta inicialmente desde Windows, puede cambiarse sin reiniciar y queda guardado para el siguiente inicio. La función **NO CONTACTAR** y la nueva campaña individual —campos, cola, contadores, botones, avisos y confirmaciones— están incluidas en esos 62 idiomas.
 
 ## España
 

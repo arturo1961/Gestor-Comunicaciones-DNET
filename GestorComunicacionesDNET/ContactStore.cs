@@ -45,6 +45,21 @@ internal sealed class ContactStore
 
 	public string DataDirectory => _directory;
 
+	public JsonObject? FindActiveContact(string contactId)
+	{
+		return Contacts.FirstOrDefault(contact => string.Equals(Get(contact, "id"), contactId, StringComparison.OrdinalIgnoreCase));
+	}
+
+	public int ConfirmedTodayCount()
+	{
+		DateTime today = DateTime.Today;
+		return HistoryEntries.Count(entry =>
+		{
+			if (!string.Equals(Get(entry, "estado"), "enviado_confirmado_usuario", StringComparison.OrdinalIgnoreCase)) return false;
+			return DateTimeOffset.TryParse(Get(entry, "fecha"), out DateTimeOffset date) && date.LocalDateTime.Date == today;
+		});
+	}
+
 	public ContactStore()
 		: this(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Gestor_Comunicaciones_DNET"))
 	{
@@ -399,12 +414,17 @@ internal sealed class ContactStore
 		using ZipArchive zipArchive = new ZipArchive(fileStream, ZipArchiveMode.Create);
 		AddTextEntry(zipArchive, "contactos.json", contactsText);
 		AddTextEntry(zipArchive, "envios.json", historyText);
+		string campaignPath = new CampaignStateStore(_directory).Path;
+		bool includesCampaign = File.Exists(campaignPath);
+		if (includesCampaign) AddTextEntry(zipArchive, "campana_actual.json", File.ReadAllText(campaignPath));
 		JsonObject manifest = new JsonObject
 		{
 			["formato"] = "Gestor_Comunicaciones_DNET_copia",
 			["version_formato"] = 1,
 			["fecha_creacion"] = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:sszzz"),
-			["incluye"] = new JsonArray("contactos.json", "envios.json")
+			["incluye"] = includesCampaign
+				? new JsonArray("contactos.json", "envios.json", "campana_actual.json")
+				: new JsonArray("contactos.json", "envios.json")
 		};
 		AddTextEntry(zipArchive, "manifest.json", manifest.ToJsonString(Options));
 	}
@@ -419,14 +439,20 @@ internal sealed class ContactStore
 		}
 		string contactsText;
 		string historyText;
+		string? campaignText;
 		using (FileStream fileStream = new FileStream(fullPath, FileMode.Open, FileAccess.Read, FileShare.Read))
 		using (ZipArchive zipArchive = new ZipArchive(fileStream, ZipArchiveMode.Read))
 		{
 			contactsText = ReadRequiredEntry(zipArchive, "contactos.json");
 			historyText = ReadRequiredEntry(zipArchive, "envios.json");
+			campaignText = ReadOptionalEntry(zipArchive, "campana_actual.json");
 		}
 		JsonObject contactsRoot = ValidateDataFile(contactsText, "contactos", "contactos.json");
 		JsonObject historyRoot = ValidateDataFile(historyText, "envios", "envios.json");
+		CampaignState? campaignState = campaignText is null
+			? null
+			: System.Text.Json.JsonSerializer.Deserialize<CampaignState>(campaignText)
+				?? throw new InvalidDataException("La campaña incluida en la copia no es válida.");
 		MergeSuppressions(contactsRoot, currentSuppressions);
 		int contactCount = (contactsRoot["contactos"] as JsonArray)?.Count ?? 0;
 		int shipmentCount = (historyRoot["envios"] as JsonArray)?.Count ?? 0;
@@ -437,6 +463,12 @@ internal sealed class ContactStore
 			_database.SaveAll(contactsRoot, historyRoot);
 			Load();
 			RefreshCompatibilityJson(includeHistory: true);
+			CampaignStateStore campaignStore = new(_directory);
+			if (campaignText is null)
+			{
+				if (File.Exists(campaignStore.Path)) File.Delete(campaignStore.Path);
+			}
+			else campaignStore.Save(campaignState!);
 		}
 		catch
 		{
@@ -461,6 +493,14 @@ internal sealed class ContactStore
 			throw new InvalidDataException("La copia no contiene " + name + ".");
 		}
 		using StreamReader reader = new StreamReader(entry.Open(), Encoding.UTF8, true);
+		return reader.ReadToEnd();
+	}
+
+	private static string? ReadOptionalEntry(ZipArchive archive, string name)
+	{
+		ZipArchiveEntry? entry = archive.Entries.SingleOrDefault(item => string.Equals(item.FullName, name, StringComparison.OrdinalIgnoreCase));
+		if (entry is null) return null;
+		using StreamReader reader = new(entry.Open(), Encoding.UTF8, true);
 		return reader.ReadToEnd();
 	}
 
@@ -629,6 +669,16 @@ internal sealed class ContactStore
 
 	public void ConfirmSend(IReadOnlyList<JsonObject> contacts, string version)
 	{
+		ConfirmSendCore(contacts, version, "mailto_manual", "Confirmado por el usuario tras abrir borrador mailto. No constituye prueba automática de entrega.");
+	}
+
+	public void ConfirmIndividualSend(IReadOnlyList<JsonObject> contacts, string version)
+	{
+		ConfirmSendCore(contacts, version, "borrador_individual_supervisado", "Confirmado por el usuario después de revisar y enviar el borrador individual. No constituye prueba automática de entrega.");
+	}
+
+	private void ConfirmSendCore(IReadOnlyList<JsonObject> contacts, string version, string medium, string observation)
+	{
 		if (!(_historyRoot["envios"] is JsonArray jsonArray))
 		{
 			throw new InvalidDataException("Falta el historial.");
@@ -646,8 +696,8 @@ internal sealed class ContactStore
 				["version"] = version,
 				["fecha"] = text,
 				["estado"] = "enviado_confirmado_usuario",
-				["medio"] = "mailto_manual",
-				["observaciones"] = "Confirmado por el usuario tras abrir borrador mailto. No constituye prueba automática de entrega."
+				["medio"] = medium,
+				["observaciones"] = observation
 			});
 		}
 		_contactsRoot["contactos"] = new JsonArray(Contacts.Select((JsonObject c) => c.DeepClone()).ToArray());
