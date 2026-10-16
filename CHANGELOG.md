@@ -2,6 +2,9 @@
 
 ## 1.10.1
 
+- Campo **URL** para guardar un enlace de documentación de Google Drive o de cualquier sitio e insertarlo como `{enlace_documentacion}` en el asunto o el cuerpo.
+- Límite diario modificable y persistente; comienza en 45 y puede cambiarse posteriormente sin crear otra campaña.
+- Evitado el asistente de instalación de Outlook 16 cuando Windows utiliza el nuevo Outlook u otra aplicación de correo predeterminada.
 - Nuevo botón **TXT UTF-8** para cargar directamente el cuerpo conservando sus párrafos; reconoce las cartas que comienzan por `Subject:` o `Asunto:`.
 - Corregida la conservación de los saltos de línea del cuerpo al abrir el borrador en Outlook o mediante `mailto`.
 - El usuario puede elegir la espera entre envíos confirmados, de 1 a 3.600 segundos.

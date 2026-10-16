@@ -1026,9 +1026,15 @@ internal sealed class MainForm : DnetForm
 	private void Help(object? sender, EventArgs e)
 	{
 		int delaySeconds = 20;
-		try { delaySeconds = Math.Clamp(new CampaignStateStore(_store.DataDirectory).Load().DelaySeconds, 1, 3600); }
+		int dailyLimit = 45;
+		try
+		{
+			CampaignState campaign = new CampaignStateStore(_store.DataDirectory).Load();
+			delaySeconds = Math.Clamp(campaign.DelaySeconds, 1, 3600);
+			dailyLimit = Math.Clamp(campaign.DailyLimit, 1, 10000);
+		}
 		catch (InvalidDataException) { }
-		MessageBox.Show(UiText.Format("1) Busca, filtra y marca los contactos que necesites.\n2) Para un grupo puedes mantener el sistema CCO existente.\n3) Para enviar uno a uno, abre 'Campaña individual', escribe el asunto y el cuerpo, añade los archivos y crea la cola.\n4) 'Preparar siguiente' abre un solo borrador en la aplicación y cuenta predeterminadas del usuario.\n5) Revisa el mensaje y pulsa Enviar personalmente. Después confirma el envío en el gestor.\n6) El siguiente se habilita tras {0} segundos y el gestor se detiene al llegar a 45 confirmados en el día.\n7) Puedes pausar, cerrar y continuar la cola posteriormente sin repetir destinatarios.\n8) NO CONTACTAR, la papelera y quienes ya recibieron la versión quedan excluidos.\n9) Las copias de seguridad incluyen los contactos, el historial y la campaña guardada.\n\nIMPORTANTE: el gestor no envía automáticamente ni guarda contraseñas. Abrir un borrador nunca lo marca como enviado.", delaySeconds), UiText.Get("Cómo utilizar el gestor"));
+		MessageBox.Show(UiText.Format("1) Busca, filtra y marca los contactos que necesites.\n2) Para un grupo puedes mantener el sistema CCO existente.\n3) Para enviar uno a uno, abre 'Campaña individual', escribe el asunto y el cuerpo, añade los archivos y crea la cola.\n4) 'Preparar siguiente' abre un solo borrador en la aplicación y cuenta predeterminadas del usuario.\n5) Revisa el mensaje y pulsa Enviar personalmente. Después confirma el envío en el gestor.\n6) El siguiente se habilita tras {0} segundos y el gestor se detiene al llegar a {1} confirmados en el día.\n7) Puedes pausar, cerrar y continuar la cola posteriormente sin repetir destinatarios.\n8) NO CONTACTAR, la papelera y quienes ya recibieron la versión quedan excluidos.\n9) Las copias de seguridad incluyen los contactos, el historial y la campaña guardada.\n\nIMPORTANTE: el gestor no envía automáticamente ni guarda contraseñas. Abrir un borrador nunca lo marca como enviado.", delaySeconds, dailyLimit), UiText.Get("Cómo utilizar el gestor"));
 	}
 
 	private void Warn(string message)

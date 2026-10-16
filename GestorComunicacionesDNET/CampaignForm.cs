@@ -11,7 +11,7 @@ namespace GestorComunicacionesDNET;
 
 internal sealed class CampaignForm : DnetForm
 {
-	private const int DailyLimit = 45;
+	private const int DefaultDailyLimit = 45;
 	private const int DefaultDelaySeconds = 20;
 	private static readonly string[] StandardTemplateFields =
 	{
@@ -26,7 +26,9 @@ internal sealed class CampaignForm : DnetForm
 	private CampaignState _state;
 	private readonly TextBox _subject = new() { Dock = DockStyle.Fill };
 	private readonly TextBox _version = new() { Dock = DockStyle.Fill };
+	private readonly TextBox _documentationUrl = new() { Dock = DockStyle.Fill };
 	private readonly NumericUpDown _delay = new() { Dock = DockStyle.Left, Minimum = 1, Maximum = 3600, Value = DefaultDelaySeconds, Width = 110, ThousandsSeparator = true };
+	private readonly NumericUpDown _dailyLimit = new() { Minimum = 1, Maximum = 10000, Value = DefaultDailyLimit, Width = 105, ThousandsSeparator = true };
 	private readonly Label _delayLabel = new() { Dock = DockStyle.Fill, TextAlign = ContentAlignment.MiddleLeft };
 	private readonly TextBox _body = new() { Dock = DockStyle.Fill, Multiline = true, ScrollBars = ScrollBars.Vertical, AcceptsReturn = true };
 	private readonly ListBox _attachments = new() { Dock = DockStyle.Fill, HorizontalScrollbar = true };
@@ -49,6 +51,7 @@ internal sealed class CampaignForm : DnetForm
 		_state = _stateStore.Load();
 		_templateTarget = _body;
 		_state.DelaySeconds = Math.Clamp(_state.DelaySeconds, (int)_delay.Minimum, (int)_delay.Maximum);
+		_state.DailyLimit = Math.Clamp(_state.DailyLimit, (int)_dailyLimit.Minimum, (int)_dailyLimit.Maximum);
 		if (_state.Queue.Count == 0 && _state.Version.Length == 0) _state.Version = initialVersion;
 
 		Text = "Campaña individual — preparación supervisada";
@@ -67,7 +70,7 @@ internal sealed class CampaignForm : DnetForm
 			RowCount = 5
 		};
 		root.RowStyles.Add(new RowStyle(SizeType.Absolute, 54));
-		root.RowStyles.Add(new RowStyle(SizeType.Absolute, 126));
+		root.RowStyles.Add(new RowStyle(SizeType.Absolute, 174));
 		root.RowStyles.Add(new RowStyle(SizeType.Percent, 55));
 		root.RowStyles.Add(new RowStyle(SizeType.Percent, 45));
 		root.RowStyles.Add(new RowStyle(SizeType.Absolute, 160));
@@ -82,17 +85,26 @@ internal sealed class CampaignForm : DnetForm
 			TextAlign = ContentAlignment.MiddleLeft
 		}, 0, 0);
 
-		TableLayoutPanel header = new() { Dock = DockStyle.Fill, ColumnCount = 2, RowCount = 3 };
+		TableLayoutPanel header = new() { Dock = DockStyle.Fill, ColumnCount = 2, RowCount = 4 };
 		header.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 160));
 		header.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
-		header.RowStyles.Add(new RowStyle(SizeType.Percent, 33.33f));
-		header.RowStyles.Add(new RowStyle(SizeType.Percent, 33.33f));
-		header.RowStyles.Add(new RowStyle(SizeType.Percent, 33.34f));
+		for (int row = 0; row < 4; row++) header.RowStyles.Add(new RowStyle(SizeType.Percent, 25));
 		AddField(header, "Asunto:", _subject, 0);
 		AddField(header, "Versión:", _version, 1);
-		header.Controls.Add(_delayLabel, 0, 2);
+		TableLayoutPanel linkPanel = new() { Dock = DockStyle.Fill, ColumnCount = 2, RowCount = 1 };
+		linkPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
+		linkPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 70));
+		linkPanel.Controls.Add(_documentationUrl, 0, 0);
+		linkPanel.Controls.Add(NewButton("＋", InsertDocumentationLink, 55), 1, 0);
+		AddField(header, "URL:", linkPanel, 2);
+		header.Controls.Add(_delayLabel, 0, 3);
 		_delay.Margin = new Padding(3, 5, 3, 5);
-		header.Controls.Add(_delay, 1, 2);
+		FlowLayoutPanel limits = new() { Dock = DockStyle.Fill, WrapContents = false, FlowDirection = FlowDirection.LeftToRight };
+		limits.Controls.Add(_delay);
+		limits.Controls.Add(new Label { Text = "✉ / 24 h:", AutoSize = true, TextAlign = ContentAlignment.MiddleLeft, Margin = new Padding(22, 10, 3, 3) });
+		_dailyLimit.Margin = new Padding(3, 5, 3, 5);
+		limits.Controls.Add(_dailyLimit);
+		header.Controls.Add(limits, 1, 3);
 		root.Controls.Add(header, 0, 1);
 
 		GroupBox bodyGroup = new() { Text = "Cuerpo del mensaje", Dock = DockStyle.Fill, Padding = new Padding(9) };
@@ -160,12 +172,15 @@ internal sealed class CampaignForm : DnetForm
 		_subject.Enter += (_, _) => _templateTarget = _subject;
 		_body.Enter += (_, _) => _templateTarget = _body;
 		_version.Text = _state.Version;
+		_documentationUrl.Text = _state.DocumentationUrl;
 		_delay.Value = _state.DelaySeconds;
+		_dailyLimit.Value = _state.DailyLimit;
 		_delay.ValueChanged += (_, _) =>
 		{
 			_state.DelaySeconds = (int)_delay.Value;
 			UpdateDelayLabel();
 		};
+		_dailyLimit.ValueChanged += (_, _) => _state.DailyLimit = (int)_dailyLimit.Value;
 		ReloadAttachments();
 		PopulateTemplateFields();
 		_timer.Tick += (_, _) => UpdateStatus();
@@ -275,7 +290,8 @@ internal sealed class CampaignForm : DnetForm
 
 	private void PopulateTemplateFields()
 	{
-		IEnumerable<string> fields = StandardTemplateFields
+		IEnumerable<string> fields = new[] { "enlace_documentacion" }
+			.Concat(StandardTemplateFields)
 			.Concat(_store.Contacts.SelectMany(contact => contact.Select(property => property.Key)))
 			.Where(field => !string.IsNullOrWhiteSpace(field) && !field.Contains('{') && !field.Contains('}'))
 			.Distinct(StringComparer.OrdinalIgnoreCase);
@@ -287,6 +303,19 @@ internal sealed class CampaignForm : DnetForm
 	private void InsertTemplateField(object? sender, EventArgs e)
 	{
 		if (_templateField.SelectedItem is not string token) return;
+		int insertionPoint = _templateTarget.SelectionStart;
+		_templateTarget.SelectedText = token;
+		_templateTarget.SelectionStart = insertionPoint + token.Length;
+		_templateTarget.Focus();
+	}
+
+	private void InsertDocumentationLink(object? sender, EventArgs e)
+	{
+		InsertToken("{enlace_documentacion}");
+	}
+
+	private void InsertToken(string token)
+	{
 		int insertionPoint = _templateTarget.SelectionStart;
 		_templateTarget.SelectedText = token;
 		_templateTarget.SelectionStart = insertionPoint + token.Length;
@@ -329,9 +358,9 @@ internal sealed class CampaignForm : DnetForm
 	private void PrepareNext(object? sender, EventArgs e)
 	{
 		SaveEditorState();
-		if (_store.ConfirmedTodayCount() >= DailyLimit)
+		if (_store.ConfirmedTodayCount() >= _state.DailyLimit)
 		{
-			Warn("Se ha alcanzado el límite de 45 envíos confirmados de hoy. Continúa mañana.");
+			Warn(UiText.Format("Se ha alcanzado el límite de {0} envíos confirmados de hoy. Continúa mañana.", _state.DailyLimit));
 			return;
 		}
 		if (SecondsRemaining() > 0)
@@ -366,8 +395,8 @@ internal sealed class CampaignForm : DnetForm
 		} while (contact is null);
 
 		string recipient = ContactStore.Get(contact, "correo").Trim();
-		string subject = Personalize(_state.Subject, contact);
-		string body = Personalize(_state.Body, contact);
+		string subject = Personalize(_state.Subject, contact, _state.DocumentationUrl);
+		string body = Personalize(_state.Body, contact, _state.DocumentationUrl);
 		if (!EmailDraftLauncher.Open(recipient, subject, body, _state.Attachments, out string detail))
 		{
 			Warn(detail);
@@ -450,7 +479,9 @@ internal sealed class CampaignForm : DnetForm
 		_state.Subject = _subject.Text;
 		_state.Body = _body.Text;
 		_state.Version = _version.Text.Trim();
+		_state.DocumentationUrl = _documentationUrl.Text.Trim();
 		_state.DelaySeconds = (int)_delay.Value;
+		_state.DailyLimit = (int)_dailyLimit.Value;
 		if (save) _stateStore.Save(_state);
 	}
 
@@ -466,13 +497,13 @@ internal sealed class CampaignForm : DnetForm
 		int skipped = _state.Queue.Count(item => item.Status == "skipped");
 		int today = _store.ConfirmedTodayCount();
 		int seconds = SecondsRemaining();
-		_summary.Text = UiText.Format("Enviados hoy: {0} de 45    ·    Cola: {1} confirmados, {2} pendientes, {3} omitidos", today, confirmed, pending, skipped);
+		_summary.Text = UiText.Format("Enviados hoy: {0} de {4}    ·    Cola: {1} confirmados, {2} pendientes, {3} omitidos", today, confirmed, pending, skipped, _state.DailyLimit);
 		CampaignQueueItem? prepared = _state.Queue.FirstOrDefault(item => item.Status == "prepared");
 		JsonObject? contact = prepared is null ? null : _store.FindActiveContact(prepared.ContactId);
 		_current.Text = contact is null
 			? (seconds > 0 ? UiText.Format("Siguiente disponible en {0} segundos.", seconds) : UiText.Get("No hay ningún borrador pendiente de confirmación."))
 			: UiText.Format("Pendiente de confirmar: {0} — {1}", ContactStore.Get(contact, "nombre"), ContactStore.Get(contact, "correo"));
-		_prepare.Enabled = today < DailyLimit && seconds == 0 && prepared is null && pending > 0;
+		_prepare.Enabled = today < _state.DailyLimit && seconds == 0 && prepared is null && pending > 0;
 		_confirm.Enabled = prepared is not null;
 		_notSent.Enabled = prepared is not null;
 	}
@@ -483,8 +514,9 @@ internal sealed class CampaignForm : DnetForm
 		return Math.Max(0, (int)Math.Ceiling((_state.CooldownUntil.Value - DateTimeOffset.Now).TotalSeconds));
 	}
 
-	private static string Personalize(string template, JsonObject contact)
+	private static string Personalize(string template, JsonObject contact, string documentationUrl)
 	{
+		template = template.Replace("{enlace_documentacion}", documentationUrl, StringComparison.OrdinalIgnoreCase);
 		bool hasOrganization = false;
 		foreach ((string field, JsonNode? _) in contact)
 		{

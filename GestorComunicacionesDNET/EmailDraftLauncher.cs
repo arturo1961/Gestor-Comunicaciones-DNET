@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using Microsoft.Win32;
 
 namespace GestorComunicacionesDNET;
 
@@ -24,10 +25,14 @@ internal static class EmailDraftLauncher
 		}
 
 		// Sin adjuntos, mailto respeta siempre la aplicación y la cuenta predeterminadas de Windows.
-		// Con adjuntos se intenta Outlook de escritorio, que usa el perfil activo del usuario.
+		// Con adjuntos sólo se usa la automatización COM si Outlook clásico es realmente el
+		// controlador predeterminado. Así evitamos que una instalación residual de Office 16
+		// abra su asistente de configuración cuando el usuario utiliza el nuevo Outlook.
 		try
 		{
-			Type? outlookType = attachments.Count > 0 ? Type.GetTypeFromProgID("Outlook.Application") : null;
+			Type? outlookType = attachments.Count > 0 && IsClassicOutlookDefault()
+				? Type.GetTypeFromProgID("Outlook.Application")
+				: null;
 			if (outlookType is not null)
 			{
 				dynamic outlook = Activator.CreateInstance(outlookType)!;
@@ -60,6 +65,22 @@ internal static class EmailDraftLauncher
 		catch (Exception ex)
 		{
 			detail = UiText.Get("No se pudo abrir la aplicación de correo.") + "\n\n" + ex.Message;
+			return false;
+		}
+	}
+
+	private static bool IsClassicOutlookDefault()
+	{
+		try
+		{
+			const string userChoice = @"HKEY_CURRENT_USER\Software\Microsoft\Windows\Shell\Associations\UrlAssociations\mailto\UserChoice";
+			string? progId = Registry.GetValue(userChoice, "ProgId", null) as string;
+			return !string.IsNullOrWhiteSpace(progId)
+				&& !progId.StartsWith("AppX", StringComparison.OrdinalIgnoreCase)
+				&& progId.Contains("Outlook", StringComparison.OrdinalIgnoreCase);
+		}
+		catch
+		{
 			return false;
 		}
 	}
