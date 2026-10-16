@@ -11,13 +11,15 @@ namespace GestorComunicacionesDNET;
 internal sealed class CampaignForm : DnetForm
 {
 	private const int DailyLimit = 45;
-	private const int DelaySeconds = 20;
+	private const int DefaultDelaySeconds = 20;
 	private readonly ContactStore _store;
 	private readonly CampaignStateStore _stateStore;
 	private readonly List<JsonObject> _selectedContacts;
 	private CampaignState _state;
 	private readonly TextBox _subject = new() { Dock = DockStyle.Fill };
 	private readonly TextBox _version = new() { Dock = DockStyle.Fill };
+	private readonly NumericUpDown _delay = new() { Dock = DockStyle.Left, Minimum = 1, Maximum = 3600, Value = DefaultDelaySeconds, Width = 110, ThousandsSeparator = true };
+	private readonly Label _delayLabel = new() { Dock = DockStyle.Fill, TextAlign = ContentAlignment.MiddleLeft };
 	private readonly TextBox _body = new() { Dock = DockStyle.Fill, Multiline = true, ScrollBars = ScrollBars.Vertical, AcceptsReturn = true };
 	private readonly ListBox _attachments = new() { Dock = DockStyle.Fill, HorizontalScrollbar = true };
 	private readonly Label _summary = new() { Dock = DockStyle.Fill, AutoEllipsis = true, TextAlign = ContentAlignment.MiddleLeft };
@@ -35,6 +37,7 @@ internal sealed class CampaignForm : DnetForm
 		_selectedContacts = selectedContacts.ToList();
 		_stateStore = new CampaignStateStore(store.DataDirectory);
 		_state = _stateStore.Load();
+		_state.DelaySeconds = Math.Clamp(_state.DelaySeconds, (int)_delay.Minimum, (int)_delay.Maximum);
 		if (_state.Queue.Count == 0 && _state.Version.Length == 0) _state.Version = initialVersion;
 
 		Text = "Campaña individual — preparación supervisada";
@@ -52,7 +55,7 @@ internal sealed class CampaignForm : DnetForm
 			RowCount = 5
 		};
 		root.RowStyles.Add(new RowStyle(SizeType.Absolute, 54));
-		root.RowStyles.Add(new RowStyle(SizeType.Absolute, 86));
+		root.RowStyles.Add(new RowStyle(SizeType.Absolute, 126));
 		root.RowStyles.Add(new RowStyle(SizeType.Percent, 55));
 		root.RowStyles.Add(new RowStyle(SizeType.Percent, 45));
 		root.RowStyles.Add(new RowStyle(SizeType.Absolute, 160));
@@ -67,13 +70,17 @@ internal sealed class CampaignForm : DnetForm
 			TextAlign = ContentAlignment.MiddleLeft
 		}, 0, 0);
 
-		TableLayoutPanel header = new() { Dock = DockStyle.Fill, ColumnCount = 2, RowCount = 2 };
+		TableLayoutPanel header = new() { Dock = DockStyle.Fill, ColumnCount = 2, RowCount = 3 };
 		header.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 160));
 		header.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
-		header.RowStyles.Add(new RowStyle(SizeType.Percent, 50));
-		header.RowStyles.Add(new RowStyle(SizeType.Percent, 50));
+		header.RowStyles.Add(new RowStyle(SizeType.Percent, 33.33f));
+		header.RowStyles.Add(new RowStyle(SizeType.Percent, 33.33f));
+		header.RowStyles.Add(new RowStyle(SizeType.Percent, 33.34f));
 		AddField(header, "Asunto:", _subject, 0);
 		AddField(header, "Versión:", _version, 1);
+		header.Controls.Add(_delayLabel, 0, 2);
+		_delay.Margin = new Padding(3, 5, 3, 5);
+		header.Controls.Add(_delay, 1, 2);
 		root.Controls.Add(header, 0, 1);
 
 		GroupBox bodyGroup = new() { Text = "Cuerpo del mensaje", Dock = DockStyle.Fill, Padding = new Padding(9) };
@@ -120,11 +127,18 @@ internal sealed class CampaignForm : DnetForm
 		_subject.Text = _state.Subject;
 		_body.Text = _state.Body;
 		_version.Text = _state.Version;
+		_delay.Value = _state.DelaySeconds;
+		_delay.ValueChanged += (_, _) =>
+		{
+			_state.DelaySeconds = (int)_delay.Value;
+			UpdateDelayLabel();
+		};
 		ReloadAttachments();
 		_timer.Tick += (_, _) => UpdateStatus();
 		_timer.Start();
 		FormClosing += (_, _) => SaveEditorState();
 		UiText.Apply(this);
+		UpdateDelayLabel();
 		UpdateStatus();
 	}
 
@@ -273,7 +287,7 @@ internal sealed class CampaignForm : DnetForm
 			_store.ConfirmIndividualSend(new[] { contact }, _state.Version.Trim());
 			item.Status = "confirmed";
 			item.Note = DateTimeOffset.Now.ToString("O");
-			_state.CooldownUntil = DateTimeOffset.Now.AddSeconds(DelaySeconds);
+			_state.CooldownUntil = DateTimeOffset.Now.AddSeconds(_state.DelaySeconds);
 			_stateStore.Save(_state);
 			HistoryChanged = true;
 			UpdateStatus();
@@ -325,7 +339,13 @@ internal sealed class CampaignForm : DnetForm
 		_state.Subject = _subject.Text;
 		_state.Body = _body.Text;
 		_state.Version = _version.Text.Trim();
+		_state.DelaySeconds = (int)_delay.Value;
 		if (save) _stateStore.Save(_state);
+	}
+
+	private void UpdateDelayLabel()
+	{
+		_delayLabel.Text = UiText.Format("Espera {0} segundos antes de preparar el siguiente mensaje.", (int)_delay.Value);
 	}
 
 	private void UpdateStatus()

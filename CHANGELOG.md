@@ -1,5 +1,11 @@
 # Historial de cambios
 
+## 1.10.1
+
+- El usuario puede elegir la espera entre envíos confirmados, de 1 a 3.600 segundos.
+- El tiempo elegido se conserva al pausar, cerrar, reanudar o restaurar una copia de seguridad.
+- La ayuda muestra el tiempo configurado y la opción funciona en los 62 idiomas.
+
 ## 1.10.0
 
 - Nueva ventana **Campaña individual** con asunto, cuerpo, versión y selección de varios archivos adjuntos.

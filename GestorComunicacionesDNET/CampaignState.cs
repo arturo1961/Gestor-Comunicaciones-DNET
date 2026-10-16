@@ -17,6 +17,7 @@ internal sealed class CampaignState
 	public string Subject { get; set; } = "";
 	public string Body { get; set; } = "";
 	public string Version { get; set; } = "";
+	public int DelaySeconds { get; set; } = 20;
 	public List<string> Attachments { get; set; } = new();
 	public List<CampaignQueueItem> Queue { get; set; } = new();
 	public DateTimeOffset CreatedAt { get; set; } = DateTimeOffset.Now;

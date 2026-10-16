@@ -4,7 +4,7 @@
 
 Aplicación personal para Windows que permite organizar contactos, filtrarlos y preparar un correo nuevo con los destinatarios seleccionados en el campo CCO.
 
-La versión 1.10.0 incluye **62 idiomas** y añade campañas individuales supervisadas: asunto, cuerpo, adjuntos, cola persistente, pausa de 20 segundos y límite diario de 45 envíos confirmados. Utiliza una base de datos SQLite para trabajar con listas grandes y permite importar contactos de Google, Outlook y otras agendas mediante CSV o vCard, sin pedir contraseñas. Los filtros de país y región están relacionados: al elegir un país sólo aparecen sus regiones. También crea informes PDF con los contactos visibles o marcados y las columnas elegidas.
+La versión 1.10.1 incluye **62 idiomas** y añade campañas individuales supervisadas: asunto, cuerpo, adjuntos, cola persistente, espera configurable y límite diario de 45 envíos confirmados. Utiliza una base de datos SQLite para trabajar con listas grandes y permite importar contactos de Google, Outlook y otras agendas mediante CSV o vCard, sin pedir contraseñas. Los filtros de país y región están relacionados: al elegir un país sólo aparecen sus regiones. También crea informes PDF con los contactos visibles o marcados y las columnas elegidas.
 
 El programa no envía mensajes automáticamente ni almacena contraseñas. El usuario revisa y envía personalmente cada correo en su aplicación y cuenta predeterminadas. Cuando se guarda una campaña, su asunto, cuerpo y rutas de adjuntos permanecen únicamente en la carpeta local de datos.
 
@@ -21,7 +21,7 @@ El icono propio del Gestor identifica el ejecutable, las ventanas, los accesos d
 - Selección de destinatarios y copia de direcciones en CCO.
 - Apertura de un borrador mediante `mailto`.
 - Campaña individual con asunto, cuerpo, adjuntos, personalización, cola reanudable y un solo destinatario por borrador.
-- Confirmación manual, espera de 20 segundos y límite de 45 destinatarios confirmados por día, incluidos los reenvíos.
+- Confirmación manual, espera configurable de 1 a 3.600 segundos y límite de 45 destinatarios confirmados por día, incluidos los reenvíos.
 - Registro manual y consulta visual del historial de comunicaciones.
 - Papelera para recuperar contactos eliminados o borrarlos definitivamente.
 - Revisión de posibles contactos repetidos y correos incorrectos.
@@ -62,7 +62,7 @@ Los contactos, el historial y la campaña guardada permanecen fuera del reposito
 6. Escribe el asunto y el cuerpo, añade los archivos y crea la cola con los contactos marcados. Puedes usar los campos de personalización mostrados en la ventana.
 7. Pulsa **Preparar siguiente**. Se abre un solo borrador; con Outlook de escritorio compatible se incorporan también los adjuntos. En otras aplicaciones quizá debas añadirlos manualmente.
 8. Revisa el borrador y pulsa Enviar personalmente. Regresa al gestor y pulsa **Confirmar enviado**; solo entonces se registra.
-9. Tras 20 segundos podrás preparar el siguiente. Al alcanzar 45 confirmados durante el día, la cola se detiene hasta el día siguiente.
+9. Tras el tiempo de espera elegido podrás preparar el siguiente. Al alcanzar 45 confirmados durante el día, la cola se detiene hasta el día siguiente.
 10. **Pausar y cerrar** conserva la cola para continuar después. **No enviado** devuelve el contacto a pendientes y **Omitir** lo salta sin registrarlo.
 11. Para atender una solicitud de baja, selecciona el contacto y pulsa **Marcar NO CONTACTAR**. El punto rojo confirma que no podrá incluirse en futuros destinatarios ni reaparecer mediante una importación.
 12. En **Herramientas** puedes abrir la papelera, consultar el historial y revisar posibles duplicados o correos incorrectos.
