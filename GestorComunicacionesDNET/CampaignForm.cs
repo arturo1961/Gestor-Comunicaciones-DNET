@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Text.Json.Nodes;
 using System.Windows.Forms;
 
@@ -95,7 +96,14 @@ internal sealed class CampaignForm : DnetForm
 		root.Controls.Add(header, 0, 1);
 
 		GroupBox bodyGroup = new() { Text = "Cuerpo del mensaje", Dock = DockStyle.Fill, Padding = new Padding(9) };
-		bodyGroup.Controls.Add(_body);
+		TableLayoutPanel bodyLayout = new() { Dock = DockStyle.Fill, ColumnCount = 1, RowCount = 2 };
+		bodyLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 44));
+		bodyLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
+		FlowLayoutPanel bodyTools = new() { Dock = DockStyle.Fill, FlowDirection = FlowDirection.RightToLeft, WrapContents = false };
+		bodyTools.Controls.Add(NewButton("TXT UTF-8 ↓", LoadBodyFromTextFile, 125));
+		bodyLayout.Controls.Add(bodyTools, 0, 0);
+		bodyLayout.Controls.Add(_body, 0, 1);
+		bodyGroup.Controls.Add(bodyLayout);
 		root.Controls.Add(bodyGroup, 0, 2);
 
 		GroupBox attachmentsGroup = new() { Text = "Archivos adjuntos", Dock = DockStyle.Fill, Padding = new Padding(9) };
@@ -192,6 +200,63 @@ internal sealed class CampaignForm : DnetForm
 		}
 		ReloadAttachments();
 		SaveEditorState();
+	}
+
+	private void LoadBodyFromTextFile(object? sender, EventArgs e)
+	{
+		using OpenFileDialog dialog = new()
+		{
+			Title = "TXT UTF-8",
+			Filter = "TXT UTF-8 (*.txt)|*.txt|Todos los archivos (*.*)|*.*"
+		};
+		if (dialog.ShowDialog(this) != DialogResult.OK) return;
+
+		try
+		{
+			string text = File.ReadAllText(dialog.FileName, new System.Text.UTF8Encoding(false, true));
+			text = NormalizeForEditor(text);
+			string[] lines = text.Split(new[] { "\r\n" }, StringSplitOptions.None);
+
+			// Las cartas DNET pueden guardar el asunto en la primera línea y dejar
+			// después una línea vacía. Si aparece esa cabecera, se separa del cuerpo.
+			if (lines.Length >= 3 && string.IsNullOrWhiteSpace(lines[1]) && TryReadSubject(lines[0], out string subject))
+			{
+				_subject.Text = subject;
+				_body.Text = string.Join("\r\n", lines.Skip(2));
+			}
+			else
+			{
+				_body.Text = text;
+			}
+
+			_body.SelectionStart = 0;
+			_body.ScrollToCaret();
+			_templateTarget = _body;
+			SaveEditorState();
+		}
+		catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or DecoderFallbackException)
+		{
+			MessageBox.Show(this, ex.Message, "TXT UTF-8", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+		}
+	}
+
+	private static string NormalizeForEditor(string text)
+	{
+		return text.Replace("\r\n", "\n").Replace('\r', '\n').Replace("\n", "\r\n");
+	}
+
+	private static bool TryReadSubject(string firstLine, out string subject)
+	{
+		string trimmed = firstLine.Trim();
+		string[] prefixes = { "Subject:", "Asunto:" };
+		foreach (string prefix in prefixes)
+		{
+			if (!trimmed.StartsWith(prefix, StringComparison.OrdinalIgnoreCase)) continue;
+			subject = trimmed[prefix.Length..].Trim();
+			return subject.Length > 0;
+		}
+		subject = "";
+		return false;
 	}
 
 	private void RemoveAttachment(object? sender, EventArgs e)
