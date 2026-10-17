@@ -219,6 +219,7 @@ internal sealed class MainForm : DnetForm
 		flowLayoutPanel2.Controls.Add(Btn("Importar JSON/CSV/VCF", ImportJson, 188));
 		flowLayoutPanel2.Controls.Add(Btn("Exportar JSON", ExportJson, 132));
 		flowLayoutPanel2.Controls.Add(Btn("Crear informe PDF", ExportPdf, 157));
+		flowLayoutPanel2.Controls.Add(Btn("Ver gráficos", ShowCharts, 137));
 		_classifyAs.Items.AddRange(new object[5] { "empresa_medio", "organismo_publico", "red_publica", "entidad_civil", "sin_clasificar" });
 		_classifyAs.SelectedIndex = 0;
 		_classifyAs.Width = 165;
@@ -517,6 +518,12 @@ internal sealed class MainForm : DnetForm
 	private void ShowIssues(object? sender, EventArgs e)
 	{
 		using IssuesForm form = new IssuesForm(_store);
+		form.ShowDialog(this);
+	}
+
+	private void ShowCharts(object? sender, EventArgs e)
+	{
+		using ChartsForm form = new ChartsForm(_visibleRows, CurrentFilterSummary(markedOnly: false));
 		form.ShowDialog(this);
 	}
 

@@ -17,6 +17,7 @@ El icono propio del Gestor identifica el ejecutable, las ventanas, los accesos d
 - Alta, modificación y eliminación controlada de contactos.
 - Filtros por país, región, idioma, tipo, organización y estado.
 - Informes PDF de la lista filtrada o de los contactos marcados, con selección de columnas.
+- Gráficos de columnas, barras, circular, anillo, líneas y área sobre los contactos visibles o marcados, con agrupación y filtro por cualquier campo, tabla de resumen y exportación a PNG.
 - Búsqueda instantánea por nombre, correo, ubicación, organización, estado o notas.
 - Selección de destinatarios y copia de direcciones en CCO.
 - Apertura de un borrador mediante `mailto`.
