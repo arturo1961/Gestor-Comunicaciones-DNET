@@ -1,5 +1,14 @@
 # Historial de cambios
 
+## 1.10.2
+
+- Nueva ventana **Gráficos de contactos** para analizar los contactos visibles o únicamente los marcados.
+- Elección libre del campo de agrupación y de un segundo campo y valor de filtro.
+- Gráficos de columnas, barras horizontales, circular, anillo, líneas y área.
+- Tabla de resumen con cantidades y porcentajes, límite configurable de categorías y agrupación del resto como **Otros**.
+- Copia del gráfico al portapapeles y exportación directa como imagen PNG.
+- Nueva función traducida en los 62 idiomas sin modificar los contactos ni la base de datos.
+
 ## 1.10.1
 
 - Campo **URL** para guardar un enlace de documentación de Google Drive o de cualquier sitio e insertarlo como `{enlace_documentacion}` en el asunto o el cuerpo.
