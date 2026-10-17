@@ -101,10 +101,14 @@ Utiliza siempre CCO para grupos de destinatarios, respeta las solicitudes de baj
 
 Si el programa te resulta útil y quieres apoyar voluntariamente su mantenimiento y evolución, puedes hacerlo por cualquiera de estos medios:
 
-- [PayPal: paypal.me/acarballoflandes](https://paypal.me/acarballoflandes)
-- [Ko-fi: ko-fi.com/arturocarballo](https://ko-fi.com/arturocarballo)
+[![Donar con PayPal](https://img.shields.io/badge/PayPal-Donar-003087?style=for-the-badge&logo=paypal&logoColor=white)](https://paypal.me/acarballoflandes)
+[![Apoyar en Ko-fi](https://img.shields.io/badge/Ko--fi-Apoyar-FF5E5B?style=for-the-badge&logo=kofi&logoColor=white)](https://ko-fi.com/arturocarballo)
+[![Patrocinar en GitHub](https://img.shields.io/badge/GitHub%20Sponsors-Patrocinar-EA4AAA?style=for-the-badge&logo=githubsponsors&logoColor=white)](https://github.com/sponsors/arturo1961)
+
+- **PayPal:** [paypal.me/acarballoflandes](https://paypal.me/acarballoflandes)
+- **Ko-fi:** [ko-fi.com/arturocarballo](https://ko-fi.com/arturocarballo)
+- **GitHub Sponsors:** [github.com/sponsors/arturo1961](https://github.com/sponsors/arturo1961)
 - **Bizum:** `+34 662 024 169`
-- [GitHub Sponsors de arturo1961](https://github.com/sponsors/arturo1961), cuando el perfil esté disponible.
 
 Donar no desbloquea funciones, no ofrece ventajas especiales y no modifica la licencia MIT ni las condiciones del programa. Consulta los detalles en [DONACIONES.md](DONACIONES.md).
 
