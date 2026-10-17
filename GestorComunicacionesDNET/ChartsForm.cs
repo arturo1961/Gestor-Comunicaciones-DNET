@@ -79,6 +79,7 @@ internal sealed class ChartsForm : DnetForm
 	};
 	private readonly ChartCanvas _chart = new() { Dock = DockStyle.Fill };
 	private readonly DataGridView _summaryGrid = new();
+	private readonly SplitContainer _contentSplit = new();
 	private readonly Label _summary = new()
 	{
 		Dock = DockStyle.Fill,
@@ -92,8 +93,15 @@ internal sealed class ChartsForm : DnetForm
 		_mainFilterSummary = mainFilterSummary;
 		Text = "Gráficos de contactos";
 		StartPosition = FormStartPosition.CenterParent;
-		Size = new Size(1280, 820);
-		MinimumSize = new Size(960, 650);
+		Rectangle workingArea = Screen.FromPoint(Cursor.Position).WorkingArea;
+		int usableWidth = Math.Max(360, workingArea.Width - 30);
+		int usableHeight = Math.Max(360, workingArea.Height - 30);
+		Size = new Size(
+			Math.Min(1280, usableWidth),
+			Math.Min(820, usableHeight));
+		MinimumSize = new Size(
+			Math.Min(720, usableWidth),
+			Math.Min(540, usableHeight));
 		Font = new Font("Segoe UI", 10f);
 		BackColor = Color.FromArgb(244, 247, 251);
 
@@ -152,21 +160,15 @@ internal sealed class ChartsForm : DnetForm
 		selectors.Controls.Add(_includeEmpty);
 		root.Controls.Add(selectors, 0, 1);
 
-		var split = new SplitContainer
-		{
-			Dock = DockStyle.Fill,
-			Orientation = Orientation.Vertical,
-			SplitterDistance = 880,
-			SplitterWidth = 7,
-			Panel1MinSize = 560,
-			Panel2MinSize = 240
-		};
-		split.Panel1.Padding = new Padding(0, 0, 5, 0);
-		split.Panel2.Padding = new Padding(5, 0, 0, 0);
-		split.Panel1.Controls.Add(_chart);
+		_contentSplit.Dock = DockStyle.Fill;
+		_contentSplit.Orientation = Orientation.Vertical;
+		_contentSplit.SplitterWidth = 7;
+		_contentSplit.Panel1.Padding = new Padding(0, 0, 5, 0);
+		_contentSplit.Panel2.Padding = new Padding(5, 0, 0, 0);
+		_contentSplit.Panel1.Controls.Add(_chart);
 		SetupSummaryGrid();
-		split.Panel2.Controls.Add(_summaryGrid);
-		root.Controls.Add(split, 0, 2);
+		_contentSplit.Panel2.Controls.Add(_summaryGrid);
+		root.Controls.Add(_contentSplit, 0, 2);
 
 		var footer = new TableLayoutPanel
 		{
@@ -216,6 +218,32 @@ internal sealed class ChartsForm : DnetForm
 		PopulateFilterValues();
 		UpdateChart();
 		UiText.Apply(this);
+		Shown += (_, _) => AdaptContentLayout();
+		SizeChanged += (_, _) => AdaptContentLayout();
+	}
+
+	private void AdaptContentLayout()
+	{
+		if (_contentSplit.Width <= 0 || _contentSplit.Height <= 0) return;
+		bool narrow = _contentSplit.Width < 900;
+		Orientation orientation = narrow ? Orientation.Horizontal : Orientation.Vertical;
+		int available = orientation == Orientation.Vertical
+			? _contentSplit.Width : _contentSplit.Height;
+		if (available <= _contentSplit.SplitterWidth + 80) return;
+
+		_contentSplit.Panel1MinSize = 0;
+		_contentSplit.Panel2MinSize = 0;
+		_contentSplit.Orientation = orientation;
+		int secondMinimum = narrow ? 135 : 210;
+		int firstMinimum = narrow ? 180 : 300;
+		int desired = (int)(available * (narrow ? 0.63 : 0.70));
+		int maximum = Math.Max(firstMinimum, available - _contentSplit.SplitterWidth - secondMinimum);
+		_contentSplit.SplitterDistance = Math.Clamp(desired, Math.Min(firstMinimum, maximum), maximum);
+		_contentSplit.Panel1MinSize = Math.Min(firstMinimum, _contentSplit.SplitterDistance);
+		_contentSplit.Panel2MinSize = Math.Min(secondMinimum,
+			available - _contentSplit.SplitterWidth - _contentSplit.SplitterDistance);
+		_contentSplit.Panel1.Padding = narrow ? new Padding(0, 0, 0, 4) : new Padding(0, 0, 5, 0);
+		_contentSplit.Panel2.Padding = narrow ? new Padding(0, 4, 0, 0) : new Padding(5, 0, 0, 0);
 	}
 
 	private static ComboBox DropDown(int width) => new()
@@ -434,7 +462,10 @@ internal sealed class ChartCanvas : Control
 		using var titleBrush = new SolidBrush(Color.FromArgb(28, 51, 82));
 		graphics.DrawString(_title, titleFont, titleBrush, new RectangleF(24, 17, bounds.Width - 48, 36), new StringFormat { Alignment = StringAlignment.Center });
 
-		Rectangle plot = Rectangle.FromLTRB(62, 65, bounds.Width - 24, bounds.Height - 48);
+		int leftMargin = bounds.Width < 500 ? 42 : 62;
+		int rightMargin = bounds.Width < 500 ? 10 : 24;
+		Rectangle plot = Rectangle.FromLTRB(leftMargin, 65, bounds.Width - rightMargin, bounds.Height - 48);
+		if (plot.Width < 40 || plot.Height < 50) return;
 		if (_points.Count == 0)
 		{
 			using var emptyBrush = new SolidBrush(Color.FromArgb(100, 112, 132));
@@ -475,8 +506,10 @@ internal sealed class ChartCanvas : Control
 	private void DrawHorizontalBars(Graphics graphics, Rectangle plot, Font textFont, Font smallFont)
 	{
 		int maximum = Math.Max(1, _points.Max(point => point.Value));
-		int labelWidth = Math.Min(240, Math.Max(120, plot.Width / 3));
-		Rectangle bars = Rectangle.FromLTRB(plot.Left + labelWidth, plot.Top, plot.Right - 30, plot.Bottom);
+		int labelWidth = Math.Min(240, Math.Max(55, plot.Width / 3));
+		int barsRight = Math.Max(plot.Left + labelWidth + 8, plot.Right - 30);
+		Rectangle bars = Rectangle.FromLTRB(plot.Left + labelWidth, plot.Top, barsRight, plot.Bottom);
+		if (bars.Width <= 1) return;
 		float slot = bars.Height / (float)_points.Count;
 		float barHeight = Math.Max(7, slot * 0.62f);
 		for (int index = 0; index < _points.Count; index++)
@@ -495,9 +528,13 @@ internal sealed class ChartCanvas : Control
 	private void DrawPie(Graphics graphics, Rectangle plot, Font textFont, bool doughnut)
 	{
 		int total = _points.Sum(point => point.Value);
-		int legendWidth = Math.Min(300, Math.Max(210, plot.Width / 3));
-		Rectangle pieArea = Rectangle.FromLTRB(plot.Left, plot.Top, plot.Right - legendWidth - 15, plot.Bottom);
+		bool stacked = plot.Width < 520;
+		int legendWidth = stacked ? plot.Width : Math.Min(300, Math.Max(180, plot.Width / 3));
+		Rectangle pieArea = stacked
+			? new Rectangle(plot.Left, plot.Top, plot.Width, Math.Max(70, (int)(plot.Height * 0.58)))
+			: Rectangle.FromLTRB(plot.Left, plot.Top, plot.Right - legendWidth - 15, plot.Bottom);
 		int diameter = Math.Min(pieArea.Width, pieArea.Height) - 20;
+		if (diameter < 20) return;
 		var circle = new Rectangle(pieArea.Left + (pieArea.Width - diameter) / 2, pieArea.Top + (pieArea.Height - diameter) / 2, diameter, diameter);
 		float start = -90;
 		for (int index = 0; index < _points.Count; index++)
@@ -515,11 +552,14 @@ internal sealed class ChartCanvas : Control
 			DrawCentered(graphics, total.ToString("N0"), totalFont, Brushes.DimGray, new RectangleF(circle.Left, circle.Top + diameter / 2f - 18, diameter, 36));
 		}
 
-		float legendX = plot.Right - legendWidth + 8;
-		float rowHeight = Math.Max(21, Math.Min(30, plot.Height / (float)Math.Max(1, _points.Count)));
+		float legendX = stacked ? plot.Left + 4 : plot.Right - legendWidth + 8;
+		float legendTop = stacked ? pieArea.Bottom + 5 : plot.Top;
+		float legendHeight = stacked ? Math.Max(20, plot.Bottom - legendTop) : plot.Height;
+		float rowHeight = Math.Max(18, Math.Min(30, legendHeight / Math.Max(1, _points.Count)));
 		for (int index = 0; index < _points.Count; index++)
 		{
-			float y = plot.Top + index * rowHeight;
+			float y = legendTop + index * rowHeight;
+			if (y + 16 > plot.Bottom) break;
 			using var brush = new SolidBrush(Palette[index % Palette.Length]);
 			graphics.FillRectangle(brush, legendX, y + 4, 14, 14);
 			double percentage = total == 0 ? 0 : _points[index].Value * 100d / total;

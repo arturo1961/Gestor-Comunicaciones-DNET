@@ -8,6 +8,7 @@
 - Tabla de resumen con cantidades y porcentajes, límite configurable de categorías y agrupación del resto como **Otros**.
 - Copia del gráfico al portapapeles y exportación directa como imagen PNG.
 - Nueva función traducida en los 62 idiomas sin modificar los contactos ni la base de datos.
+- Corregida la ventana de gráficos en pantallas estrechas: adapta gráfico y tabla en vertical y evita dimensiones inválidas en gráficos circulares y de barras.
 
 ## 1.10.1
 
